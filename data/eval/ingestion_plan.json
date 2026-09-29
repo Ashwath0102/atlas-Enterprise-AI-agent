@@ -1,0 +1,68 @@
+{
+  "groq_daily_audio_budget_seconds": 28800,
+  "entries": [
+    {
+      "file": "data/audio/ami/ES2008a.wav",
+      "kind": "audio",
+      "duration_seconds": 1043.4,
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "file": "data/audio/ami/ES2008b.wav",
+      "kind": "audio",
+      "duration_seconds": 2231.7,
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "file": "data/audio/ami/ES2008c.wav",
+      "kind": "audio",
+      "duration_seconds": 2102.6,
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/jira_beginners_2026.mp4",
+      "kind": "video",
+      "duration_seconds": 1713.0,
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/jsm_beginners.mp4",
+      "kind": "video",
+      "duration_seconds": 3350.0,
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/confluence_training.mp4",
+      "kind": "video",
+      "duration_seconds": 4909.9,
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/jsm_full_e2e.mp4",
+      "kind": "video",
+      "duration_seconds": 5766.0,
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/jira_full_course.mp4",
+      "kind": "video",
+      "duration_seconds": 10628.4,
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "file": "data/videos/jira_training_6hr.mp4",
+      "kind": "video",
+      "duration_seconds": 23216.1,
+      "priority": 2,
+      "status": "pending"
+    }
+  ]
+}
