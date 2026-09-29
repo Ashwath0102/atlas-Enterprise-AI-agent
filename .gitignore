@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+node_modules/
+cache/
+data/videos/*.mp4
+data/audio/**/*.wav
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.db-journal
+logs/
+*.log
