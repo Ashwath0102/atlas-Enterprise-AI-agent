@@ -6,21 +6,21 @@
       "kind": "audio",
       "duration_seconds": 1043.4,
       "priority": 1,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/audio/ami/ES2008b.wav",
       "kind": "audio",
       "duration_seconds": 2231.7,
       "priority": 1,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/audio/ami/ES2008c.wav",
       "kind": "audio",
       "duration_seconds": 2102.6,
       "priority": 1,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/jira_beginners_2026.mp4",
@@ -64,5 +64,6 @@
       "priority": 2,
       "status": "pending"
     }
-  ]
+  ],
+  "daily_seconds_used": 5377.7
 }
