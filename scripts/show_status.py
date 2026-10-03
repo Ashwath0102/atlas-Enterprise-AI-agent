@@ -16,7 +16,10 @@ print()
 print("=== Video Frame Caches ===")
 cache_dir = Path("cache")
 for f in cache_dir.glob("*.json"):
-    data = json.loads(f.read_text())
+    try:
+        data = json.loads(f.read_text(encoding="utf-8"))
+    except Exception:
+        continue
     if "frames" in data:
         print(f"  {data.get('file', '?')}: {len(data['frames'])} frames described")
 

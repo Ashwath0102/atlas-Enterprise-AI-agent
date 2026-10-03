@@ -1,5 +1,5 @@
 """
-backend/ingestion/audio.py
+backend/ingestion/audio.py  # noqa: UTF-8
 ──────────────────────────
 Audio ingestion pipeline for AMI meetings and video audio tracks.
 
@@ -119,10 +119,44 @@ def _add_seconds_used(plan: dict, seconds: float) -> None:
 # ffmpeg helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _find_ffmpeg() -> str:
+    """Return the ffmpeg executable path, checking project root and PATH."""
+    import shutil
+    # Check PATH first
+    found = shutil.which("ffmpeg")
+    if found:
+        return found
+    # Fall back to project root (c:\IBM_BOB\Entreprise\ffmpeg.exe)
+    project_root = Path(__file__).resolve().parent.parent.parent
+    local = project_root / "ffmpeg.exe"
+    if local.exists():
+        return str(local)
+    # One more common location
+    for candidate in [Path("ffmpeg.exe"), Path("C:/ffmpeg/bin/ffmpeg.exe")]:
+        if candidate.exists():
+            return str(candidate)
+    raise RuntimeError(
+        "ffmpeg not found on PATH or in project root. "
+        "Place ffmpeg.exe in the project root or add it to PATH."
+    )
+
+
+def _has_audio_stream(path: Path) -> bool:
+    """Return True if the file has at least one audio stream."""
+    try:
+        result = subprocess.run(
+            [_find_ffmpeg(), "-i", str(path)],
+            capture_output=True, text=True,
+        )
+        return "Audio:" in result.stderr
+    except Exception:
+        return True  # assume audio present if check fails
+
+
 def _ffmpeg_convert(src: Path, dst: Path) -> None:
     """Convert audio/video file to 16 kHz mono WAV."""
     cmd = [
-        "ffmpeg", "-y",
+        _find_ffmpeg(), "-y",
         "-i", str(src),
         "-vn",                  # drop video stream if present
         "-ar", str(_SAMPLE_RATE),
@@ -155,7 +189,7 @@ def _split_wav(wav_path: Path) -> List[Path]:
     pattern = str(out_dir / f"{wav_path.stem}_%03d.wav")
 
     cmd = [
-        "ffmpeg", "-y",
+        _find_ffmpeg(), "-y",
         "-i", str(wav_path),
         "-f", "segment",
         "-segment_time", str(max_seg_seconds),
@@ -485,6 +519,17 @@ def ingest_audio_files(
                 if not file_path.exists():
                     logger.error("Audio file not found: %s", file_path)
                     results[file_str] = "error"
+                    progress.advance(task)
+                    continue
+
+                # Skip files with no audio stream (silent screen recordings)
+                if not _has_audio_stream(file_path):
+                    logger.info(
+                        "Audio: %s has no audio stream — marking done (video2text frames cover it)",
+                        file_path.name,
+                    )
+                    _mark_done(plan, file_str)
+                    results[file_str] = "done"
                     progress.advance(task)
                     continue
 

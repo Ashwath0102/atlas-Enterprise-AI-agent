@@ -34,3 +34,13 @@
 - Fixed 429 retry in embed_texts: now uses base-4 exponential backoff up to 120s with 6 retries
 - Ingested on Day 1: 20 tickets, 6 images, 3 AMI audio meetings (ES2008a/b/c, 29 audio chunks), 900 text chunks from GitLab handbook; video STT and video2text frames continue Day 2+
 - Qdrant collection atlas_chunks: 955 points (ticket:20, text:900, audio:29, image:6, video:0 pending)
+
+## 2026-10-01 — Day 2 ingestion: video STT + video2text completion
+
+- Discovered 3 videos (jira_beginners_2026, jsm_beginners, jsm_full_e2e) had no audio stream — added _has_audio_stream() check to skip silently and mark done; user replaced with audio-enabled versions
+- Added _find_ffmpeg() to locate ffmpeg.exe in project root when not on PATH
+- Added scripts/reset_video_audio.py to reset plan entries and clear stale cache for replaced videos
+- Completed video2text for all 6 videos: 360 frame-description chunks upserted (60 per video)
+- Completed video STT for 5 videos: confluence_training (30 chunks), jsm_full_e2e (46 chunks), jira_full_course (42 chunks), jira_beginners_2026 and jsm_beginners (done earlier)
+- jira_training_6hr.mp4 (6.4h) deferred to Day 3 — exceeds remaining daily Groq budget
+- Qdrant collection atlas_chunks: 2021 points (ticket:20, text:1454, audio:181, video:360, image:6)
