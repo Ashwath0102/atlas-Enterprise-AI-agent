@@ -44,3 +44,10 @@
 - Completed video STT for 5 videos: confluence_training (30 chunks), jsm_full_e2e (46 chunks), jira_full_course (42 chunks), jira_beginners_2026 and jsm_beginners (done earlier)
 - jira_training_6hr.mp4 (6.4h) deferred to Day 3 — exceeds remaining daily Groq budget
 - Qdrant collection atlas_chunks: 2021 points (ticket:20, text:1454, audio:181, video:360, image:6)
+
+## 2026-10-02 — Day 3 ingestion: jira_training_6hr.mp4 — Phase 1 COMPLETE
+
+- Transcribed jira_training_6hr.mp4 (6.4h, 38 segments) via Groq Whisper — final audio pipeline item
+- All 9 audio/video files now status=done in ingestion_plan.json; Groq budget used 23216s/28800s
+- Phase 1 fully complete: Qdrant atlas_chunks has 2169 points across all 5 modalities
+  - ticket: 20, text: 1454, audio: 329, video: 360, image: 6

@@ -27,43 +27,44 @@
       "kind": "video",
       "duration_seconds": 1713.0,
       "priority": 2,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/jsm_beginners.mp4",
       "kind": "video",
       "duration_seconds": 3350.0,
       "priority": 2,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/confluence_training.mp4",
       "kind": "video",
       "duration_seconds": 4909.9,
       "priority": 2,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/jsm_full_e2e.mp4",
       "kind": "video",
       "duration_seconds": 5766.0,
       "priority": 2,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/jira_full_course.mp4",
       "kind": "video",
       "duration_seconds": 10628.4,
       "priority": 2,
-      "status": "pending"
+      "status": "done"
     },
     {
       "file": "data/videos/jira_training_6hr.mp4",
       "kind": "video",
       "duration_seconds": 23216.1,
       "priority": 2,
-      "status": "pending"
+      "status": "done",
+      "defer_reason": "Would use 23216s but only 2433s remain today (28800s/day budget)"
     }
   ],
-  "daily_seconds_used": 5377.7
+  "daily_seconds_used": 23216.1
 }
