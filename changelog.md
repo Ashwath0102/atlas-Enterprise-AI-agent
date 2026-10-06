@@ -51,3 +51,18 @@
 - All 9 audio/video files now status=done in ingestion_plan.json; Groq budget used 23216s/28800s
 - Phase 1 fully complete: Qdrant atlas_chunks has 2169 points across all 5 modalities
   - ticket: 20, text: 1454, audio: 329, video: 360, image: 6
+
+## 2026-10-02 — Phase 2: Hybrid retrieval pipeline
+
+- Implemented backend/retrieval/dense.py: Qdrant cosine search with modality/source_id filters
+- Implemented backend/retrieval/bm25.py: BM25Okapi sparse index over full Qdrant payload corpus, pickle-cached, auto-rebuilds when Qdrant grows
+- Implemented backend/retrieval/fusion.py: Reciprocal Rank Fusion (k=60) merging dense + BM25 result lists with normalised [0,1] scores
+- Implemented backend/retrieval/reranker.py: cross-encoder/ms-marco-MiniLM-L-6-v2 re-ranking via sentence-transformers (FlashRank dropped — broken transitive dep on Python 3.8)
+- Implemented backend/retrieval/query_rewriter.py: HyDE passage generation + sub-question expansion via LLM_PRIMARY_MODEL, disk-cached per query
+- Implemented backend/retrieval/pipeline.py: single retrieve() entry point combining all stages, configurable via RetrievalConfig dataclass
+- Added scripts/test_retrieval.py: 8-query baseline eval reporting P@5 / MRR@5 / p50/p95 latency
+- Baseline results (8 queries, top_k=5):
+    dense:  P@5=0.600  MRR=0.594  p50=2560ms  p95=3851ms
+    bm25:   P@5=0.575  MRR=0.667  p50=3ms     p95=9281ms (first call builds index)
+    hybrid: P@5=0.600  MRR=0.667  p50=12001ms p95=45084ms (includes HyDE+subq LLM calls)
+- Image dashboard queries score 0.00 — expected; agent will route these with explicit modality filter in Phase 4
