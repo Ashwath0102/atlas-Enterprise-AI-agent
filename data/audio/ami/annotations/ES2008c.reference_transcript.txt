@@ -1,0 +1,1142 @@
+[A] Mm-hmm.
+[B] Mm yeah.
+[A] Okay. I g yeah. Time is it?
+[D] Fourteen twenty six.
+[A] Okay. Lovely to see you all again. Um it's our conceptual design meeting and it's starting at approximately fourteen twenty five and so we have forty minutes for this one again and so we'll go just after three o'clock. Um okay our agenda, we're gonna do an opening, I'm gonna review the minutes of the last meeting, then we'll have your three presentations um and then we'll have to make a decision on the remote control concepts, and finally we'll close.
+[B] Okay
+[A] So
+[B] .
+[A] opening. Um these are our minutes from r the functional design. We decided our target group is the focus on who can afford it, because we have international appeal and we said it's for all age groups, different um functions of it. Our main objectives were simplicity and fashion. And s um in specific functions are something to keep the remote from getting lost, large buttons for the essential functions, a possibility for extra functions, like a sliding a sliding piece and a long-life battery or a charging station. Okay, now three presentations. I'd like to do it in this order, first do the conceptual specification of components, properties and materials um
+[B] That would be me.
+[A] and then the conceptual specification of user interface
+[C] Yep.
+[A] and finally trend watching.
+[B] Alright. Well.
+[A] Mm. 'kay. Function F_ eight it. There we go.
+[B] Alright. Um I'm very excited by this one actually guys I uh had a lot of fun doing it. Components design. This is where you look at what does it take to make a remote control and what should we make our specific remote control out of. Um. So, we need to examine each element separately, but we're designing a full thing, so you wanna keep it integrated as a whole. The main elements of remote controls in general, and therefore ours as well, are the case, the buttons, the circuit board with the chip and the battery. These are all things that we had sort of addressed before, but I'm gonna take each one a little bit separately here as we figure out what they should be made of and what they should look like. The case, uh the options that I've gotten from headquarters about what we can do, um there's there's the shape of a case, we could do a flat sh a flat case, a curved case or maybe even a double double-curved case. I haven't seen any pictures of what this exactly looks like yet, just keep that in mind, but these are the options that we have from manufacturing and we can make our case out of plastic, the m the main base will be plastic, but we have all these sort of fashion and technological elements we can add in, wood, latex, titanium, rubber or other coloured types of plastic. That would be our case. Um buttons, for buttons we have um pushbuttons, which is what Real Reaction uses the most often, but we also have scror scroll wheels, which can
+[A] Mm
+[B] have integrated pushbuttons
+[A] .
+[B] , or we could go all high-tech and have an L_ L_C_D_ screen. Um circuit board and chip we can have a simple one, a regular one or an advanced one, depending on what our other needs are. And then battery I think is where things get most exciting. We're talking about long-life batteries here. Um we can we can have your sort of basic double A_ batteries, but we also have these options of um using a kinetic battery, like are used in high-tech watches, where you just have to move it a little bit to get it to power up. Um so simple movements like pushing buttons would recharge the battery. Or a solar battery, although there are slight um complications with solar batteries as in we can't use a latex case if we have a solar battery
+[A] Hmm.
+[B] . Or um something they only described as the type of battery you find in torches from about fifty years ago, flashlights. Not quite sure what that is, but that's the description that I received, so that's what I'm passing on to you. So those are our options. Um personal preferences that I was thinking through here's what we've been talking about all through, fashion and simplicity. So if we're going for fashion in our cases, I think that what we're gonna wanna look at is a curved or a double-curved case, probably with a variety of design elements. Maybe titanium, maybe some wood. We're gonna have to investigate that better when I get specifics of the actual materials, but that's sort of what I have in mind. And we wanna go for simplicity. Probably pushbuttons, but I'm sort of intrigued by the idea of a scroll scroll
+[A] Mm
+[B] wheel
+[A] .
+[B] , if anyone has anything any ideas on that? I mean I know the iPods and things right now have touch scroll um buttons which are exactly like what they're describing, so that might be something we wanna look into. And I'm really intrigued by the idea of a kinetic battery. Solar I don't think would be such a good idea, because how often are you sure that your remote control will get a certain amount of light. But this idea of the kinetic, that you don't have to replace, and that a simple just shaking it around will make it work, I think that that m would be a very interesting thing. But I think we'd also wanna go for e a simple chip or regular chip to keep our costs down. Uh we really only need a regular or advanced chip t if we're gonna start using an L_C_D_. So I think we want to be aware of not making things overly t technological if they don't need to be, 'cause that'll keep our manufacturing price way down. That's what I have for options. Um I'd appreciate anyone's input, but that's what I'm seeing for the future of the the look of this thing.
+[D] Is double-curved like would be like two hands kind of thing?
+[B] I'm not sure. I haven't received any specific
+[D] Okay
+[B] visuals
+[D] . 'Cause I'm
+[B] of
+[D] imagining
+[B] this yet.
+[D] like double-curved is like, you know, like two sides that curve
+[B] This is
+[D] and
+[B] what
+[D] then like
+[B] I'm sort
+[D] one
+[B] of
+[D] curve would just be like a single vertical-ish kind of looking
+[B] Yeah
+[D] thing, but I've
+[B] . I'm
+[D] no idea
+[B] not sure, but
+[D] .
+[B] I'll let you know as soon as I get any pictures
+[D] Sounds
+[B] .
+[D] good.
+[A] Yeah, I wonder
+[B] I know if we do have a double-curved case, it can't have any titanium in it. But the titanium, they were quite they're marketing quite hard to us as being used in the space programme, so that could be quite interesting. Space-age remote.
+[A] Mm-hmm
+[B] Just all things
+[A] . Just
+[B] to
+[A] an interesting
+[B] keep in mind
+[A] marketing kind of
+[B] . Yeah
+[A] element
+[B] .
+[A] .
+[B] That's about all I have to do, guys. I hope I didn't go through that too quickly.
+[A] Uh just a real quick question um the weight of these different elements
+[B] Yeah
+[A] , have
+[B] , n
+[A] you
+[B] no
+[A] no
+[B] idea
+[A] idea, okay
+[B] , no idea
+[A] .
+[B] . Um I'm assuming that a kinetic battery isn't gonna take up that much weight
+[A] Mm-hmm
+[B] , and
+[A] .
+[B] that a tita titanium is very light, I know
+[A] Mm-hmm
+[B] , um but other than that's
+[A] .
+[B] really basic, I mean, that's all I have gotten so far
+[A] Okay.
+[B] . Alright? Any other questions?
+[C] Uh-huh. Don't think so
+[B] No
+[C] .
+[B] ? Okay.
+[A] Mm 'kay
+[B] I have save
+[A] .
+[B] this in the uh shared projects, if anyone wants to look
+[A] Thank you, perfect
+[B] and
+[D] Thanks
+[B] I have
+[D] .
+[A] .
+[B] c considerable notes on the topic as well, if anyone needs any more information. Uh
+[A] Um if you made notes yourself you can put those on our um underneath our
+[B] Just in
+[A] oh
+[B] my notebook
+[A] , uh in your book, then don't worry about
+[B] , but if
+[A] that
+[B] anyone has any specific
+[A] .
+[B] questions, don't hesitate to email me or something. Alright? Uh I guess I can
+[A] 'Kay now we're um concepts concepts of user interface. Yeah, um. This one's so much tighter than the other one
+[B] I
+[A] .
+[B] know.
+[A] Okay. Nope. There we go. Here you are.
+[C] Jess.
+[B] G oh, geez.
+[C] Alright, so I'm gonna describe the the concept of the user interface of this des device. Um we've talked about uh the two essential properties of the user interface. We want it to be simple and we want it to be fashionable. Um other we've also got to remember that this is a device that serves as a useful purpose. Uh we want people to be able to use it s as a remote control, so we need to determine what the essential functions of the d of the device are and make sure that we include that we've included all of those and that we actually end up with a device that is going to be useful to people. We have a number of different choices for a design concept um and s that's that's something that that I'll show you some examples of um, but essentially we need to choose how how is this device going to work, how how what kind of model is there going to be for user interaction with this device. Uh once we've chosen a a concept for it, we can then design the features around the concept, making sure that we get all the essential functions in the device and uh the extra functions and the more advanced features. And of course we also have to make it look cool. So basically, that's what we don't want. M we don't want lots of buttons, uh complicated features. We want something that looks nice and simple. Here's a
+[B] Hmm
+[C] a fairly simple
+[B] .
+[C] device. This is an an iPod from Apple. Um I think the main thing to notice about it is it just has four buttons. It's very minimalistic in its design. Uh you use these four buttons to m to move around a range of settings on the small L_C_D_ screen. Um the thing I like about this is that it's very very quick to access the main features. Uh you can just about make out uh that the button three buttons are uh previous track, next track and play pause. They're the main the main features of the iPod, the things you will use a all the time. Um then if you want to do anything more advanced, you go into the little menu on the L_C_D_ screen and you use the buttons just to scroll around and and find the more advanced features that you want. So I think that's that's a good a good kind of model that we could have. Um here's a another example. This is uh it's an interesting idea and I think i it looks pretty cool. Um it's certainly got novelty value. Uh
+[A] Mm
+[C] it's
+[A] .
+[C] nice and colourful, it's nice and bright. Uh it's also something that you can kind of feel your way around. The buttons are are different shapes and and you can sort of yeah if you're watching T_V_ in the dark or whatever, you can work out which button's which and basically, yeah it's ith it's fun. So I I like I like this idea of just having buttons for the features that you use most often. So you'd need a few buttons to select your favourite channels. I mean most people, when they watch T_V_, they have two hundred and fifty channels on their T_V_ and they watch of 'bout four of them at the most. So, you have buttons for your favourite channel, changing the volume, which is something you do all the time when you're watching T_V_, and the button to switch it off, in case you get bored. Um other features, things like adjusting the brightness, tuning the T_V_, uh I don't know what else you do with a T_V_. Um but these are these are all necessary functions. Uh you can't have a t there's no point having a television that you can't tune or that you can't set the contrast, so we need to find a way of including these somehow. Um and one other suggestions I'd make is to in is to include in a menu system, a bit like on the iPod. So we'd either have a small L_C_D_ display on the device itself, or uh have a dis a menu display that comes up on your television and can b be controlled through the device
+[B] Hmm
+[C] . And
+[B] .
+[C] that would allow you to access access the advanced features uh whilst keeping a very small and simple set of buttons for the features that you use most often.
+[A] Okay.
+[B] So you'd be advocating an L_C_D_ then?
+[C] I think that's that's one way to go, yes
+[B] Okay
+[C] . Um
+[B] .
+[C] I mean there are there are advantages and disadvantages if you if you have an L_C_D_ display, it's it's nice, because it's it it lets you just sort of sit there and st and control your television from your armchair.
+[B] Mm-hmm.
+[C] There are disadvantages, an an L_C_D_ display would have to be quite small, 'cause we're
+[B] Right
+[C] we're
+[B] .
+[C] I well we're I assume we're gonna be making quite a small device. Um it would also have to have uh a kind of backlighting in it, 'cause you ten you tend to watch
+[A] Mm-hmm
+[C] T_V_ in the dark
+[A] .
+[B] Right
+[C] , but you
+[B] .
+[C] need to be able to see your L_D_D_ L_C_D_ display. The alternative is to have a an on-screen display on your television that you control through your remote control. Uh a bit like a bit like how they have these um digital boxes where you you press the buttons and it comes up with your this thing of watch lo what's
+[A] Mm-hmm
+[C] on each channel
+[A] .
+[C] . I mean
+[B] Okay
+[C] that that's
+[B] .
+[C] also a good idea. It's it can it does have it's problems as well, if you've got a small T_V_ and you're sitting on the other
+[A] Mm
+[C] side
+[A] .
+[C] of a room, it's hard to read the little text that comes up.
+[B] Mm-hmm.
+[C] Uh but that's a that's a design decision that we can make.
+[B] 'Kay.
+[A] I do think that um one of the important features for a remote is seeing a menu and seeing what's on. Um
+[C] Yeah.
+[A] and so like favourite channels is is applicable, but I think th that you do need to have some kind of function where it's um you have t you can see
+[B] Well
+[A] the title of the show or possibly a description of it
+[B] Are you
+[C] Yeah.
+[A] . Like
+[B] are you
+[A] I
+[B] tak
+[A] I know I use
+[D] Wait
+[A] that
+[D] , but is
+[A] often
+[D] that separate
+[A] enough
+[D] from what
+[A] .
+[D] he was saying?
+[B] Yeah
+[A] Well
+[B] .
+[A] if it if it was a L_ L_C_D_ on th on the remote, I don't know that you could f that you'd
+[B] No
+[A] be able to
+[B] , I
+[A] see
+[B] think
+[A] a
+[B] I think we're talking menu like contrast and
+[A] Okay
+[B] tuning
+[A] .
+[B] the V_C_R_ or something if I've understood you correctly
+[C] Yeah, that
+[B] , rather than
+[C] that
+[B] menu
+[C] would be one
+[B] as
+[C] of the
+[B] what's
+[C] features
+[B] on
+[C] , yes
+[B] .
+[C] .
+[A] Okay
+[C] But it's
+[A] . 'Cause that would
+[C] it's
+[A] be more specifically
+[C] it's
+[A] a
+[C] something
+[A] digital
+[C] to bear
+[A] box
+[C] in mind is that
+[A] , mm-hmm.
+[C] if we put a display on the remote control the c uh communication is one way, so you can't have the televisions and information back to the remote control
+[B] Oh
+[C] , at
+[B] , good
+[C] least
+[B] point
+[C] I
+[A] Mm
+[C] don't think you can
+[B] .
+[C] . Um
+[A] .
+[C] I'm not sure.
+[B] Yeah.
+[A] Okay, now
+[D] Should
+[A] we're
+[D] I plug
+[A] moving
+[D] that
+[A] on
+[D] in
+[A] to market
+[D] ?
+[A] . Marketing.
+[C] Is that going on? Okay.
+[D] Maybe it's just not
+[C] Uh that should
+[D] Is it
+[C] be
+[D] on
+[C] alright
+[D] ?
+[C] , actually.
+[D] Ri What F_ do you have to press, five
+[A] Eight.
+[D] ? I just keep pressing lots of 'em. Well, I don't know how relevant all of this gonna be. If anything, the that they gave me
+[B] No
+[A] Oops
+[B] signal
+[A] , it's not plugged in
+[B] .
+[A] , quite
+[D] . Alright
+[A] in well
+[D] .
+[A] enough. There we are.
+[B] Oop, there we go.
+[A] Mm 'kay.
+[D] Oh yeah. Okay, so we're gonna look a little bit at trend watching. Basically, I was given um an executive summary that was a market investigation on remote controls that was recently conducted, and then also some fashion watchers in Paris and Milan commented on some things that are gonna be going on this year. So first um they had people they ranked um the important aspects of r remote controls, and right now i d they're saying that currently there's a functional look and feel preference, but that really, over the next year it it that's gonna be switching to fancy look and feel remotes, so that just goes back to the whole desire of our c Real Reaction company wanting to focus on fashion and so, even though we're stressing, when we're talking, we've all been talking about this like simplicity and easy to use idea, they're sort of wanting us to remember that the number one thing for everyone is that it's fancy look and feel. And as these are ranked, the top one is doubly important to the second one, which is doubly important to the third one, so
+[B] Okay.
+[D] just to take that weight into account. The second thing that was mentioned as important was the technological innovations. That would be like if we use something like the space material or the L_C_D_ screen, things like that. And then ease of use was the third most important, whi so really, no matter what, we need to focus the most on fancy look and feel, according to this. I don't know how much we agree with that. And then the fashion watch talks about that this year's top trend for clothes, shoes and furniture is fruits and vegetables and tha that there's a preference
+[A] S sweet
+[D] for spongy
+[A] .
+[D] , tight material. And so that brings us to my personal preferences. Who wants a spongy remote or one with fruit and vegetable padding. Personally, I don't really think that I want one that's gonna go out of style or go stale, excuse the pun, um in a year, so even though this is coming from us as, you know, trend watch, market research, I don't know how much of it we necessarily wanna take away. Also, considering that the d research b has been carried out by Real Reaction, I'm a little hesitant as to like, how these questions may have been worded, and if necessarily this whole fashion to technology y edas ease of use is necessarily the right ranking. Personally, like I might reverse it, but if we're working for this company then I guess no matter what, we have to stress fashion the most. But it
+[B] Mm.
+[D] doesn't necessarily need to be a spongy material
+[B] That
+[D] .
+[B] there's all kinds of scope for imagination in that one though.
+[D] Yeah. I don't have a lot of notes to share if you want them, that pretty much sums it up. So yeah.
+[A] Okay, do we have any s some questions for this, let's
+[D] Yeah
+[A] see um
+[D] , what can
+[A] .
+[D] I possibly enlighten on?
+[A] Um do you have any ideas how to possibly use these? Um how to how to use a fruit or vegetable or um or the spongy material at all? Like could we make a s like could we make a spongy remote? It would be easier
+[B] If
+[A] on
+[B] it's
+[A] the hands
+[B] latex
+[A] .
+[B] if it's latexy
+[A] It's kind of
+[B] Um
+[A] and then it
+[B] , mean
+[C] A kind of
+[A] we
+[C] thing
+[A] would have to
+[C] that
+[A] find a way to protect like the chip and all that, I dunno
+[B] An
+[A] . But
+[B] uh I if th my understanding of a latex case is that it's in fact hard to protect stuff inside, but that
+[A] Mm-hmm
+[B] it's covered
+[A] .
+[B] with the latex, which is spongier and softer on your hands. It's there's something to be said, I mean we we got that thing earlier from you about um not wanting it to R_ R_ repetitive stress injuries
+[A] Mm-hmm
+[B] and
+[D] Mm-hmm
+[B] things
+[D] .
+[A] .
+[C] Yeah
+[B] and
+[C] .
+[B] and Yeah
+[D] Yeah, so something, m
+[B] , something
+[D] m instead of
+[B] grippable
+[D] a necess
+[B] , I mean
+[D] yeah
+[B] we don't
+[D] , grip
+[B] we don't
+[D] , I'm thinking
+[B] we don't wanna go
+[D] grip
+[B] spongy
+[D] more than
+[B] , maybe
+[D] like sinking into your hands
+[C] Yeah
+[D] , you know, i and I
+[C] . Yeah
+[D] think
+[C] .
+[D] I'm envisioning more like
+[B] . Yeah.
+[D] , you know, the material that you have when you sit on like a bicycle, so
+[A] Mm-hmm
+[D] that it doesn't
+[A] .
+[D] hurt when
+[B] Mm-hmm
+[D] you're
+[B] .
+[D] sitting down for a long time, like I'm imagining that sort of thing, I don't know what th that
+[B] Yeah
+[D] material's
+[B] , I think
+[D] called
+[B] that given
+[D] .
+[B] the list of materials I w I was forwarded it's that seems doable. could we go in fruit and vegetable colours? We could colour-co-ordinate
+[A] F for
+[B] them
+[A] sure, or maybe
+[B] , li
+[A] like um couple main ones being like, I dunno, lemons or strawberries or something
+[B] The buttons
+[A] .
+[B] could be fruit-shaped
+[A] Could they be smelly?
+[C] I
+[B] . Oh
+[D] Oh God
+[C] Is it supposed
+[D] .
+[C] to be shaped like a vegetable? Uh
+[A] I
+[C] like
+[A] don't
+[C] uh
+[A] know
+[C] I dunno, like
+[A] .
+[C] uh carrots or something.
+[B] well it's
+[A] Or
+[B] quite easy
+[A] carrot
+[B] to s
+[A] shaped
+[B] shape thing
+[A] , mm
+[B] like carrot isn't it
+[A] .
+[C] Maybe
+[B] ? Or maybe the
+[C] , or
+[B] buttons could be shaped
+[A] Like large
+[B] like different
+[A] button
+[B] fruits
+[A] , that's what I was thinking of, yeah
+[B] .
+[A] .
+[D] What about the idea of like a round remote? Instead of like a vertical up and down one. Like
+[C] Kind
+[D] in
+[C] of
+[D] terms
+[C] like a
+[D] of
+[C] potato
+[D] holding it
+[C] .
+[D] . Like that's a f shape
+[B] be yeah
+[D] of a fruit
+[B] . It'd
+[D] . Just
+[A] Might
+[D] to
+[A] would you
+[D] tie
+[C] Yeah
+[A] think you
+[D] it
+[C] .
+[A] you
+[D] in a little
+[A] do
+[D] .
+[A] you think you'd be able to hold it? 'Cause I think the reason they're long
+[B] be harder
+[A] is
+[B] to f bu uh buttons
+[A] yeah.
+[B] I think. It'd be harder to press
+[C] Depends
+[B] button
+[A] Harder to
+[B] .
+[A] push
+[C] . When you
+[A] .
+[C] when you use a remote, do you press the buttons with your thumb, usually?
+[D] Yeah
+[C] Or your fingers
+[D] .
+[C] ?
+[B] Um
+[A] I usually hold it in one hand. Maybe
+[C] Or maybe
+[B] I
+[C] you want something that's shaped like a mobile phone, so you you hold it in one hand, and you press the buttons
+[B] Yeah
+[A] But then
+[C] with
+[A] the buttons
+[C] your thumb
+[A] would
+[B] , that's
+[A] have to
+[C] .
+[A] be very small
+[B] ts how I tend to do it.
+[D] Yeah
+[A] . Don't
+[D] , 'cause
+[A] you think
+[B] No
+[D] otherwise
+[B] just
+[A] ?
+[D] your
+[B] thumb-sized
+[D] fingers can't move around
+[B] . Jus
+[D] . But
+[A] But
+[D] I like
+[A] I mean
+[D] i
+[A] in order to get to all of them
+[C] Yeah
+[A] , you know.
+[C] .
+[B] Yeah.
+[A] They would have to be within
+[C] Maybe
+[A] a certain amount
+[B] That's
+[A] of
+[C] . But
+[B] true
+[A] space
+[C] if you've only
+[B] .
+[A] with
+[C] got
+[A] each other
+[C] like
+[A] .
+[C] four or five buttons anyway, then it's it's not
+[B] Right
+[C] so
+[B] .
+[C] much a problem, perhaps
+[B] I
+[C] .
+[B] When I'm when I'm pressing buttons on my iPod, that's how I do it, hold it and press
+[A] Mm-hmm
+[B] the
+[C] So
+[B] four
+[C] you hold it
+[A] .
+[C] in one hand
+[B] . Yeah
+[C] and you
+[B] .
+[C] press you press the buttons
+[B] Yeah
+[A] Mm-hmm
+[C] with
+[B] , or
+[C] your thumb
+[B] in
+[A] .
+[B] and use
+[C] and
+[B] my thumb or my pointer finger on the touch scroll wheel.
+[C] And
+[D] I
+[C] you find
+[D] love
+[C] that works
+[D] the idea
+[C] quite well
+[D] of
+[C] ?
+[D] the
+[B] Yeah
+[A] Mm-hmm
+[D] wheel like
+[A] .
+[D] the iPod
+[C] Is
+[D] . 'Cause
+[C] that
+[D] th
+[C] The button on an iPod, is it what is it, is it just four buttons or is it
+[D] It's
+[C] li
+[D] like
+[C] more
+[D] five
+[C] like
+[A] It's a
+[C] a
+[A] scroll
+[C] scroll
+[D] , 'cause
+[C] thing
+[D] there's
+[B] It
+[A] , yeah
+[D] one
+[B] wel
+[A] , it's
+[D] in the
+[A] a
+[D] middle
+[C] ?
+[A] wheel
+[B] well
+[D] .
+[A] .
+[B] yeah, it would I mean each version of it has been a little bit different
+[A] The one I have
+[B] , but
+[A] doesn't have the four on i like
+[B] Oh yeah
+[A] around
+[B] , you had
+[A] it
+[B] one
+[A] , I don't
+[B] of the
+[A] think
+[B] in-between
+[A] .
+[B] ones, when they weren't doing that anymore. Ts
+[C] Right
+[B] and you press
+[C] .
+[B] the centre button, that's that's
+[C] Oh
+[B] your all-purpose
+[C] , I see
+[B] select
+[C] , right, yeah
+[B] button right there.
+[C] . Oh, okay
+[B] Since it's the
+[C] . Yeah
+[B] one
+[C] , that's
+[B] in the
+[C] quite
+[B] centre
+[C] a good
+[B] that's
+[C] design
+[B] not marked
+[C] .
+[B] , yeah.
+[D] I think why it would be good for us is 'cause like you could have the same wheel sort of effect for like channel flipping and then the other
+[B] Yeah
+[D] one could
+[B] .
+[D] be like for volume. Like just the idea of like those so few buttons
+[B] Uh
+[D] for main
+[B] uh t
+[D] things, but then how you could go back to the menu and like, I dunno if we would want it on the screen there or on the actual T_V_. I kind of am wanting
+[B] Yeah
+[D] to say
+[B] .
+[D] on the T_V_, 'cause if you're changing
+[B] Hmm
+[D] the
+[B] .
+[D] brightness, don't you wanna see it happening, kind
+[A] Mm
+[D] of
+[C] Yeah.
+[A] .
+[B] Yeah.
+[D] ? And then
+[B] Yeah, I
+[D] you
+[B] think
+[D] could still
+[B] an
+[D] have
+[B] L_C_D_
+[D] that available
+[B] screen
+[D] .
+[B] might be good in theory, but not as useful
+[C] I think
+[B] in
+[C] it
+[B] practice
+[C] could be difficult
+[B] .
+[C] in practice, yeah
+[B] Yeah.
+[C] . Also z yeah, 'cause you would be z looking down at the L_C_D_ screen
+[D] Mm-hmm
+[C] , than
+[B] Right
+[C] back up
+[B] .
+[C] at your T_V_ and
+[D] . Mm-hmm.
+[C] people
+[B] Um
+[C] don't wanna do that.
+[A] Okay um
+[B] Oh we
+[A] we
+[B] probably have
+[A] have
+[B] to get going, don't
+[A] we've
+[B] we
+[A] about fifteen
+[B] ?
+[A] minutes left, so I'm I'm gonna
+[D] Uh-huh
+[A] continue with
+[D] .
+[A] my pres presentation. Um I've one more slide before we close, but in that slide is when we need to make decisions about this these kinds of things, so I'll just
+[B] 'Kay.
+[A] bring that up and show you all before we move on. Um
+[D] If I get
+[B] Could
+[D] any more information of fruits and vegetables
+[B] Could we
+[D] , I'll let
+[B] uh
+[D] you know
+[B] could we have
+[D] .
+[B] changeable covers like for your mobile
+[C] Like
+[B] ? In different
+[C] , to
+[B] fruit
+[C] make
+[B] and
+[C] it
+[B] vegetable
+[C] different fruits
+[B] colours, yeah.
+[C] . Yeah, it's possible
+[A] Yeah
+[C] .
+[A] , and then like the the covers could be spongy latex
+[B] Exactly
+[A] wherea but the
+[B] .
+[A] actual model could be titanium.
+[B] And you could co-ordinate with your house or whatever
+[C] I
+[B] . All
+[C] think
+[B] these
+[C] maybe
+[B] options.
+[C] th the packaging, it should be like a lemon and the the packaging is like the peel. So
+[B] Ooh
+[C] instead of opening the box
+[B] .
+[C] you just kind of peel it, and the remote control's inside.
+[D] Well, there we
+[B] Oh
+[D] go
+[C] Don't know
+[A] Ah hmm
+[D] . The
+[C] .
+[A] hmm
+[D] iPod packaging
+[B] .
+[A] hmm
+[D] is me
+[A] .
+[D] like was so that was like half the fun. It's
+[B] Yeah
+[D] like the
+[B] .
+[D] way it all comes all cute.
+[B] Mm
+[D] Lemons
+[B] . Options.
+[D] ?
+[A] Okay, um components concept. Energy, chip
+[B] Uh-hu oh
+[A] on print
+[B] , oh
+[A] .
+[B] yes. Right
+[A] G
+[B] , I had sort of skipped over that hoping it wouldn't get be necessary but um
+[A] That's th th this is the agenda they gave me. So
+[B] Alright
+[A] can you just explain
+[B] , so
+[A] what that
+[B] um
+[A] is real quick?
+[B] decisions, what the okay deci decisions on energy I'm thinking is based on the battery
+[A] Mm-hmm
+[B] . Um
+[A] .
+[B] I dunno, what do people think about this kinetic battery idea?
+[A] I think it's awesome. I
+[B] Am
+[A] think
+[B] I
+[A] it's really cool.
+[B] Yeah.
+[D] Yeah, I mean, it would t totally take care of our problem of not wanting to change batteries.
+[B] Yeah.
+[C] Yeah, um I think it's good, as as long as we consider the the cost and the uh how reliable it is, but
+[B] Right
+[C] as far
+[B] , I haven't
+[C] as I know
+[B] gotten
+[C] , the technology
+[B] any
+[C] is good.
+[D] Costs
+[B] yeah
+[D] .
+[B] , any more information on cost other than it's more expensive than a regular battery, but um
+[D] But over time
+[B] but if we're using a an i a cheaper chip, then it'll even out, I think. Um circuit boards. Um yeah, I got a whole bunch of information on how circuit boards are produced. They're they're thin fibreglass with copper wires etched on to them, and di I think they're quite easily printed on by machine, which is chip on print is where the machine prints on the wires and solders it all together for us. I don't really know what to tell you as far as decisions. I wasn't really given any options, I was just given that this is how they're done.
+[A] Okay
+[B] Um
+[A] .
+[B] yeah, I can't can't really tell you. I can I can tell you a whole lot about how it works. But I don't know any decisions on
+[A] If they're if they're really options.
+[B] Yeah. I'm sorry, I did
+[A] Okay
+[C] Al
+[A] .
+[B] f
+[C] all circuit boards are pretty much the same, I think. Uh it's fairly fairly standard
+[B] Yeah.
+[C] .
+[A] Um okay, then we'll move on to the case. Um oh bu I guess maybe if we decided on like a simple, a regular, or an advanced
+[B] Right
+[A] chip
+[B] . Well
+[A] , maybe
+[B] okay
+[A] .
+[B] , here's the here's the thing on the chips that I that I got. Um simple, regular, advanced chip on print. The chip on print includes an infrared sensor, so we don't have to worry about that. Um, 'kay, the pushbutton if we're gonna have pushbuttons, they require a simple chip, but a scroll wheel requires a regular chip, and an L_C_D_ requires advanced. Do we want a scroll wheel, or do we just want pushbuttons?
+[C] Um I don't think we ne really need the scroll whe wheel. I mean it might be nice for changing the volume
+[B] Oh
+[A] It would
+[C] . Uh
+[A] be
+[B] .
+[A] nice for changing
+[C] but
+[A] the volume, but I don't know how useful it'd be for changing the channel
+[C] I don't
+[A] . 'Cause
+[C] think
+[A] you
+[C] it
+[A] don't
+[C] would
+[D] Yeah
+[A] have
+[D] , it's
+[C] really
+[A] control
+[C] work
+[D] a
+[A] over
+[C] .
+[A] numbers or
+[C] Yeah, you
+[B] Yeah
+[C] really need buttons
+[B] , th
+[C] for
+[B] it'd
+[C] changing
+[B] be
+[C] a channel.
+[B] it'd be handy for going through if there was an on-screen menu of your channel choices
+[D] But
+[B] , than
+[D] if
+[B] you
+[D] you
+[B] can
+[C] Yeah
+[B] scroll
+[C] .
+[D] c if you
+[B] down
+[D] could scroll
+[B] on the scroll
+[D] through the
+[B] .
+[D] channels, and then
+[B] Yeah
+[D] the volume
+[B] .
+[D] would just
+[A] We have
+[D] be
+[A] five minutes left for the meeting, so
+[D] and the volume would just
+[A] .
+[D] be like the same way
+[B] Yeah
+[D] , forward
+[B] .
+[D] and backward as I'm just thinking like it would make it much like sleeker sort of looking
+[B] Yeah.
+[D] . And
+[C] Yeah
+[D] otherwise
+[C] .
+[D] , no matter how may buttons we have, we're gonna have like, you know, black with red sticking out and th no it's gonna inevitably sort of start looking like
+[C] Yeah
+[D] those
+[C] .
+[D] group of sort of ugly ones that we saw stacked up.
+[B] Hmm.
+[A] So, have a scroll for volume?
+[B] F or for all those secret
+[A] F
+[B] functions? When you get on the on-screen menu of all your functions that your remote could do for you without the buttons and you could have a scroll wheel to go through those menus.
+[C] I think yeah, I think a scroll wheel would be nice, but it's not necessary
+[B] Right
+[C] . Um
+[B] . So we could either go with a simple or a regular chip, depending and maybe we could table that decision for later.
+[A] Um
+[B] I don't know
+[A] .
+[B] .
+[A] I think w well I think when we go on to the une userface, we're gonna have to decide the interface we're gonna have to decide
+[B] Okay
+[A] um
+[B] .
+[A] whether we're gonna have a scroll or not.
+[B] Well, let's think about that while we talk about the case
+[A] Okay, let's do
+[B] .
+[A] case.
+[B] Uh I'm kinda liking the idea of latex, if if spongy
+[C] Yeah.
+[B] is the in thing.
+[A] I'm a little um I'm a little hesitant about it, because I'm worried about protecting the stuff on the inside.
+[B] Okay.
+[A] Um
+[D] Oh could it be hard, and then
+[B] Uh yeah
+[D] something around
+[B] , everything
+[D] it
+[B] I've
+[D] ?
+[A] Yeah, I would be more okay with like a titanium actual thing and then maybe
+[B] N oh
+[A] like
+[B] wha
+[A] a mobile phone
+[B] what I've
+[A] kind of thing
+[B] what I've
+[A] .
+[B] seen, just not related to this
+[A] Mm-hmm
+[B] , but of
+[A] .
+[B] latex cases before, is that there's uh like a hard plastic inside, and it's just covered with the latex
+[A] Okay.
+[B] . Not too thick a layer
+[A] Mm-hmm
+[B] of latex, just
+[A] .
+[B] enough to be grippable
+[A] Okay
+[B] , like bike
+[A] .
+[B] handles or or anything that you've seen like that. The inside is hard. I don't think we need to worry about protecting
+[A] Ge o
+[B] the circuit board, I think that that's done for us.
+[A] Okay
+[C] 'Kay. Yeah.
+[A] . So we uh we do want latex.
+[C] Yeah.
+[B] Yeah.
+[A] Okay. Latex. Um and probably in colours, maybe fruity, vegetable colours.
+[B] Yeah.
+[A] Fruity colours. Okay um let's go to the ufe user interface then we'll come back to the chip I suppose.
+[B] Oh and we want a curved case, yeah? Or a double-curved?
+[A] Well, we don't really know what the difference is, right?
+[D] I'm thinking curved of some sort
+[A] Yeah.
+[B] Yeah
+[C] Yeah
+[D] .
+[B] , okay
+[C] .
+[B] . We don't really know what the difference
+[A] Um okay, interface, the type and the supplements. So
+[C] Um
+[A] push or scroll, right
+[C] Yep
+[A] ? Or both?
+[C] . Um And I think if we wanna keep our costs down, we should just go for pushbuttons, 'cause then we can have a a simple chip and it's simpler, it's it's cheaper to make pushbuttons than it is a scroll button
+[B] Good point
+[C] . So
+[B] .
+[C] in terms
+[A] Mm-hmm
+[C] of uh
+[A] .
+[C] in terms of uh economics it's probably better to have pushbuttons.
+[A] And if we had a sc an on-screen um kind of thing that you could scroll through, like you can use your buttons to scroll through things
+[C] Yeah, yeah, it's uh
+[A] . I think
+[C] it's
+[A] that
+[C] it's fairly simple.
+[A] yeah. For channel surfing I think a scroll an actual like an iPod's kind of scroll thing would be too fast
+[B] Yeah
+[A] , I dunno.
+[B] . I say pushbuttons at least unless we get any information but I have no idea how much more expensive a scroll wheel is than than a pushbutton, but it's gotta be some more expensive, so
+[C] Yeah
+[B] I
+[C] .
+[B] think it might be better to put our money into the stuff like the kinetic battery and the cool case
+[A] Mm-hmm
+[C] Yeah
+[B] because
+[A] . Is that okay
+[C] . Interesting
+[A] with you
+[C] .
+[A] ? How you feeling
+[D] Yeah
+[A] ?
+[D] . And let's like see if we get anything else. I mean I'm not like hard-sold on the scroll wheel, it's more just to give it a different kind of look
+[A] Mm-hmm
+[D] , but if it's gonna
+[A] .
+[D] be in a latex type thing
+[A] It might
+[D] and that's
+[A] be cool
+[D] gonna look
+[A] enough
+[D] cool, then that's
+[A] .
+[D] probably gonna have a bigger impact than the scroll wheel.
+[B] Yeah.
+[A] Okay, so we're gonna go with um type pushbuttons
+[C] Yep.
+[A] , and then supplements, how are we gonna do that?
+[C] Uh what do you mean by supplements, exactly?
+[A] Um I assume that's what else we're gonna like h ha the um the additional buttons we can use.
+[C] Um
+[B] Oh
+[A] So we're
+[B] .
+[A] gonna have like a menu button
+[C] Yep
+[A] , so that
+[C] .
+[A] we can access on-screen things
+[C] Yeah.
+[A] then? Okay, um
+[B] Alright
+[A] so
+[C] Um
+[B] .
+[A] we're
+[C] in
+[A] doing an on-screen menu
+[B] So what
+[A] that
+[B] are
+[A] we
+[C] Yeah
+[A] can
+[B] what
+[C] .
+[A] scroll
+[B] are our
+[A] through
+[B] buttons
+[A] .
+[B] gonna be? On off
+[C] On off, uh volume, favourite channels, uh
+[B] So like one
+[C] and
+[B] through
+[C] menu
+[B] five, or
+[C] . Yeah
+[D] Like a
+[C] , yeah
+[D] radio
+[C] about
+[D] type sorta situation
+[C] yeah like yeah
+[D] ?
+[C] , a bit like radio presets. Um
+[A] Pre-set channels and then we're gonna need um numbers one through zero, right
+[C] Uh we
+[A] ?
+[C] wouldn't even need
+[B] No
+[C] the numbers
+[B] .
+[C] . I think maybe numbers seems is kind of
+[A] Well
+[C] old-fashioned
+[A] , but in order to pre-set
+[C] .
+[A] a cha oh I guess you can just hold it down
+[C] Yeah
+[A] when you get
+[C] , yeah
+[A] to one
+[C] , you can just
+[B] Mm
+[A] when
+[B] .
+[A] you're scrolling through
+[C] and you
+[A] .
+[C] need some kind of, I dunno, sort of up down kind of button
+[B] Yeah
+[C] , but
+[B] , up
+[C] the volume
+[B] down
+[C] control
+[B] .
+[C] could double for that, for example.
+[A] Mm-hmm. Okay, um finishing the meeting now. Um our next meeting starts in thirty minutes, um you each have things to do, look and feel design, user interface design, product evaluation, and you two are going to work together on a prototype using modelling clay. You'll get specific
+[B] Ooh
+[A] instructions
+[C] Cool
+[A] from your personal coach.
+[D] Wow.
+[A] Um did we decide on a chip
+[C] .
+[B] .
+[A] ? Let's go with a simple chip
+[B] Simple chip
+[C] Yep
+[A] ? Okay
+[B] .
+[C] .
+[A] . We are done. Thank you everyone. Oh I di these are already in our shared folder
+[B] Okay, cool
+[A] , so
+[B] .
+[A] .
+[B] Clay
+[C] Clay. I wasn't expecting that
+[B] .
+[C] .
