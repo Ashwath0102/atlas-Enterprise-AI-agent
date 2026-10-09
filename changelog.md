@@ -66,3 +66,18 @@
     bm25:   P@5=0.575  MRR=0.667  p50=3ms     p95=9281ms (first call builds index)
     hybrid: P@5=0.600  MRR=0.667  p50=12001ms p95=45084ms (includes HyDE+subq LLM calls)
 - Image dashboard queries score 0.00 â€” expected; agent will route these with explicit modality filter in Phase 4
+
+## 2026-10-01
+- Extended .gitignore to exclude Bob session notes (bob-task-*.md) and .vscode/ folder
+- Staged and committed all safe data files: 6 dashboard screenshots + ground_truth.md, 622 handbook markdown files, tickets.db, and 9 AMI annotation files (reference RTTM + flat transcripts)
+- No API keys or raw audio/video files included — .env, *.wav, *.mp4, cache/ and logs/ remain gitignored
+- Repo is now ready to push to GitHub via SSH
+
+
+## 2026-10-09 — Phase 3
+- Built mcp_servers/shared/protocol.py: minimal MCP JSON-RPC 2.0 over stdio, Python 3.8 compatible (official SDK requires 3.10+)
+- Built mcp_servers/docs_search/server.py: search_docs tool wrapping the retrieval pipeline (dense+BM25+rerank, no HyDE for latency)
+- Built mcp_servers/ticketing/server.py: 5 tools (list_tickets, get_ticket, create_ticket, update_status, assign_ticket), parameterized SQL, ticket_events audit trail on every mutation
+- Built backend/agent/mcp_client.py: synchronous stdio transport client with readline-based reader thread and stale-message drain on timeout
+- scripts/test_mcp.py: 20 scripted requests — 20/20 passed (100% success rate, 93s total). Key fix: each docs-search test uses a fresh subprocess to avoid Gemini free-tier RPM burst accumulation across multiple embedding calls
+
