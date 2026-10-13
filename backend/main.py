@@ -13,11 +13,14 @@ Or via uvicorn:
 from __future__ import annotations
 
 import logging
+import time
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 from backend.config import settings
 
@@ -32,8 +35,8 @@ logger = logging.getLogger("atlas")
 # ── App ───────────────────────────────────────────────────────────────────────
 app = FastAPI(
     title="Atlas Multimodal Enterprise Agent",
-    version="0.1.0",
-    description="Phase 0 scaffold — Atlas backend API",
+    version="0.4.0",
+    description="Atlas — multimodal onboarding assistant with LangGraph-style agent",
 )
 
 # ── CORS (permit the Vite dev server) ────────────────────────────────────────
@@ -49,12 +52,46 @@ app.add_middleware(
 )
 
 
+# ── Lazy-load the agent graph (avoids import-time BM25 / Qdrant hits) ────────
+_graph = None
+
+def _get_graph():
+    global _graph
+    if _graph is None:
+        from backend.agent.graph import atlas_graph
+        _graph = atlas_graph
+    return _graph
+
+
+# ── Request / Response models ─────────────────────────────────────────────────
+
+class ChatRequest(BaseModel):
+    question: str = Field(..., min_length=1, max_length=2000)
+    session_id: Optional[str] = None
+
+
+class TokenUsage(BaseModel):
+    node: str
+    model: str
+    input_tokens: int
+    output_tokens: int
+
+
+class ChatResponse(BaseModel):
+    answer: str
+    citations: List[str]
+    latency_ms: float
+    token_usage: List[Dict[str, Any]]
+    trace: List[Dict[str, Any]]
+    session_id: Optional[str] = None
+    error: Optional[str] = None
+
+
 # ── Lifecycle ──────────────────────────────────────────────────────────────────
 @app.on_event("startup")
 async def _startup() -> None:
     logger.info("Atlas backend starting…")
     settings.validate_required()
-    # Ensure cache directory exists
     Path(settings.CACHE_DIR).mkdir(parents=True, exist_ok=True)
     logger.info(
         "Config loaded — primary=%s  bulk=%s  fallback=%s",
@@ -68,7 +105,44 @@ async def _startup() -> None:
 @app.get("/api/health", tags=["system"])
 async def health() -> dict:
     """Simple liveness probe."""
-    return {"status": "ok", "version": "0.1.0"}
+    return {"status": "ok", "version": "0.4.0"}
+
+
+@app.post("/api/chat", response_model=ChatResponse, tags=["agent"])
+async def chat(req: ChatRequest) -> ChatResponse:
+    """
+    Main agent endpoint.
+
+    Accepts a natural-language question, runs the Atlas agent graph
+    (planner → sub-agents → synthesizer), and returns a cited answer.
+
+    The agent runs synchronously in a thread pool to avoid blocking the
+    event loop (the MCP subprocess I/O is blocking).
+    """
+    import asyncio
+    from concurrent.futures import ThreadPoolExecutor
+
+    loop = asyncio.get_event_loop()
+
+    def _run() -> Dict[str, Any]:
+        return _get_graph().run(req.question)
+
+    try:
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            state = await loop.run_in_executor(executor, _run)
+    except Exception as exc:
+        logger.error("Agent error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    return ChatResponse(
+        answer      = state.get("answer", ""),
+        citations   = state.get("citations", []),
+        latency_ms  = state.get("latency_ms", 0.0),
+        token_usage = state.get("token_usage", []),
+        trace       = state.get("trace", []),
+        session_id  = req.session_id,
+        error       = state.get("error"),
+    )
 
 
 @app.get("/api/config", tags=["system"])
