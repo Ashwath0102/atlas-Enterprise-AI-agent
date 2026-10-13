@@ -81,3 +81,18 @@
 - Built backend/agent/mcp_client.py: synchronous stdio transport client with readline-based reader thread and stale-message drain on timeout
 - scripts/test_mcp.py: 20 scripted requests — 20/20 passed (100% success rate, 93s total). Key fix: each docs-search test uses a fresh subprocess to avoid Gemini free-tier RPM burst accumulation across multiple embedding calls
 
+
+## 2026-10-09 — Phase 4
+- backend/agent/state.py: AgentState dict schema with empty_state() factory
+- backend/agent/llm.py: Gemini REST wrapper + Groq fallback, base-4 backoff, disk cache keyed by SHA-256(model+prompt)
+- backend/agent/tracer.py: LangSmith tracing shim (Python 3.8 native REST, POST to open spans, PATCH to close)
+- backend/agent/nodes/planner.py: Gemini planner — classifies intent, outputs structured JSON plan (retrieval/vision/action/hybrid)
+- backend/agent/nodes/retrieval_node.py: calls docs-search MCP server, fresh subprocess per call
+- backend/agent/nodes/vision_node.py: Gemini vision (LLM_BULK_MODEL) on image chunks with [source_id] labelling
+- backend/agent/nodes/action_node.py: calls ticketing MCP server based on plan action_intent
+- backend/agent/nodes/synthesizer.py: Gemini synthesizer — merges all context, enforces [source_id] citations
+- backend/agent/graph.py: AtlasGraph state machine — planner ? sub-agents (sequential) ? synthesizer; LangSmith traced
+- backend/main.py: added POST /api/chat endpoint, ThreadPoolExecutor for blocking MCP I/O, ChatRequest/ChatResponse models
+- scripts/test_agent.py: 5/5 smoke tests passing (retrieval, vision, action, hybrid, citation grounding)
+- Note: LangGraph + langsmith SDK both require Python >=3.9; implemented equivalent functionality natively for Python 3.8
+
