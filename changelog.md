@@ -96,3 +96,15 @@
 - scripts/test_agent.py: 5/5 smoke tests passing (retrieval, vision, action, hybrid, citation grounding)
 - Note: LangGraph + langsmith SDK both require Python >=3.9; implemented equivalent functionality natively for Python 3.8
 
+
+## 2026-10-09 — Phase 5
+- backend/voice/stt.py: GroqSTT provider — accepts any audio, converts to 16kHz mono MP3 via ffmpeg, transcribes via Groq Whisper, logs provider per request
+- backend/voice/tts.py: Gemini TTS — raw PCM wrapped in WAV header (16-bit, 24kHz, mono), base-4 backoff on 429
+- backend/main.py: added POST /api/stt (multipart upload) and POST /api/tts (JSON in, base64 WAV out); version bumped to 0.5.0
+- frontend/src/hooks/useSTT.js: fetch /api/stt primary; Puter.js fallback on 429 if VITE_ENABLE_PUTER_STT=true
+- frontend/src/hooks/useTTS.js: fetch /api/tts, decode base64, play via Web Audio API
+- frontend/src/components/VoiceChat.jsx: hold-to-record mic button, waveform animation, STT?chat?TTS pipeline, Space bar push-to-talk, provider badge
+- frontend/src/App.jsx: full rewrite — real /api/chat integration, CitedText renderer, ThinkingBubble, VoiceChat embedded
+- scripts/test_voice.py: 5/5 tests passing (health, STT, TTS, TTS validation, chat roundtrip)
+- Note: LangSmith PATCH traces now returning 202 Accepted
+
