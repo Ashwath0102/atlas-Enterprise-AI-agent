@@ -2,6 +2,7 @@
 backend/main.py
 ───────────────
 FastAPI application entry point for the Atlas Multimodal Enterprise Agent Platform.
+Phase 5: added /api/stt and /api/tts voice endpoints.
 
 Run directly:
     python backend/main.py
@@ -17,9 +18,12 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import base64
+
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
 from backend.config import settings
@@ -35,8 +39,8 @@ logger = logging.getLogger("atlas")
 # ── App ───────────────────────────────────────────────────────────────────────
 app = FastAPI(
     title="Atlas Multimodal Enterprise Agent",
-    version="0.4.0",
-    description="Atlas — multimodal onboarding assistant with LangGraph-style agent",
+    version="0.5.0",
+    description="Atlas — multimodal onboarding assistant with LangGraph-style agent + voice loop",
 )
 
 # ── CORS (permit the Vite dev server) ────────────────────────────────────────
@@ -105,7 +109,7 @@ async def _startup() -> None:
 @app.get("/api/health", tags=["system"])
 async def health() -> dict:
     """Simple liveness probe."""
-    return {"status": "ok", "version": "0.4.0"}
+    return {"status": "ok", "version": "0.5.0"}
 
 
 @app.post("/api/chat", response_model=ChatResponse, tags=["agent"])
@@ -163,6 +167,113 @@ async def public_config() -> dict:
         "langsmith_project": settings.LANGSMITH_PROJECT,
         "log_level": settings.LOG_LEVEL,
     }
+
+
+# ── STT endpoint ──────────────────────────────────────────────────────────────
+
+class STTResponse(BaseModel):
+    text: str
+    provider: str
+    duration_s: float
+    latency_ms: float
+    model: str
+
+
+@app.post("/api/stt", response_model=STTResponse, tags=["voice"])
+async def speech_to_text(
+    audio: UploadFile = File(..., description="Audio file (WebM, WAV, MP3, etc.)"),
+) -> STTResponse:
+    """
+    Transcribe uploaded audio via Groq Whisper.
+
+    Accepts any audio format; converts to 16 kHz mono MP3 internally.
+    Returns transcript text + provider metadata.
+    On Groq 429, returns HTTP 429 so the frontend can fall back to Puter.js.
+    """
+    from backend.voice.stt import get_stt_provider
+
+    raw = await audio.read()
+    filename = audio.filename or "audio.webm"
+
+    if not raw:
+        raise HTTPException(status_code=400, detail="Empty audio file")
+
+    provider = get_stt_provider()
+
+    try:
+        result = await __import__("asyncio").get_event_loop().run_in_executor(
+            None, lambda: provider.transcribe(raw, filename)
+        )
+    except RuntimeError as exc:
+        msg = str(exc)
+        if "429" in msg or "rate limit" in msg.lower():
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "Groq STT rate limit reached",
+                    "fallback": "puter",
+                    "message": msg,
+                },
+            )
+        raise HTTPException(status_code=500, detail=msg)
+    except Exception as exc:
+        logger.error("STT error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    return STTResponse(
+        text=result.text,
+        provider=result.provider,
+        duration_s=result.duration_s,
+        latency_ms=result.latency_ms,
+        model=result.model,
+    )
+
+
+# ── TTS endpoint ──────────────────────────────────────────────────────────────
+
+class TTSRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=4000)
+    voice: str = Field(default="Aoede")
+    format: str = Field(default="wav", description="'wav' or 'b64'")
+
+
+class TTSResponse(BaseModel):
+    audio_b64: str          # base64-encoded WAV
+    size_bytes: int
+    latency_ms: float
+    model: str
+
+
+@app.post("/api/tts", response_model=TTSResponse, tags=["voice"])
+async def text_to_speech(req: TTSRequest) -> TTSResponse:
+    """
+    Synthesise speech from text using Gemini TTS.
+
+    Returns base64-encoded WAV audio (16-bit PCM, 24 kHz, mono).
+    The frontend decodes and plays it with the Web Audio API.
+    """
+    from backend.voice.tts import synthesize_speech
+    import asyncio
+
+    t0 = time.time()
+    loop = asyncio.get_event_loop()
+
+    try:
+        wav_bytes = await loop.run_in_executor(
+            None,
+            lambda: synthesize_speech(req.text, voice=req.voice),
+        )
+    except Exception as exc:
+        logger.error("TTS error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    latency_ms = (time.time() - t0) * 1000
+    return TTSResponse(
+        audio_b64  = base64.b64encode(wav_bytes).decode("ascii"),
+        size_bytes = len(wav_bytes),
+        latency_ms = round(latency_ms, 1),
+        model      = settings.TTS_MODEL,
+    )
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
