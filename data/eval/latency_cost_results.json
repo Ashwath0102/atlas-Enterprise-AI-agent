@@ -1,0 +1,624 @@
+{
+  "n": 20,
+  "latency_p50_ms": 16739.0,
+  "latency_p95_ms": 23338.9,
+  "latency_avg_ms": 16147.3,
+  "avg_input_tokens": 4306.3,
+  "avg_output_tokens": 622.6,
+  "total_cost_usd": 0.007027,
+  "avg_cost_per_query_usd": 0.000351,
+  "rows": [
+    {
+      "id": "doc_001",
+      "modality": "text",
+      "latency_ms": 17053.7,
+      "input_tokens": 3682,
+      "output_tokens": 611,
+      "cost_usd": 0.00022972,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 512,
+          "output_tokens": 116
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3170,
+          "output_tokens": 495
+        }
+      ]
+    },
+    {
+      "id": "doc_002",
+      "modality": "text",
+      "latency_ms": 17456.8,
+      "input_tokens": 4193,
+      "output_tokens": 405,
+      "cost_usd": 0.00021799,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 510,
+          "output_tokens": 109
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3683,
+          "output_tokens": 296
+        }
+      ]
+    },
+    {
+      "id": "doc_003",
+      "modality": "text",
+      "latency_ms": 16912.0,
+      "input_tokens": 3514,
+      "output_tokens": 431,
+      "cost_usd": 0.00019643,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 514,
+          "output_tokens": 109
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3000,
+          "output_tokens": 322
+        }
+      ]
+    },
+    {
+      "id": "doc_004",
+      "modality": "text",
+      "latency_ms": 16834.2,
+      "input_tokens": 3959,
+      "output_tokens": 200,
+      "cost_usd": 0.00017846,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 513,
+          "output_tokens": 111
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3446,
+          "output_tokens": 89
+        }
+      ]
+    },
+    {
+      "id": "doc_005",
+      "modality": "text",
+      "latency_ms": 16490.1,
+      "input_tokens": 3487,
+      "output_tokens": 266,
+      "cost_usd": 0.00017066,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 509,
+          "output_tokens": 108
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2978,
+          "output_tokens": 158
+        }
+      ]
+    },
+    {
+      "id": "doc_006",
+      "modality": "text",
+      "latency_ms": 16643.8,
+      "input_tokens": 4046,
+      "output_tokens": 223,
+      "cost_usd": 0.00018517,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 513,
+          "output_tokens": 115
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3533,
+          "output_tokens": 108
+        }
+      ]
+    },
+    {
+      "id": "doc_007",
+      "modality": "text",
+      "latency_ms": 16617.7,
+      "input_tokens": 4312,
+      "output_tokens": 395,
+      "cost_usd": 0.00022095,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 512,
+          "output_tokens": 110
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3800,
+          "output_tokens": 285
+        }
+      ]
+    },
+    {
+      "id": "doc_008",
+      "modality": "text",
+      "latency_ms": 17752.6,
+      "input_tokens": 4212,
+      "output_tokens": 397,
+      "cost_usd": 0.0002175,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 513,
+          "output_tokens": 114
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3699,
+          "output_tokens": 283
+        }
+      ]
+    },
+    {
+      "id": "img_001",
+      "modality": "image",
+      "latency_ms": 18303.2,
+      "input_tokens": 7948,
+      "output_tokens": 2376,
+      "cost_usd": 0.00129516,
+      "nodes": [
+        "planner",
+        "vision",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 514,
+          "output_tokens": 97
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1238,
+          "output_tokens": 414
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1234,
+          "output_tokens": 403
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1215,
+          "output_tokens": 735
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1222,
+          "output_tokens": 674
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2525,
+          "output_tokens": 53
+        }
+      ]
+    },
+    {
+      "id": "img_002",
+      "modality": "image",
+      "latency_ms": 5910.0,
+      "input_tokens": 3603,
+      "output_tokens": 258,
+      "cost_usd": 0.00017381,
+      "nodes": [
+        "planner",
+        "action",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 509,
+          "output_tokens": 94
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3094,
+          "output_tokens": 164
+        }
+      ]
+    },
+    {
+      "id": "img_003",
+      "modality": "image",
+      "latency_ms": 23338.9,
+      "input_tokens": 7954,
+      "output_tokens": 2382,
+      "cost_usd": 0.00129874,
+      "nodes": [
+        "planner",
+        "vision",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 510,
+          "output_tokens": 98
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1234,
+          "output_tokens": 403
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1234,
+          "output_tokens": 432
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1215,
+          "output_tokens": 735
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1222,
+          "output_tokens": 674
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2539,
+          "output_tokens": 40
+        }
+      ]
+    },
+    {
+      "id": "img_004",
+      "modality": "image",
+      "latency_ms": 18041.4,
+      "input_tokens": 7983,
+      "output_tokens": 2423,
+      "cost_usd": 0.00130788,
+      "nodes": [
+        "planner",
+        "vision",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 517,
+          "output_tokens": 90
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1222,
+          "output_tokens": 674
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1215,
+          "output_tokens": 735
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1238,
+          "output_tokens": 414
+        },
+        {
+          "node": "vision",
+          "model": "gemini-3.1-flash-lite",
+          "input_tokens": 1234,
+          "output_tokens": 432
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2557,
+          "output_tokens": 78
+        }
+      ]
+    },
+    {
+      "id": "ticket_001",
+      "modality": "ticket",
+      "latency_ms": 6883.0,
+      "input_tokens": 2172,
+      "output_tokens": 643,
+      "cost_usd": 0.0001779,
+      "nodes": [
+        "planner",
+        "action",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 506,
+          "output_tokens": 110
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 1666,
+          "output_tokens": 533
+        }
+      ]
+    },
+    {
+      "id": "audio_001",
+      "modality": "audio",
+      "latency_ms": 17180.2,
+      "input_tokens": 3900,
+      "output_tokens": 214,
+      "cost_usd": 0.00017835,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 513,
+          "output_tokens": 116
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3387,
+          "output_tokens": 98
+        }
+      ]
+    },
+    {
+      "id": "audio_002",
+      "modality": "audio",
+      "latency_ms": 16019.3,
+      "input_tokens": 3035,
+      "output_tokens": 144,
+      "cost_usd": 0.00013541,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 515,
+          "output_tokens": 118
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2520,
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "id": "video_001",
+      "modality": "video",
+      "latency_ms": 16098.6,
+      "input_tokens": 3568,
+      "output_tokens": 223,
+      "cost_usd": 0.00016725,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 513,
+          "output_tokens": 110
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3055,
+          "output_tokens": 113
+        }
+      ]
+    },
+    {
+      "id": "video_002",
+      "modality": "video",
+      "latency_ms": 16408.8,
+      "input_tokens": 4202,
+      "output_tokens": 166,
+      "cost_usd": 0.00018248,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 511,
+          "output_tokens": 109
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3691,
+          "output_tokens": 57
+        }
+      ]
+    },
+    {
+      "id": "video_003",
+      "modality": "video",
+      "latency_ms": 17053.8,
+      "input_tokens": 3846,
+      "output_tokens": 225,
+      "cost_usd": 0.00017797,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 512,
+          "output_tokens": 107
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 3334,
+          "output_tokens": 118
+        }
+      ]
+    },
+    {
+      "id": "video_004",
+      "modality": "video",
+      "latency_ms": 15819.7,
+      "input_tokens": 3366,
+      "output_tokens": 195,
+      "cost_usd": 0.00015547,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 510,
+          "output_tokens": 109
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2856,
+          "output_tokens": 86
+        }
+      ]
+    },
+    {
+      "id": "video_005",
+      "modality": "video",
+      "latency_ms": 16128.5,
+      "input_tokens": 3144,
+      "output_tokens": 276,
+      "cost_usd": 0.0001593,
+      "nodes": [
+        "planner",
+        "retrieval",
+        "synthesizer"
+      ],
+      "token_detail": [
+        {
+          "node": "planner",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 512,
+          "output_tokens": 114
+        },
+        {
+          "node": "synthesizer",
+          "model": "gemini-3.5-flash-lite",
+          "input_tokens": 2632,
+          "output_tokens": 162
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "avg_faithfulness": 0.205,
+  "n_evaluated": 14,
+  "judge_model": "qwen/qwen3.8-27b",
+  "rows": [
+    {
+      "id": "doc_001",
+      "faithfulness": null,
+      "note": "no claims extracted",
+      "answer_len": 2145
+    },
+    {
+      "id": "doc_002",
+      "modality": "text",
+      "faithfulness": 0.0,
+      "claims": [
+        "The P.R.O.V.E. framework assigns a 50% weighting to the Product component.",
+        "The Risk component in the P.R.O.V.E. framework has a 25% weighting.",
+        "The Outcomes component in the P.R.O.V.E. framework has a 10% weighting.",
+        "The Voice of the customer component in the P.R.O.V.E. framework has a 5% weighting.",
+        "The Engagement component in the P.R.O.V.E. framework has a 10% weighting."
+      ],
+      "supported": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 18727.0
+    },
+    {
+      "id": "doc_003",
+      "modality": "text",
+      "faithfulness": 1.0,
+      "claims": [
+        "GitLab has two types of customer escalations: Account Escalation and Support Ticket Attention Requests (STAR).",
+        "An Account Escalation at GitLab can be opened by anyone in the company.",
+        "Account Escalations at GitLab should not be used to raise the priority of a single support ticket.",
+        "Support Ticket Attention Requests (STAR) are used when an open support ticket is moving too slowly or needs a priority increase.",
+        "Account Escalations at GitLab focus on issues such as delays across multiple tickets or systemic support concerns."
+      ],
+      "supported": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "latency_ms": 18819.3
+    },
+    {
+      "id": "doc_004",
+      "modality": "text",
+      "faithfulness": 0.0,
+      "claims": [
+        "Customers are engaged weekly or biweekly.",
+        "There is a monthly minimum frequency for customer engagement."
+      ],
+      "supported": [
+        false,
+        false
+      ],
+      "latency_ms": 16746.7
+    },
+    {
+      "id": "doc_005",
+      "modality": "text",
+      "faithfulness": 0.2,
+      "claims": [
+        "The provided sources do not contain information about the four lifecycle stages a GitLab customer goes through.",
+        "The sources include a document on customer success manager onboarding.",
+        "The sources include a document on renewals managers.",
+        "The sources include a document on professional services engineering positioning.",
+        "The sources include a document on the sales learning path."
+      ],
+      "supported": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 17922.0
+    },
+    {
+      "id": "doc_006",
+      "modality": "text",
+      "faithfulness": 0.2,
+      "claims": [
+        "The provided sources do not explicitly outline all specific tasks a CSM must complete before the first customer call.",
+        "The sources primarily focus on activities occurring during and after the kickoff call.",
+        "The sources cover internal handoffs and subsequent calls.",
+        "A CSM should review the command plan with the SAE/AE and SA during an internal handoff.",
+        "A CSM should review adoption goals, priorities, and stakeholders with the SAE/AE and SA during an internal handoff."
+      ],
+      "supported": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "latency_ms": 18668.3
+    },
+    {
+      "id": "doc_007",
+      "modality": "text",
+      "faithfulness": 0.4,
+      "claims": [
+        "A success plan at GitLab is the roadmap for achieving a customer's business objectives using the platform.",
+        "A success plan serves as the foundation of every Customer Success Manager (CSM) engagement.",
+        "The three core components of a success plan are Objective, Initiative, and Verifiable Outcome (VO).",
+        "An Objective is defined by a clear goal, measurable success criteria, owners, and a timeline.",
+        "A Verifiable Outcome (VO) must be SMART, formally tracked, customer-validated, and reported quarterly."
+      ],
+      "supported": [
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 18213.0
+    },
+    {
+      "id": "doc_008",
+      "modality": "text",
+      "faithfulness": 0.0,
+      "claims": [
+        "Customer Success Managers use Gainsight to log customer calls and interactions on the Timeline.",
+        "Customer Success Managers update calls-to-action (CTAs) within Gainsight.",
+        "Customer Success Managers use Gainsight to update and manage success plans.",
+        "Customer Success Managers gain insights into customer product usage data using Gainsight.",
+        "Customer Success Managers track customer renewals and health scores in Gainsight."
+      ],
+      "supported": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 18360.9
+    },
+    {
+      "id": "audio_001",
+      "modality": "audio",
+      "faithfulness": 0.2,
+      "claims": [
+        "The provided sources do not contain information about ES2008a.",
+        "The source list includes doc/customer-experience/content/handbook/customer-experience/apj-customer-success.",
+        "The source list includes doc/support/content/handbook/support/managers/leadership-sync.",
+        "The source list includes doc/support/content/handbook/support/managers/change-management.",
+        "The source list includes doc/support/content/handbook/support/workflows/team/weekly_team_call."
+      ],
+      "supported": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 18026.2
+    },
+    {
+      "id": "audio_002",
+      "modality": "audio",
+      "faithfulness": 0.0,
+      "claims": [
+        "The provided sources do not contain information about ES2008b.",
+        "The provided sources do not contain information about the meeting type of ES2008b.",
+        "The provided sources do not contain information about the main topic of ES2008b.",
+        "The list of sources provided is empty."
+      ],
+      "supported": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 17531.5
+    },
+    {
+      "id": "video_001",
+      "modality": "video",
+      "faithfulness": 0.667,
+      "claims": [
+        "The Jira setup process involves creating a test project named \"GITLAB\".",
+        "The Jira setup process involves creating a test issue for testing purposes.",
+        "The steps for creating a test project are documented in the file doc/support/content/handbook/support/workflows/jira-server."
+      ],
+      "supported": [
+        true,
+        true,
+        false
+      ],
+      "latency_ms": 18022.9
+    },
+    {
+      "id": "video_002",
+      "modality": "video",
+      "faithfulness": 0.0,
+      "claims": [
+        "The provided sources do not contain information about the Jira board column structure.",
+        "The provided sources do not contain information about the beginners tutorial.",
+        "The source document is located at doc/support/content/handbook/support/workflows/jira-server."
+      ],
+      "supported": [
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 17881.2
+    },
+    {
+      "id": "video_003",
+      "modality": "video",
+      "faithfulness": 0.2,
+      "claims": [
+        "The provided sources do not contain information about the JSM beginners tutorial.",
+        "The provided sources do not contain information about the All Open Tickets queue.",
+        "The source list includes doc/support/content/handbook/support/workflows/ticket_triage.",
+        "The source list includes doc/support/content/handbook/support/workflows/team/shift_chair.",
+        "The source list includes doc/support/content/handbook/support/workflows/ticket_lifecycle."
+      ],
+      "supported": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "latency_ms": 17647.4
+    },
+    {
+      "id": "video_004",
+      "modality": "video",
+      "faithfulness": 0.0,
+      "claims": [
+        "The provided sources do not contain information about Jira Service Management projects.",
+        "The provided sources do not contain information about the JSM tutorial.",
+        "The only source provided is doc/support/content/handbook/support/workflows/jira-server."
+      ],
+      "supported": [
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 16602.2
+    },
+    {
+      "id": "video_005",
+      "modality": "video",
+      "faithfulness": 0.0,
+      "claims": [
+        "The provided sources do not contain information about what a Jira scrum board looks like in a full course tutorial.",
+        "The source doc/support/content/handbook/support/workflows/jira-server is cited in the answer.",
+        "The source doc/customer-experience/content/handbook/customer-experience/education-enablement is cited in the answer.",
+        "The source doc/customer-experience/content/handbook/customer-experience/gitlab-training-seminar is cited in the answer."
+      ],
+      "supported": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "latency_ms": 17124.4
+    }
+  ]
+}

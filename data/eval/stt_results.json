@@ -1,0 +1,35 @@
+{
+  "stt_model": "whisper-large-v3-turbo",
+  "diar_model": "pyannote/speaker-diarization-3.1",
+  "avg_wer": 0.223,
+  "avg_der": "unavailable",
+  "meetings": [
+    {
+      "meeting": "ES2008a",
+      "wer": 0.2273,
+      "stt_ms": 6256.5,
+      "hyp_len": 11618,
+      "ref_len": 13235,
+      "der": "unavailable",
+      "der_note": "pyannote.audio not installed"
+    },
+    {
+      "meeting": "ES2008b",
+      "wer": 0.2116,
+      "stt_ms": 12494.2,
+      "hyp_len": 27800,
+      "ref_len": 31783,
+      "der": "unavailable",
+      "der_note": "pyannote.audio not installed"
+    },
+    {
+      "meeting": "ES2008c",
+      "wer": 0.2301,
+      "stt_ms": 11910.5,
+      "hyp_len": 26979,
+      "ref_len": 31534,
+      "der": "unavailable",
+      "der_note": "pyannote.audio not installed"
+    }
+  ]
+}

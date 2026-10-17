@@ -1,0 +1,1338 @@
+{
+  "retrieval": {
+    "overall": {
+      "n": 20,
+      "p5": 0.39,
+      "mrr": 0.754,
+      "recall5": 0.9
+    },
+    "by_modality": {
+      "text": {
+        "n": 8,
+        "p5": 0.225,
+        "mrr": 0.729,
+        "recall5": 0.875
+      },
+      "image": {
+        "n": 4,
+        "p5": 0.2,
+        "mrr": 0.75,
+        "recall5": 1.0
+      },
+      "ticket": {
+        "n": 1,
+        "p5": 1.0,
+        "mrr": 1.0,
+        "recall5": 1.0
+      },
+      "audio": {
+        "n": 2,
+        "p5": 0.2,
+        "mrr": 0.375,
+        "recall5": 1.0
+      },
+      "video": {
+        "n": 5,
+        "p5": 0.76,
+        "mrr": 0.9,
+        "recall5": 0.8
+      }
+    },
+    "latency_p50_ms": 3174.1,
+    "latency_p95_ms": 9417.0,
+    "rows": [
+      {
+        "id": "doc_001",
+        "modality": "text",
+        "p5": 0.2,
+        "mrr": 0.5,
+        "recall5": 1.0,
+        "latency_ms": 9417.0,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/segment/cse/cse-tm-onboarding",
+          "doc/customer-experience/content/handbook/customer-experience/csm/csm-onboarding/_index",
+          "doc/customer-experience/content/handbook/customer-experience/renewals-managers/home/index",
+          "doc/customer-experience/content/handbook/customer-experience/renewals-managers/rm-onboarding",
+          "doc/customer-experience/content/handbook/customer-experience/csm/engagement/_index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/csm-onboarding/_index"
+        ]
+      },
+      {
+        "id": "doc_002",
+        "modality": "text",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3661.5,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/customer-health-scoring/index",
+          "doc/customer-experience/content/handbook/customer-experience/product-usage-data/use-case-adoption/index",
+          "doc/customer-experience/content/handbook/customer-experience/product-usage-data/use-case-adoption/index",
+          "doc/customer-experience/content/handbook/customer-experience/csm/health-score-triage/index",
+          "doc/customer-experience/content/handbook/customer-experience/customer-success-vision/index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/customer-health-scoring/index"
+        ]
+      },
+      {
+        "id": "doc_003",
+        "modality": "text",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3329.2,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/escalations/_index",
+          "doc/customer-experience/content/handbook/customer-experience/csm/segment/cse/cse-operating-rhythm",
+          "doc/support/content/handbook/support/workflows/support-sales-escalations",
+          "doc/customer-experience/content/handbook/customer-experience/csm/gainsight/deployment-types",
+          "doc/support/content/handbook/support/workflows/customer_emergencies_workflows"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/escalations/_index"
+        ]
+      },
+      {
+        "id": "doc_004",
+        "modality": "text",
+        "p5": 0.4,
+        "mrr": 0.333,
+        "recall5": 1.0,
+        "latency_ms": 3192.5,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/_index",
+          "doc/customer-experience/content/handbook/customer-experience/csm/onboarding",
+          "doc/customer-experience/content/handbook/customer-experience/csm/cadence-calls",
+          "doc/customer-experience/content/handbook/customer-experience/csm/cadence-calls",
+          "doc/customer-experience/content/handbook/customer-experience/csm/csm-manager/_index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/cadence-calls"
+        ]
+      },
+      {
+        "id": "doc_005",
+        "modality": "text",
+        "p5": 0.0,
+        "mrr": 0.0,
+        "recall5": 0.0,
+        "latency_ms": 3353.3,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/renewals-managers/home/index",
+          "doc/onboarding/content/handbook/sales/onboarding/sales-learning-path/_index",
+          "doc/customer-experience/content/handbook/customer-experience/professional-services-engineering/positioning/index",
+          "doc/onboarding/content/handbook/sales/onboarding/sales-learning-path/_index",
+          "doc/customer-experience/content/handbook/customer-experience/professional-services-engineering/professional-services-presale-methodology/_index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/customer-success-vision/index"
+        ]
+      },
+      {
+        "id": "doc_006",
+        "modality": "text",
+        "p5": 0.4,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3232.7,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/onboarding",
+          "doc/customer-experience/content/handbook/customer-experience/csm/csm-onboarding/shadowing",
+          "doc/customer-experience/content/handbook/customer-experience/csm/csm-internship",
+          "doc/customer-experience/content/handbook/customer-experience/csm/cadence-calls",
+          "doc/customer-experience/content/handbook/customer-experience/csm/onboarding"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/onboarding"
+        ]
+      },
+      {
+        "id": "doc_007",
+        "modality": "text",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3433.4,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/success-plans/_index",
+          "doc/customer-experience/content/handbook/customer-experience/success-services/_index",
+          "doc/customer-experience/content/handbook/customer-experience/customer-success-vision/index",
+          "doc/onboarding/content/handbook/sales/onboarding/graduating-sqs",
+          "doc/customer-experience/content/handbook/customer-experience/csm/_index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/success-plans/_index"
+        ]
+      },
+      {
+        "id": "doc_008",
+        "modality": "text",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3590.1,
+        "retrieved_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/gainsight/_index",
+          "doc/customer-experience/content/handbook/customer-experience/csm/gainsight/dashboards-overview",
+          "doc/customer-experience/content/handbook/customer-experience/product-usage-data/maturity-scoring",
+          "doc/customer-experience/content/handbook/customer-experience/csm/gainsight/c360-overview",
+          "doc/customer-experience/content/handbook/customer-experience/product-usage-data/use-case-adoption/index"
+        ],
+        "expected_sids": [
+          "doc/customer-experience/content/handbook/customer-experience/csm/gainsight/_index"
+        ]
+      },
+      {
+        "id": "img_001",
+        "modality": "image",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 2470.0,
+        "retrieved_sids": [
+          "image/dash_status",
+          "image/dash_priority",
+          "image/overallsample",
+          "image/dash_trend",
+          "image/dash_component"
+        ],
+        "expected_sids": [
+          "image/dash_status"
+        ]
+      },
+      {
+        "id": "img_002",
+        "modality": "image",
+        "p5": 0.2,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 2553.3,
+        "retrieved_sids": [
+          "image/dash_priority",
+          "image/overallsample",
+          "image/dash_component",
+          "image/dash_status",
+          "image/company_value"
+        ],
+        "expected_sids": [
+          "image/dash_priority"
+        ]
+      },
+      {
+        "id": "img_003",
+        "modality": "image",
+        "p5": 0.2,
+        "mrr": 0.5,
+        "recall5": 1.0,
+        "latency_ms": 2463.2,
+        "retrieved_sids": [
+          "image/dash_priority",
+          "image/dash_component",
+          "image/overallsample",
+          "image/dash_trend",
+          "image/dash_status"
+        ],
+        "expected_sids": [
+          "image/dash_component"
+        ]
+      },
+      {
+        "id": "img_004",
+        "modality": "image",
+        "p5": 0.2,
+        "mrr": 0.5,
+        "recall5": 1.0,
+        "latency_ms": 2427.6,
+        "retrieved_sids": [
+          "image/dash_trend",
+          "image/overallsample",
+          "image/dash_status",
+          "image/dash_component",
+          "image/dash_priority"
+        ],
+        "expected_sids": [
+          "image/overallsample"
+        ]
+      },
+      {
+        "id": "ticket_001",
+        "modality": "ticket",
+        "p5": 1.0,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 2677.8,
+        "retrieved_sids": [
+          "ticket/8",
+          "ticket/14",
+          "ticket/4",
+          "ticket/19",
+          "ticket/15"
+        ],
+        "expected_sids": [
+          "ticket/"
+        ]
+      },
+      {
+        "id": "audio_001",
+        "modality": "audio",
+        "p5": 0.2,
+        "mrr": 0.25,
+        "recall5": 1.0,
+        "latency_ms": 3407.8,
+        "retrieved_sids": [
+          "ami/ES2008c",
+          "ami/ES2008b",
+          "ami/ES2008c",
+          "ami/ES2008a",
+          "video/confluence_training"
+        ],
+        "expected_sids": [
+          "ami/ES2008a"
+        ]
+      },
+      {
+        "id": "audio_002",
+        "modality": "audio",
+        "p5": 0.2,
+        "mrr": 0.5,
+        "recall5": 1.0,
+        "latency_ms": 3073.5,
+        "retrieved_sids": [
+          "ami/ES2008c",
+          "ami/ES2008b",
+          "ami/ES2008a",
+          "ami/ES2008c",
+          "video/confluence_training"
+        ],
+        "expected_sids": [
+          "ami/ES2008b"
+        ]
+      },
+      {
+        "id": "video_001",
+        "modality": "video",
+        "p5": 0.6,
+        "mrr": 1.0,
+        "recall5": 0.5,
+        "latency_ms": 2872.3,
+        "retrieved_sids": [
+          "video/jira_training_6hr",
+          "video/jsm_beginners",
+          "video/jira_training_6hr",
+          "video/jira_training_6hr",
+          "video/jsm_beginners"
+        ],
+        "expected_sids": [
+          "video/jira_beginners_2026",
+          "video/jira_training_6hr"
+        ]
+      },
+      {
+        "id": "video_002",
+        "modality": "video",
+        "p5": 0.6,
+        "mrr": 0.5,
+        "recall5": 0.5,
+        "latency_ms": 2873.6,
+        "retrieved_sids": [
+          "video/jsm_beginners",
+          "video/jira_training_6hr",
+          "video/jira_training_6hr",
+          "video/jira_full_course",
+          "video/jira_training_6hr"
+        ],
+        "expected_sids": [
+          "video/jira_beginners_2026",
+          "video/jira_training_6hr"
+        ]
+      },
+      {
+        "id": "video_003",
+        "modality": "video",
+        "p5": 0.8,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 2922.6,
+        "retrieved_sids": [
+          "video/jsm_beginners",
+          "video/jsm_beginners",
+          "video/jsm_full_e2e",
+          "video/jsm_beginners",
+          "video/jsm_beginners"
+        ],
+        "expected_sids": [
+          "video/jsm_beginners"
+        ]
+      },
+      {
+        "id": "video_004",
+        "modality": "video",
+        "p5": 1.0,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3846.2,
+        "retrieved_sids": [
+          "video/jsm_beginners",
+          "video/jsm_beginners",
+          "video/jsm_beginners",
+          "video/jsm_beginners",
+          "video/jsm_beginners"
+        ],
+        "expected_sids": [
+          "video/jsm_beginners"
+        ]
+      },
+      {
+        "id": "video_005",
+        "modality": "video",
+        "p5": 0.8,
+        "mrr": 1.0,
+        "recall5": 1.0,
+        "latency_ms": 3155.6,
+        "retrieved_sids": [
+          "video/jira_full_course",
+          "video/jira_full_course",
+          "video/jira_training_6hr",
+          "video/jira_full_course",
+          "video/jira_full_course"
+        ],
+        "expected_sids": [
+          "video/jira_full_course"
+        ]
+      }
+    ]
+  },
+  "faithfulness": {
+    "avg_faithfulness": 0.205,
+    "n_evaluated": 14,
+    "judge_model": "qwen/qwen3.8-27b",
+    "rows": [
+      {
+        "id": "doc_001",
+        "faithfulness": null,
+        "note": "no claims extracted",
+        "answer_len": 2145
+      },
+      {
+        "id": "doc_002",
+        "modality": "text",
+        "faithfulness": 0.0,
+        "claims": [
+          "The P.R.O.V.E. framework assigns a 50% weighting to the Product component.",
+          "The Risk component in the P.R.O.V.E. framework has a 25% weighting.",
+          "The Outcomes component in the P.R.O.V.E. framework has a 10% weighting.",
+          "The Voice of the customer component in the P.R.O.V.E. framework has a 5% weighting.",
+          "The Engagement component in the P.R.O.V.E. framework has a 10% weighting."
+        ],
+        "supported": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 18727.0
+      },
+      {
+        "id": "doc_003",
+        "modality": "text",
+        "faithfulness": 1.0,
+        "claims": [
+          "GitLab has two types of customer escalations: Account Escalation and Support Ticket Attention Requests (STAR).",
+          "An Account Escalation at GitLab can be opened by anyone in the company.",
+          "Account Escalations at GitLab should not be used to raise the priority of a single support ticket.",
+          "Support Ticket Attention Requests (STAR) are used when an open support ticket is moving too slowly or needs a priority increase.",
+          "Account Escalations at GitLab focus on issues such as delays across multiple tickets or systemic support concerns."
+        ],
+        "supported": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "latency_ms": 18819.3
+      },
+      {
+        "id": "doc_004",
+        "modality": "text",
+        "faithfulness": 0.0,
+        "claims": [
+          "Customers are engaged weekly or biweekly.",
+          "There is a monthly minimum frequency for customer engagement."
+        ],
+        "supported": [
+          false,
+          false
+        ],
+        "latency_ms": 16746.7
+      },
+      {
+        "id": "doc_005",
+        "modality": "text",
+        "faithfulness": 0.2,
+        "claims": [
+          "The provided sources do not contain information about the four lifecycle stages a GitLab customer goes through.",
+          "The sources include a document on customer success manager onboarding.",
+          "The sources include a document on renewals managers.",
+          "The sources include a document on professional services engineering positioning.",
+          "The sources include a document on the sales learning path."
+        ],
+        "supported": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 17922.0
+      },
+      {
+        "id": "doc_006",
+        "modality": "text",
+        "faithfulness": 0.2,
+        "claims": [
+          "The provided sources do not explicitly outline all specific tasks a CSM must complete before the first customer call.",
+          "The sources primarily focus on activities occurring during and after the kickoff call.",
+          "The sources cover internal handoffs and subsequent calls.",
+          "A CSM should review the command plan with the SAE/AE and SA during an internal handoff.",
+          "A CSM should review adoption goals, priorities, and stakeholders with the SAE/AE and SA during an internal handoff."
+        ],
+        "supported": [
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        "latency_ms": 18668.3
+      },
+      {
+        "id": "doc_007",
+        "modality": "text",
+        "faithfulness": 0.4,
+        "claims": [
+          "A success plan at GitLab is the roadmap for achieving a customer's business objectives using the platform.",
+          "A success plan serves as the foundation of every Customer Success Manager (CSM) engagement.",
+          "The three core components of a success plan are Objective, Initiative, and Verifiable Outcome (VO).",
+          "An Objective is defined by a clear goal, measurable success criteria, owners, and a timeline.",
+          "A Verifiable Outcome (VO) must be SMART, formally tracked, customer-validated, and reported quarterly."
+        ],
+        "supported": [
+          true,
+          true,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 18213.0
+      },
+      {
+        "id": "doc_008",
+        "modality": "text",
+        "faithfulness": 0.0,
+        "claims": [
+          "Customer Success Managers use Gainsight to log customer calls and interactions on the Timeline.",
+          "Customer Success Managers update calls-to-action (CTAs) within Gainsight.",
+          "Customer Success Managers use Gainsight to update and manage success plans.",
+          "Customer Success Managers gain insights into customer product usage data using Gainsight.",
+          "Customer Success Managers track customer renewals and health scores in Gainsight."
+        ],
+        "supported": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 18360.9
+      },
+      {
+        "id": "audio_001",
+        "modality": "audio",
+        "faithfulness": 0.2,
+        "claims": [
+          "The provided sources do not contain information about ES2008a.",
+          "The source list includes doc/customer-experience/content/handbook/customer-experience/apj-customer-success.",
+          "The source list includes doc/support/content/handbook/support/managers/leadership-sync.",
+          "The source list includes doc/support/content/handbook/support/managers/change-management.",
+          "The source list includes doc/support/content/handbook/support/workflows/team/weekly_team_call."
+        ],
+        "supported": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 18026.2
+      },
+      {
+        "id": "audio_002",
+        "modality": "audio",
+        "faithfulness": 0.0,
+        "claims": [
+          "The provided sources do not contain information about ES2008b.",
+          "The provided sources do not contain information about the meeting type of ES2008b.",
+          "The provided sources do not contain information about the main topic of ES2008b.",
+          "The list of sources provided is empty."
+        ],
+        "supported": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 17531.5
+      },
+      {
+        "id": "video_001",
+        "modality": "video",
+        "faithfulness": 0.667,
+        "claims": [
+          "The Jira setup process involves creating a test project named \"GITLAB\".",
+          "The Jira setup process involves creating a test issue for testing purposes.",
+          "The steps for creating a test project are documented in the file doc/support/content/handbook/support/workflows/jira-server."
+        ],
+        "supported": [
+          true,
+          true,
+          false
+        ],
+        "latency_ms": 18022.9
+      },
+      {
+        "id": "video_002",
+        "modality": "video",
+        "faithfulness": 0.0,
+        "claims": [
+          "The provided sources do not contain information about the Jira board column structure.",
+          "The provided sources do not contain information about the beginners tutorial.",
+          "The source document is located at doc/support/content/handbook/support/workflows/jira-server."
+        ],
+        "supported": [
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 17881.2
+      },
+      {
+        "id": "video_003",
+        "modality": "video",
+        "faithfulness": 0.2,
+        "claims": [
+          "The provided sources do not contain information about the JSM beginners tutorial.",
+          "The provided sources do not contain information about the All Open Tickets queue.",
+          "The source list includes doc/support/content/handbook/support/workflows/ticket_triage.",
+          "The source list includes doc/support/content/handbook/support/workflows/team/shift_chair.",
+          "The source list includes doc/support/content/handbook/support/workflows/ticket_lifecycle."
+        ],
+        "supported": [
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        "latency_ms": 17647.4
+      },
+      {
+        "id": "video_004",
+        "modality": "video",
+        "faithfulness": 0.0,
+        "claims": [
+          "The provided sources do not contain information about Jira Service Management projects.",
+          "The provided sources do not contain information about the JSM tutorial.",
+          "The only source provided is doc/support/content/handbook/support/workflows/jira-server."
+        ],
+        "supported": [
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 16602.2
+      },
+      {
+        "id": "video_005",
+        "modality": "video",
+        "faithfulness": 0.0,
+        "claims": [
+          "The provided sources do not contain information about what a Jira scrum board looks like in a full course tutorial.",
+          "The source doc/support/content/handbook/support/workflows/jira-server is cited in the answer.",
+          "The source doc/customer-experience/content/handbook/customer-experience/education-enablement is cited in the answer.",
+          "The source doc/customer-experience/content/handbook/customer-experience/gitlab-training-seminar is cited in the answer."
+        ],
+        "supported": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "latency_ms": 17124.4
+      }
+    ]
+  },
+  "stt": {
+    "stt_model": "whisper-large-v3-turbo",
+    "diar_model": "pyannote/speaker-diarization-3.1",
+    "avg_wer": 0.223,
+    "avg_der": "unavailable",
+    "meetings": [
+      {
+        "meeting": "ES2008a",
+        "wer": 0.2273,
+        "stt_ms": 6256.5,
+        "hyp_len": 11618,
+        "ref_len": 13235,
+        "der": "unavailable",
+        "der_note": "pyannote.audio not installed"
+      },
+      {
+        "meeting": "ES2008b",
+        "wer": 0.2116,
+        "stt_ms": 12494.2,
+        "hyp_len": 27800,
+        "ref_len": 31783,
+        "der": "unavailable",
+        "der_note": "pyannote.audio not installed"
+      },
+      {
+        "meeting": "ES2008c",
+        "wer": 0.2301,
+        "stt_ms": 11910.5,
+        "hyp_len": 26979,
+        "ref_len": 31534,
+        "der": "unavailable",
+        "der_note": "pyannote.audio not installed"
+      }
+    ]
+  },
+  "latency_cost": {
+    "n": 20,
+    "latency_p50_ms": 16739.0,
+    "latency_p95_ms": 23338.9,
+    "latency_avg_ms": 16147.3,
+    "avg_input_tokens": 4306.3,
+    "avg_output_tokens": 622.6,
+    "total_cost_usd": 0.007027,
+    "avg_cost_per_query_usd": 0.000351,
+    "rows": [
+      {
+        "id": "doc_001",
+        "modality": "text",
+        "latency_ms": 17053.7,
+        "input_tokens": 3682,
+        "output_tokens": 611,
+        "cost_usd": 0.00022972,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 512,
+            "output_tokens": 116
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3170,
+            "output_tokens": 495
+          }
+        ]
+      },
+      {
+        "id": "doc_002",
+        "modality": "text",
+        "latency_ms": 17456.8,
+        "input_tokens": 4193,
+        "output_tokens": 405,
+        "cost_usd": 0.00021799,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 510,
+            "output_tokens": 109
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3683,
+            "output_tokens": 296
+          }
+        ]
+      },
+      {
+        "id": "doc_003",
+        "modality": "text",
+        "latency_ms": 16912.0,
+        "input_tokens": 3514,
+        "output_tokens": 431,
+        "cost_usd": 0.00019643,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 514,
+            "output_tokens": 109
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3000,
+            "output_tokens": 322
+          }
+        ]
+      },
+      {
+        "id": "doc_004",
+        "modality": "text",
+        "latency_ms": 16834.2,
+        "input_tokens": 3959,
+        "output_tokens": 200,
+        "cost_usd": 0.00017846,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 513,
+            "output_tokens": 111
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3446,
+            "output_tokens": 89
+          }
+        ]
+      },
+      {
+        "id": "doc_005",
+        "modality": "text",
+        "latency_ms": 16490.1,
+        "input_tokens": 3487,
+        "output_tokens": 266,
+        "cost_usd": 0.00017066,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 509,
+            "output_tokens": 108
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2978,
+            "output_tokens": 158
+          }
+        ]
+      },
+      {
+        "id": "doc_006",
+        "modality": "text",
+        "latency_ms": 16643.8,
+        "input_tokens": 4046,
+        "output_tokens": 223,
+        "cost_usd": 0.00018517,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 513,
+            "output_tokens": 115
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3533,
+            "output_tokens": 108
+          }
+        ]
+      },
+      {
+        "id": "doc_007",
+        "modality": "text",
+        "latency_ms": 16617.7,
+        "input_tokens": 4312,
+        "output_tokens": 395,
+        "cost_usd": 0.00022095,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 512,
+            "output_tokens": 110
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3800,
+            "output_tokens": 285
+          }
+        ]
+      },
+      {
+        "id": "doc_008",
+        "modality": "text",
+        "latency_ms": 17752.6,
+        "input_tokens": 4212,
+        "output_tokens": 397,
+        "cost_usd": 0.0002175,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 513,
+            "output_tokens": 114
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3699,
+            "output_tokens": 283
+          }
+        ]
+      },
+      {
+        "id": "img_001",
+        "modality": "image",
+        "latency_ms": 18303.2,
+        "input_tokens": 7948,
+        "output_tokens": 2376,
+        "cost_usd": 0.00129516,
+        "nodes": [
+          "planner",
+          "vision",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 514,
+            "output_tokens": 97
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1238,
+            "output_tokens": 414
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1234,
+            "output_tokens": 403
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1215,
+            "output_tokens": 735
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1222,
+            "output_tokens": 674
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2525,
+            "output_tokens": 53
+          }
+        ]
+      },
+      {
+        "id": "img_002",
+        "modality": "image",
+        "latency_ms": 5910.0,
+        "input_tokens": 3603,
+        "output_tokens": 258,
+        "cost_usd": 0.00017381,
+        "nodes": [
+          "planner",
+          "action",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 509,
+            "output_tokens": 94
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3094,
+            "output_tokens": 164
+          }
+        ]
+      },
+      {
+        "id": "img_003",
+        "modality": "image",
+        "latency_ms": 23338.9,
+        "input_tokens": 7954,
+        "output_tokens": 2382,
+        "cost_usd": 0.00129874,
+        "nodes": [
+          "planner",
+          "vision",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 510,
+            "output_tokens": 98
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1234,
+            "output_tokens": 403
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1234,
+            "output_tokens": 432
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1215,
+            "output_tokens": 735
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1222,
+            "output_tokens": 674
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2539,
+            "output_tokens": 40
+          }
+        ]
+      },
+      {
+        "id": "img_004",
+        "modality": "image",
+        "latency_ms": 18041.4,
+        "input_tokens": 7983,
+        "output_tokens": 2423,
+        "cost_usd": 0.00130788,
+        "nodes": [
+          "planner",
+          "vision",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 517,
+            "output_tokens": 90
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1222,
+            "output_tokens": 674
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1215,
+            "output_tokens": 735
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1238,
+            "output_tokens": 414
+          },
+          {
+            "node": "vision",
+            "model": "gemini-3.1-flash-lite",
+            "input_tokens": 1234,
+            "output_tokens": 432
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2557,
+            "output_tokens": 78
+          }
+        ]
+      },
+      {
+        "id": "ticket_001",
+        "modality": "ticket",
+        "latency_ms": 6883.0,
+        "input_tokens": 2172,
+        "output_tokens": 643,
+        "cost_usd": 0.0001779,
+        "nodes": [
+          "planner",
+          "action",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 506,
+            "output_tokens": 110
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 1666,
+            "output_tokens": 533
+          }
+        ]
+      },
+      {
+        "id": "audio_001",
+        "modality": "audio",
+        "latency_ms": 17180.2,
+        "input_tokens": 3900,
+        "output_tokens": 214,
+        "cost_usd": 0.00017835,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 513,
+            "output_tokens": 116
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3387,
+            "output_tokens": 98
+          }
+        ]
+      },
+      {
+        "id": "audio_002",
+        "modality": "audio",
+        "latency_ms": 16019.3,
+        "input_tokens": 3035,
+        "output_tokens": 144,
+        "cost_usd": 0.00013541,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 515,
+            "output_tokens": 118
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2520,
+            "output_tokens": 26
+          }
+        ]
+      },
+      {
+        "id": "video_001",
+        "modality": "video",
+        "latency_ms": 16098.6,
+        "input_tokens": 3568,
+        "output_tokens": 223,
+        "cost_usd": 0.00016725,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 513,
+            "output_tokens": 110
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3055,
+            "output_tokens": 113
+          }
+        ]
+      },
+      {
+        "id": "video_002",
+        "modality": "video",
+        "latency_ms": 16408.8,
+        "input_tokens": 4202,
+        "output_tokens": 166,
+        "cost_usd": 0.00018248,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 511,
+            "output_tokens": 109
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3691,
+            "output_tokens": 57
+          }
+        ]
+      },
+      {
+        "id": "video_003",
+        "modality": "video",
+        "latency_ms": 17053.8,
+        "input_tokens": 3846,
+        "output_tokens": 225,
+        "cost_usd": 0.00017797,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 512,
+            "output_tokens": 107
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 3334,
+            "output_tokens": 118
+          }
+        ]
+      },
+      {
+        "id": "video_004",
+        "modality": "video",
+        "latency_ms": 15819.7,
+        "input_tokens": 3366,
+        "output_tokens": 195,
+        "cost_usd": 0.00015547,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 510,
+            "output_tokens": 109
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2856,
+            "output_tokens": 86
+          }
+        ]
+      },
+      {
+        "id": "video_005",
+        "modality": "video",
+        "latency_ms": 16128.5,
+        "input_tokens": 3144,
+        "output_tokens": 276,
+        "cost_usd": 0.0001593,
+        "nodes": [
+          "planner",
+          "retrieval",
+          "synthesizer"
+        ],
+        "token_detail": [
+          {
+            "node": "planner",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 512,
+            "output_tokens": 114
+          },
+          {
+            "node": "synthesizer",
+            "model": "gemini-3.5-flash-lite",
+            "input_tokens": 2632,
+            "output_tokens": 162
+          }
+        ]
+      }
+    ]
+  }
+}
