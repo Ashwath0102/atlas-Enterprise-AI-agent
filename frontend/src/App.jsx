@@ -15,6 +15,9 @@ const S = {
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
+    margin: 0,
+    padding: 0,
+    boxSizing: "border-box",
   },
   header: {
     background: "#161b22",
@@ -74,25 +77,32 @@ const S = {
     color: "#e6edf3",
     padding: "10px 16px",
     borderRadius: role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-    maxWidth: "82%",
+    maxWidth: "100%",
     fontSize: 14,
     lineHeight: 1.6,
     wordBreak: "break-word",
   }),
-  citationsRow: {
+  // Citations are now rendered INSIDE the bubble, not as a separate row
+  citationsInline: {
     display: "flex",
     flexWrap: "wrap",
-    gap: 5,
-    marginTop: 6,
+    gap: 4,
+    marginTop: 8,
+    paddingTop: 8,
+    borderTop: "1px solid rgba(255,255,255,0.08)",
   },
   citationBadge: {
     fontSize: 10,
     padding: "2px 7px",
     borderRadius: 10,
-    background: "#0d2136",
+    background: "rgba(13,33,54,0.8)",
     color: "#79c0ff",
-    border: "1px solid #1f6feb33",
+    border: "1px solid #1f6feb55",
     fontFamily: "monospace",
+    maxWidth: 260,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   thinkingDot: {
     display: "inline-block",
@@ -183,14 +193,15 @@ function MessageBubble({ msg }) {
     <div style={{ alignSelf: msg.role === "user" ? "flex-end" : "flex-start", maxWidth: "82%" }}>
       <div style={S.messageBubble(msg.role)}>
         {msg.role === "assistant" ? <CitedText text={msg.text} /> : msg.text}
+        {/* Citations rendered INSIDE the bubble — no duplicate outside */}
+        {msg.citations?.length > 0 && (
+          <div style={S.citationsInline}>
+            {msg.citations.slice(0, 8).map((c) => (
+              <span key={c} style={S.citationBadge} title={c}>{c}</span>
+            ))}
+          </div>
+        )}
       </div>
-      {msg.citations?.length > 0 && (
-        <div style={S.citationsRow}>
-          {msg.citations.slice(0, 8).map((c) => (
-            <span key={c} style={S.citationBadge}>{c}</span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -269,7 +280,7 @@ export default function App() {
         {
           id:   Date.now() + 1,
           role: "assistant",
-          text: `⚠️ Error: ${err.message}`,
+          text: `Error: ${err.message}`,
         },
       ]);
     } finally {
@@ -291,8 +302,8 @@ export default function App() {
 
   const statusLabel =
     backendOnline === null ? "Checking…"
-    : backendOnline        ? "● Backend online"
-                           : "● Backend offline";
+    : backendOnline        ? "Backend online"
+                           : "Backend offline";
 
   return (
     <div style={S.app}>
@@ -302,7 +313,14 @@ export default function App() {
           <h1 style={S.title}>Atlas</h1>
           <p style={S.subtitle}>Multimodal Enterprise Onboarding Assistant</p>
         </div>
-        <span style={S.statusBadge(backendOnline === true)}>{statusLabel}</span>
+        <span style={S.statusBadge(backendOnline === true)}>
+          {backendOnline !== null && (
+            <svg width="7" height="7" viewBox="0 0 7 7" style={{ marginRight: 5, verticalAlign: "middle" }}>
+              <circle cx="3.5" cy="3.5" r="3.5" fill={backendOnline ? "#3fb950" : "#f85149"}/>
+            </svg>
+          )}
+          {statusLabel}
+        </span>
       </header>
 
       {/* Main */}
@@ -311,7 +329,15 @@ export default function App() {
         <div ref={listRef} style={S.messageList}>
           {messages.length === 0 ? (
             <div style={S.emptyState}>
-              <span style={{ fontSize: 32 }}>🤖</span>
+              {/* Robot SVG — no emoji */}
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#484f58" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="8" width="18" height="12" rx="2"/>
+                <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+                <circle cx="9" cy="14" r="1.5" fill="#484f58" stroke="none"/>
+                <circle cx="15" cy="14" r="1.5" fill="#484f58" stroke="none"/>
+                <path d="M8 19v2M16 19v2"/>
+                <path d="M12 3v3"/>
+              </svg>
               <span>Ask Atlas anything about onboarding, Jira, or support tickets.</span>
               <span style={{ fontSize: 12 }}>Type below or hold the mic button to speak.</span>
             </div>

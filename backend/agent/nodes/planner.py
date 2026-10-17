@@ -54,17 +54,19 @@ JSON schema:
 }
 
 Rules:
-1. If the question is about a dashboard screenshot, chart, or image → set needs_vision=true, include "vision" in sub_agents.
-2. If the question mentions ticket IDs, creating/updating/assigning tickets, listing open tickets → include "action" in sub_agents.
+1. If the question is about a dashboard screenshot, chart, or image → set needs_vision=true, sub_agents=["vision"], modality="image".
+2. If the question mentions ticket IDs, creating/updating/assigning tickets, listing open tickets → sub_agents=["action"].
 3. For action_intent "get_ticket", action_params must include {"id": <integer>}.
 4. For action_intent "list_tickets", action_params may include any of: status, priority, assignee, team.
 5. For action_intent "create_ticket", action_params must include title, description, priority, reporter.
 6. For action_intent "update_status", action_params must include id, status, actor.
 7. For action_intent "assign_ticket", action_params must include id, assignee, actor.
-8. If the question is about documentation, procedures, onboarding steps, Jira/Confluence how-tos, or meeting transcripts → include "retrieval" in sub_agents.
-9. If unsure, default to retrieval.
-10. Never include sub-agents that are clearly not needed — keep the plan minimal.
-11. Output ONLY valid JSON. No preamble, no markdown fences.
+8. If the question mentions a meeting, transcript, AMI, ES2008, speaker, or what was said/discussed in a meeting → sub_agents=["retrieval"], modality="audio". The AMI corpus is indexed under source_ids starting with "ami/".
+9. If the question is about a Jira/Confluence/JSM video tutorial, what a tutorial shows, or what happens in a video → sub_agents=["retrieval"], modality="video".
+10. If the question is about documentation, procedures, onboarding steps, GitLab handbook, CSM, PROVE, lifecycle → sub_agents=["retrieval"], modality="text".
+11. If unsure, default to retrieval with modality=null.
+12. Never include sub-agents that are clearly not needed — keep the plan minimal.
+13. Output ONLY valid JSON. No preamble, no markdown fences.
 """
 
 
@@ -88,7 +90,7 @@ def planner_node(state: Dict[str, Any]) -> Dict[str, Any]:
             model=settings.LLM_PRIMARY_MODEL,
             system=_SYSTEM,
             json_mode=True,
-            use_cache=True,
+            use_cache=False,   # routing decisions must never be served from cache
         )
         raw = result["text"].strip()
 

@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Atlas — Multimodal Enterprise Agent</title>
     <meta name="description" content="Atlas Multimodal Enterprise Agent Platform" />
+    <style>
+      /* Hard reset — kills the white border around the app */
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f1117;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Puter.js: loaded only when VITE_ENABLE_PUTER_STT=true.
+         If you enable it, the user must sign in with a Puter account.
+         Usage counts against their personal free allowance. -->
+    <script>
+      if (import.meta && false) { /* replaced by vite plugin if needed */ }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

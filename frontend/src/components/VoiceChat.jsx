@@ -254,7 +254,12 @@ export default function VoiceChat({ onMessage, disabled }) {
           <span style={S.providerBadge(provider)}>STT: {provider}</span>
         )}
         {speaking && (
-          <button style={S.stopButton} onClick={stopTTS}>⏹ Stop</button>
+          <button style={S.stopButton} onClick={stopTTS}>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="#f85149" style={{ marginRight: 4, verticalAlign: "middle" }}>
+              <rect width="10" height="10" rx="1"/>
+            </svg>
+            Stop
+          </button>
         )}
       </div>
 
@@ -271,7 +276,20 @@ export default function VoiceChat({ onMessage, disabled }) {
           aria-label={recording ? "Stop recording" : "Start recording"}
           disabled={disabled || (busy && !recording)}
         >
-          {recording ? "⏹" : "🎤"}
+          {recording ? (
+            /* Stop square SVG */
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+            </svg>
+          ) : (
+            /* Microphone SVG */
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M5 10a7 7 0 0 0 14 0"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="8"  y1="22" x2="16" y2="22"/>
+            </svg>
+          )}
         </button>
 
         {/* Waveform */}
