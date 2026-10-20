@@ -123,6 +123,123 @@
   .tag-scripts   { background: #1a1f2d; color: #79c0ff; border: 1px solid #1f6feb; }
   .tag-eval      { background: #2d1a1a; color: #ff7b72; border: 1px solid #f85149; }
   .tag-config    { background: #1a2d2a; color: #56d364; border: 1px solid #238636; }
+  .tag-walkthrough { background: #1f2d1a; color: #39d353; border: 1px solid #2ea043; }
+
+  /* ── WALKTHROUGH DETAIL ─────────────────────────────────────────────────── */
+  .wt-hero {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 20px 24px 18px;
+    margin-bottom: 28px;
+  }
+  .wt-question {
+    font-size: 17px;
+    font-weight: 700;
+    color: #e6edf3;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .wt-summary {
+    font-size: 13px;
+    color: #7d8590;
+    line-height: 1.6;
+  }
+
+  .wt-phases { display: flex; flex-direction: column; gap: 0; }
+
+  .wt-phase {
+    display: flex;
+    gap: 0;
+  }
+  /* vertical spine */
+  .wt-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 36px;
+    flex-shrink: 0;
+  }
+  .wt-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .wt-line {
+    width: 2px;
+    flex: 1;
+    min-height: 16px;
+    background: #21262d;
+    margin: 0 auto;
+  }
+  .wt-phase:last-child .wt-line { display: none; }
+
+  .wt-body {
+    padding: 2px 0 24px 14px;
+    flex: 1;
+  }
+  .wt-phase-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .wt-phase-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e6edf3;
+    margin-bottom: 6px;
+  }
+  .wt-phase-desc {
+    font-size: 13px;
+    color: #8b949e;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .wt-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .wt-file-chip {
+    font-size: 11px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .wt-file-chip:hover { border-color: #58a6ff; color: #58a6ff; }
+
+  /* phase colour themes */
+  .ph-ingest  .wt-dot { background: #3d2a1a; color: #f0883e; border: 2px solid #9e6a03; }
+  .ph-ingest  .wt-phase-label { color: #f0883e; }
+  .ph-config  .wt-dot { background: #1a2d2a; color: #56d364; border: 2px solid #238636; }
+  .ph-config  .wt-phase-label { color: #56d364; }
+  .ph-agent   .wt-dot { background: #2d1f4a; color: #bc8cff; border: 2px solid #6e40c9; }
+  .ph-agent   .wt-phase-label { color: #bc8cff; }
+  .ph-retrieval .wt-dot { background: #1a2d3d; color: #39d353; border: 2px solid #238636; }
+  .ph-retrieval .wt-phase-label { color: #39d353; }
+  .ph-mcp     .wt-dot { background: #2d2a1a; color: #e3b341; border: 2px solid #9e6a03; }
+  .ph-mcp     .wt-phase-label { color: #e3b341; }
+  .ph-voice   .wt-dot { background: #2a1a2d; color: #d2a8ff; border: 2px solid #6e40c9; }
+  .ph-voice   .wt-phase-label { color: #d2a8ff; }
+  .ph-synth   .wt-dot { background: #1c2d4a; color: #58a6ff; border: 2px solid #1f6feb; }
+  .ph-synth   .wt-phase-label { color: #58a6ff; }
+  .ph-eval    .wt-dot { background: #2d1a1a; color: #ff7b72; border: 2px solid #f85149; }
+  .ph-eval    .wt-phase-label { color: #ff7b72; }
+  .ph-frontend .wt-dot { background: #1f3d2a; color: #56d364; border: 2px solid #238636; }
+  .ph-frontend .wt-phase-label { color: #56d364; }
 
   /* section divider */
   .section-divider {
@@ -374,6 +491,40 @@
       <div class="card" onclick="show('db_inspect_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_db_inspect.py</div><div class="card-role">Inspects tickets.db schema &amp; row counts</div></div>
       <div class="card" onclick="show('diag_docs_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_diag_docs.py</div><div class="card-role">Diagnoses docs retrieval quality interactively</div></div>
       <div class="card" onclick="show('smoke_docs_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_smoke_docs.py</div><div class="card-role">Smoke-tests the docs-search MCP server directly</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 10: How It Works ────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">How It Works — End-to-End Walkthroughs</div>
+    <div class="layer-row">
+      <div class="card" onclick="showWalkthrough('wt_ingestion')">
+        <div class="card-tag tag-walkthrough">Walkthrough</div>
+        <div class="card-filename">Data Ingestion</div>
+        <div class="card-role">Every file → Qdrant: docs, audio, video, images, tickets</div>
+      </div>
+      <div class="card" onclick="showWalkthrough('wt_eval')">
+        <div class="card-tag tag-walkthrough">Walkthrough</div>
+        <div class="card-filename">Evaluation Pipeline</div>
+        <div class="card-role">From golden.jsonl → retrieval scores, WER, cost report</div>
+      </div>
+      <div class="card" onclick="showWalkthrough('wt_agent_text')">
+        <div class="card-tag tag-walkthrough">Walkthrough</div>
+        <div class="card-filename">Agent: Text Question</div>
+        <div class="card-role">"How do I escalate a Jira ticket?" — handbook lookup</div>
+      </div>
+      <div class="card" onclick="showWalkthrough('wt_agent_vision')">
+        <div class="card-tag tag-walkthrough">Walkthrough</div>
+        <div class="card-filename">Agent: Dashboard Question</div>
+        <div class="card-role">"Show me the priority breakdown" — image + vision</div>
+      </div>
+      <div class="card" onclick="showWalkthrough('wt_agent_hybrid')">
+        <div class="card-tag tag-walkthrough">Walkthrough</div>
+        <div class="card-filename">Agent: Hybrid Question</div>
+        <div class="card-role">"Assign ticket-42 and explain SLA policy" — action + text</div>
+      </div>
     </div>
   </div>
 
@@ -803,6 +954,250 @@ const FILES = {
   },
 };
 
+// ── WALKTHROUGHS DATA ─────────────────────────────────────────────────────────
+const WALKTHROUGHS = {
+
+  wt_ingestion: {
+    title: "Data Ingestion — All Modalities",
+    summary: "Run once before the agent ever answers a question. Reads every raw data file, converts it into searchable chunks, and loads them all into the Qdrant vector database. Fully resumable — re-running skips files already processed.",
+    phases: [
+      {
+        theme:"ph-config", num:"0", label:"Setup",
+        title:"Read configuration & bootstrap Qdrant",
+        desc:"backend/config.py loads all API keys and model names from .env. backend/rate_limiter.py is initialised with RPM/RPD ceilings. backend/ingestion/base.py creates the atlas_chunks Qdrant collection (cosine similarity, payload indexes on modality and source_id) — idempotent, safe to re-run.",
+        files:["config_py","rate_limiter_py","base_py"]
+      },
+      {
+        theme:"ph-ingest", num:"1", label:"Text — GitLab Handbook",
+        title:"scripts/ingest.py → ingestion/docs.py",
+        desc:"ingest.py is the single entry point. It calls docs.py which walks data/docs/gitlab-handbook/, strips Hugo front-matter and shortcodes from each markdown file, splits into 500-word overlapping chunks, and calls base.py → embed_texts() to batch-embed 20 chunks at a time via Gemini EMBEDDING_MODEL. Each chunk is upserted to Qdrant with modality=text. Per-file cache means re-runs skip already-done files.",
+        files:["ingest_py","docs_py","base_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-ingest", num:"2", label:"Audio — AMI Meetings",
+        title:"ingest.py → ingestion/audio.py",
+        desc:"audio.py takes each .wav from data/audio/ami/. ffmpeg converts it to 16kHz mono MP3 and splits into sub-20MB chunks (~10 min each). Each chunk is sent to Groq Whisper (STT_MODEL) which returns word-level timestamps. pyannote.audio runs diarization on the full file and speaker labels are aligned to word timestamps. Chunks embed and upsert to Qdrant with modality=audio and speaker field populated.",
+        files:["ingest_py","audio_py","base_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-ingest", num:"3", label:"Video — STT Track",
+        title:"ingest.py → ingestion/audio.py (audio track of videos)",
+        desc:"For every .mp4 in data/videos/, ffmpeg extracts the audio track (-vn flag). The same audio.py pipeline then runs: convert → chunk → Groq Whisper → align diarization → embed → upsert. These land in Qdrant with modality=audio and source_id prefixed with the video filename.",
+        files:["ingest_py","audio_py","base_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-ingest", num:"4", label:"Video — Frame Descriptions",
+        title:"ingest.py → ingestion/video.py",
+        desc:"video.py samples up to 60 keyframes per video: scene/slide changes detected by frame-diff threshold come first, then evenly-spaced frames fill the remaining budget. Each frame is sent to LLM_BULK_MODEL (Gemini Flash-Lite) as a vision call requesting on-screen content description with timestamp. Results embed and upsert to Qdrant with modality=video. This is a completely separate pass from the STT step above.",
+        files:["ingest_py","video_py","base_py","llm_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-ingest", num:"5", label:"Images — Dashboard Screenshots",
+        title:"ingest.py → ingestion/images.py",
+        desc:"images.py sends each .png from data/images/ to LLM_BULK_MODEL with a structured prompt requesting chart values, axis labels, titles, and counts. The extracted text is cross-referenced against data/images/ground_truth.md (hand-written answer key). Each image produces one chunk in Qdrant with modality=image.",
+        files:["ingest_py","images_py","base_py","llm_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-ingest", num:"6", label:"Tickets — tickets.db",
+        title:"ingest.py → ingestion/tickets.py",
+        desc:"tickets.py reads the existing tickets.db (read-only — never modifies it). Each ticket and its event history is formatted as structured text and embedded. 20 chunks upsert to Qdrant with modality=ticket. This enables semantic search over ticket content alongside the structured SQL queries the ticketing MCP server handles separately.",
+        files:["ingest_py","tickets_py","base_py","db_py"]
+      },
+      {
+        theme:"ph-config", num:"7", label:"Done",
+        title:"Qdrant atlas_chunks collection ready",
+        desc:"After a full run: 2,169 points in Qdrant — ticket:20, text:1,454, audio:329, video:360, image:6. The agent can now answer questions. Run scripts/show_status.py to see counts per modality. Ingestion is resumable at any point by re-running ingest.py — completed files are skipped automatically.",
+        files:["ingest_py"]
+      }
+    ]
+  },
+
+  wt_eval: {
+    title: "Evaluation Pipeline — From Golden Q&A to Final Report",
+    summary: "Measures how well Atlas actually performs: retrieval precision, answer faithfulness, speech accuracy, and cost per query. Run after ingestion and agent are working. Produces data/eval/eval_report.json.",
+    phases: [
+      {
+        theme:"ph-config", num:"0", label:"Input",
+        title:"data/eval/golden.jsonl — the answer key",
+        desc:"20 hand-curated question/answer pairs covering all 5 modalities (text, audio, video, image, ticket). Each entry has: question, expected_answer, expected_source_ids, and modality. This file was drafted by generate_golden_draft.py after ingestion and finalized manually.",
+        files:["test_eval_py"]
+      },
+      {
+        theme:"ph-eval", num:"1", label:"Retrieval Eval",
+        title:"scripts/test_eval.py → eval/retrieval_eval.py",
+        desc:"For each of the 20 questions, retrieval_eval.py runs the full hybrid retrieval pipeline (query rewriting → dense → BM25 → RRF → reranker) and checks whether the expected_source_ids appear in the top-5 results. Reports P@5, MRR@5, and Recall@5 per modality. Results: overall P@5=0.390, MRR=0.754, Recall@5=0.900.",
+        files:["test_eval_py","retrieval_eval_py","pipeline_py","query_rewriter_py","dense_py","bm25_py","fusion_py","reranker_py"]
+      },
+      {
+        theme:"ph-eval", num:"2", label:"Faithfulness Eval",
+        title:"test_eval.py → eval/faithfulness_eval.py",
+        desc:"For 14 text/audio/video questions, faithfulness_eval.py runs the full agent (planner → retrieval → synthesizer) to get an answer, then asks LLM_FALLBACK_MODEL (Groq qwen3.8-27b) to score whether every claim in the answer is grounded in the retrieved context. Average score: 0.205 — low because the Groq judge flags paraphrased claims even when factually correct. Groq is used as judge to save Gemini quota.",
+        files:["test_eval_py","faithfulness_eval_py","graph_py","llm_py"]
+      },
+      {
+        theme:"ph-eval", num:"3", label:"STT / WER Eval",
+        title:"test_eval.py → eval/stt_eval.py",
+        desc:"stt_eval.py runs STT_MODEL (Groq Whisper) on each of the three AMI meeting WAVs (ES2008a, ES2008b, ES2008c). The transcript is compared to the precomputed reference_flat.txt ground truth using jiwer.wer(). Reports Word Error Rate per meeting and averaged. Result: avg WER=0.223 (22.3%), which is good for multi-speaker meeting audio. DER (diarization error rate) is skipped on this machine as pyannote requires torch.",
+        files:["test_eval_py","stt_eval_py","stt_py"]
+      },
+      {
+        theme:"ph-eval", num:"4", label:"Latency & Cost Eval",
+        title:"test_eval.py → eval/latency_cost_eval.py",
+        desc:"latency_cost_eval.py runs all 20 golden questions through the full agent and records end-to-end latency and token counts. Computes p50 and p95 latency and estimates cost per query at Gemini/Groq list prices (actual usage is zero on free tier). Results: p50=16.7s, p95=23.3s, avg $0.000351/query.",
+        files:["test_eval_py","latency_cost_eval_py","graph_py","tracer_py"]
+      },
+      {
+        theme:"ph-eval", num:"5", label:"Report",
+        title:"test_eval.py → eval/report.py → eval_report.json",
+        desc:"report.py consolidates all four eval outputs into data/eval/eval_report.json with a human-readable summary table. This file is the source of truth for the README eval results section and the Phase 7 packaging deliverable.",
+        files:["test_eval_py","report_py"]
+      }
+    ]
+  },
+
+  wt_agent_text: {
+    title: "Agent: Text Question",
+    summary: 'Example question: "What is the escalation process for a P1 support ticket according to our handbook?" — Routed to the handbook text corpus, hybrid retrieval, cited answer.',
+    phases: [
+      {
+        theme:"ph-frontend", num:"1", label:"User Input",
+        title:"Browser: App.jsx captures the question",
+        desc:"The user types (or speaks — VoiceChat.jsx records mic audio, useSTT.js sends it to /api/stt which transcribes it via voice/stt.py using Groq Whisper). The question text lands in App.jsx's message state and is POSTed to POST /api/chat.",
+        files:["app_jsx","voicechat_jsx","usestt_js","stt_py"]
+      },
+      {
+        theme:"ph-agent", num:"2", label:"Agent Entry",
+        title:"backend/main.py → agent/graph.py: start run",
+        desc:"main.py receives the POST /api/chat request and calls AtlasGraph.run(question) inside a ThreadPoolExecutor (to avoid blocking the async event loop). graph.py creates an empty AgentState, opens a LangSmith trace span via tracer.py, and enters the planner node.",
+        files:["main_py","graph_py","state_py","tracer_py"]
+      },
+      {
+        theme:"ph-agent", num:"3", label:"Planning",
+        title:"nodes/planner.py classifies intent",
+        desc:"planner.py sends the question to LLM_PRIMARY_MODEL (Gemini) with a structured routing prompt. The model returns a JSON plan: { intent: 'retrieval', modality: 'text', query: 'P1 ticket escalation process support handbook' }. use_cache=False ensures this is always a live call. The plan is stored in AgentState.",
+        files:["planner_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-retrieval", num:"4", label:"Query Rewriting",
+        title:"retrieval/query_rewriter.py expands the query",
+        desc:"query_rewriter.py takes the planner's query and generates a HyDE passage (a hypothetical ideal answer) plus 2-3 sub-questions. These expanded queries are used for dense search to improve recall on paraphrased or indirect answers. Cached on disk — identical queries don't hit the LLM again.",
+        files:["query_rewriter_py","llm_py","rate_limiter_py"]
+      },
+      {
+        theme:"ph-retrieval", num:"5", label:"Hybrid Search",
+        title:"retrieval/pipeline.py → dense + BM25 → RRF → reranker",
+        desc:"pipeline.py orchestrates: (1) dense.py embeds the HyDE query and runs cosine similarity search in Qdrant filtered to modality=text. (2) bm25.py does keyword search on the same corpus. (3) fusion.py merges both ranked lists using Reciprocal Rank Fusion (k=60). (4) reranker.py scores the top candidates with a cross-encoder (MiniLM) and returns the final top-5 chunks.",
+        files:["pipeline_py","dense_py","bm25_py","fusion_py","reranker_py"]
+      },
+      {
+        theme:"ph-mcp", num:"6", label:"MCP Call",
+        title:"nodes/retrieval_node.py → docs-search MCP server",
+        desc:"retrieval_node.py calls mcp_client.py which spawns docs_search/server.py as a subprocess and sends a JSON-RPC 2.0 search_docs request over stdio. The MCP server calls pipeline.py and streams the ranked chunks back. The agent never imports retrieval code directly — only the MCP protocol is used.",
+        files:["retrieval_node_py","mcp_client_py","docs_server_py","protocol_py","pipeline_py"]
+      },
+      {
+        theme:"ph-agent", num:"7", label:"Synthesis",
+        title:"nodes/synthesizer.py writes the cited answer",
+        desc:"synthesizer.py receives the top-5 text chunks in AgentState.retrieval_results. It formats them as a context block with [source_id] labels and sends to LLM_PRIMARY_MODEL with a strict prompt: every claim must cite its source, unsupported claims must be flagged. The final answer with inline [handbook/support/escalation.md] citations is stored in AgentState.final_answer.",
+        files:["synthesizer_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-frontend", num:"8", label:"Response",
+        title:"main.py → App.jsx → CitedText → optional TTS",
+        desc:"graph.py closes the LangSmith trace span. main.py returns { answer, citations, trace } as JSON. App.jsx renders the answer through the CitedText renderer which turns [source_id] tokens into inline coloured badges. The AgentTrace panel shows planner intent, retrieval query, chunk count, latency, and tokens. If voice mode is on, useTTS.js fetches /api/tts sentence by sentence and plays them as they arrive.",
+        files:["main_py","app_jsx","usetss_js","tts_py","tracer_py"]
+      }
+    ]
+  },
+
+  wt_agent_vision: {
+    title: "Agent: Dashboard Screenshot Question",
+    summary: 'Example question: "What is the current priority breakdown of open tickets — how many are critical vs high?" — Routes to the image corpus, Gemini reads the chart, cited answer.',
+    phases: [
+      {
+        theme:"ph-frontend", num:"1", label:"User Input",
+        title:"App.jsx POSTs question to /api/chat",
+        desc:"The question arrives as plain text. main.py calls AtlasGraph.run(). graph.py initialises AgentState and opens a LangSmith trace.",
+        files:["app_jsx","main_py","graph_py","state_py","tracer_py"]
+      },
+      {
+        theme:"ph-agent", num:"2", label:"Planning",
+        title:"nodes/planner.py routes to vision",
+        desc:"planner.py recognises 'priority breakdown' and 'critical vs high' as dashboard-reading intent. LLM_PRIMARY_MODEL returns: { intent: 'vision', modality: 'image', query: 'priority breakdown open tickets critical high' }. The image modality is set explicitly in the plan.",
+        files:["planner_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-mcp", num:"3", label:"MCP — Image Retrieval",
+        title:"nodes/retrieval_node.py → docs-search MCP (modality=image)",
+        desc:"retrieval_node.py calls docs_search/server.py via stdio with modality='image'. pipeline.py runs dense search in Qdrant filtered to modality=image — BM25 and HyDE are bypassed since image chunks are descriptions not raw text. The top-2 image chunk records are returned, carrying the file path (e.g. data/images/dash_priority.png) in their payload.",
+        files:["retrieval_node_py","mcp_client_py","docs_server_py","pipeline_py","dense_py"]
+      },
+      {
+        theme:"ph-agent", num:"4", label:"Vision Sub-agent",
+        title:"nodes/vision_node.py reads the dashboard image",
+        desc:"vision_node.py takes each image file path from the retrieval results and sends the actual PNG to LLM_BULK_MODEL (Gemini Flash-Lite) with a structured vision prompt: 'Extract all chart values, labels, titles, and counts. Label each with its source_id.' The model reads the bar/pie chart and returns structured data like: 'Critical: 12, High: 34, Medium: 28, Low: 8 [image/dash_priority.png]'.",
+        files:["vision_node_py","llm_py","rate_limiter_py","state_py"]
+      },
+      {
+        theme:"ph-agent", num:"5", label:"Synthesis",
+        title:"nodes/synthesizer.py builds the cited answer",
+        desc:"synthesizer.py merges vision_results into the context block and sends to LLM_PRIMARY_MODEL. Output: 'Based on the priority dashboard [image/dash_priority.png]: Critical tickets: 12, High tickets: 34, Medium: 28, Low: 8. Critical + High together represent 54% of open tickets.' Every number cites its source image.",
+        files:["synthesizer_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-frontend", num:"6", label:"Response",
+        title:"App.jsx renders citation badges for the image source",
+        desc:"CitedText renders [image/dash_priority.png] as an orange Image badge inline in the answer bubble. The AgentTrace panel shows: intent=vision, modality=image, vision sub-agent activated, latency, tokens.",
+        files:["app_jsx","main_py","tracer_py"]
+      }
+    ]
+  },
+
+  wt_agent_hybrid: {
+    title: "Agent: Hybrid Question — Ticket Action + Handbook Lookup",
+    summary: 'Example question: "Assign ticket TKT-042 to Sarah and tell me what the SLA policy says about P2 tickets." — Two sub-agents run: action (update ticket) + retrieval (handbook), merged into one answer.',
+    phases: [
+      {
+        theme:"ph-frontend", num:"1", label:"User Input",
+        title:"App.jsx POSTs the hybrid question",
+        desc:"The question combines an action ('assign ticket TKT-042 to Sarah') with a knowledge lookup ('SLA policy for P2'). main.py calls AtlasGraph.run(). graph.py opens state and a LangSmith trace.",
+        files:["app_jsx","main_py","graph_py","state_py","tracer_py"]
+      },
+      {
+        theme:"ph-agent", num:"2", label:"Planning",
+        title:"nodes/planner.py detects hybrid intent",
+        desc:"planner.py sends the question to LLM_PRIMARY_MODEL. The model recognises both an action intent and a retrieval intent and returns: { intent: 'hybrid', modality: 'text', action_intent: 'assign_ticket', ticket_id: 'TKT-042', assignee: 'Sarah', query: 'SLA policy P2 ticket response time' }. The graph will now run both action_node and retrieval_node.",
+        files:["planner_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-mcp", num:"3", label:"MCP — Ticket Action",
+        title:"nodes/action_node.py → ticketing MCP server",
+        desc:"action_node.py reads the plan's action_intent='assign_ticket'. It calls mcp_client.py → ticketing/server.py via stdio with a JSON-RPC assign_ticket(id='TKT-042', assignee='Sarah') call. The ticketing server uses db.py to run a parameterized UPDATE on tickets.db and inserts a ticket_events row with actor='atlas', event_type='assigned', note='Assigned to Sarah'. Returns the updated ticket record.",
+        files:["action_node_py","mcp_client_py","ticketing_server_py","protocol_py","db_py"]
+      },
+      {
+        theme:"ph-retrieval", num:"4", label:"Hybrid Search — Handbook",
+        title:"nodes/retrieval_node.py → docs-search MCP (modality=text)",
+        desc:"In parallel with the action step, retrieval_node.py calls docs_search/server.py with the SLA query and modality=text. pipeline.py runs the full hybrid chain: query_rewriter (HyDE: 'P2 tickets must receive first response within 4 hours...') → dense search → BM25 → RRF fusion → MiniLM reranker. Top-5 handbook chunks about SLA policies are returned.",
+        files:["retrieval_node_py","mcp_client_py","docs_server_py","pipeline_py","query_rewriter_py","dense_py","bm25_py","fusion_py","reranker_py"]
+      },
+      {
+        theme:"ph-agent", num:"5", label:"Synthesis",
+        title:"nodes/synthesizer.py merges both results",
+        desc:"synthesizer.py receives both action_results (ticket assignment confirmed) and retrieval_results (SLA handbook chunks) in AgentState. It sends the merged context to LLM_PRIMARY_MODEL with the citation-enforcement prompt. Output: 'TKT-042 has been assigned to Sarah. According to SLA policy [handbook/support/sla.md], P2 tickets require a first response within 4 hours and resolution within 24 hours.'",
+        files:["synthesizer_py","llm_py","state_py"]
+      },
+      {
+        theme:"ph-frontend", num:"6", label:"Response",
+        title:"App.jsx renders ticket + handbook citations side by side",
+        desc:"CitedText renders [handbook/support/sla.md] as a blue Text badge. The AgentTrace panel shows: intent=hybrid, both action_node and retrieval_node activated, two sets of source_ids. If voice mode is active, useTTS.js plays the answer sentence by sentence via voice/tts.py (Gemini TTS → WAV).",
+        files:["app_jsx","main_py","usetss_js","tts_py","tracer_py"]
+      }
+    ]
+  }
+
+};
+
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 let history = [];
 
@@ -835,11 +1230,54 @@ function show(id) {
   window.scrollTo(0,0);
 }
 
+function showWalkthrough(id) {
+  const wt = WALKTHROUGHS[id];
+  if (!wt) return;
+  history.push('__wt__' + id);
+
+  const phasesHtml = wt.phases.map(p => {
+    const chips = (p.files || []).map(fid => {
+      const f = FILES[fid];
+      return f ? `<span class="wt-file-chip" onclick="show('${fid}')">${f.filename}</span>` : '';
+    }).join('');
+
+    return `
+      <div class="wt-phase ${p.theme}">
+        <div class="wt-spine">
+          <div class="wt-dot">${p.num}</div>
+          <div class="wt-line"></div>
+        </div>
+        <div class="wt-body">
+          <div class="wt-phase-label">${p.label}</div>
+          <div class="wt-phase-title">${p.title}</div>
+          <div class="wt-phase-desc">${p.desc}</div>
+          <div class="wt-files">${chips}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('detail-content').innerHTML = `
+    <div class="wt-hero">
+      <div class="wt-question">${wt.title}</div>
+      <div class="wt-summary">${wt.summary}</div>
+    </div>
+    <div class="wt-phases">${phasesHtml}</div>
+  `;
+
+  document.getElementById('flowchart-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
 function goBack() {
   history.pop();
   if (history.length > 0) {
     const prev = history.pop();
-    show(prev);
+    if (prev.startsWith('__wt__')) {
+      showWalkthrough(prev.replace('__wt__',''));
+    } else {
+      show(prev);
+    }
   } else {
     document.getElementById('detail-view').style.display = 'none';
     document.getElementById('flowchart-view').style.display = 'block';
@@ -848,7 +1286,7 @@ function goBack() {
 }
 </script>
 
-<footer style="text-align:center;padding:24px 0 32px;font-size:11px;color:#484f58;border-top:1px solid #21262d;margin-top:40px;">Made with IBM Bob</footer>
+
 
 </body>
 </html>
