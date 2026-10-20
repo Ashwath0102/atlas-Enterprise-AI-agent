@@ -26,3 +26,6 @@ bob-task-*.md
 
 # VS Code workspace settings
 .vscode/
+
+# Draft eval files — work-in-progress, not final golden set
+data/eval/golden_draft*

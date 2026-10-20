@@ -147,3 +147,59 @@
 - Created scripts/demo.py: interactive 6-question demo covering all modalities; --auto flag for non-interactive runs; prints sub-agents, citations, answer excerpt, latency, token count, and estimated cost
 - Updated .env.example: LLM_FALLBACK_MODEL updated to qwen/qwen3.8-27b
 
+
+## Post-launch — UI Fixes Batch 1 (commit 40a52c2)
+
+- **Audio routing**: planner prompt now explicitly maps "ES2008 / meeting / AMI" queries to
+  `modality=audio`, preventing the retrieval sub-agent from falling through to video chunks.
+- **Citations inside bubble**: CitedText renderer and source badges now render inside the
+  assistant message bubble, not below it; layout is `flex-column` so citations follow the text.
+- **White border eliminated**: added a CSS reset (`body { margin:0; background:#0f1117 }`) in
+  `frontend/index.html` to remove the browser default 8px body margin that left a gap around
+  the app shell.
+- **Emoji → SVG**: all status/priority/badge icons in VoiceChat, App header, and message
+  bubbles replaced with inline SVGs for crisp rendering at all DPRs and no emoji font dependency.
+
+## Post-launch — Theme + TTS pipeline (commit 95520f8)
+
+- **Dark/light theme toggle**: implemented a two-palette system — dark default (Gruvbox Dark)
+  and Gruvbox Material Light.  Choice persisted in `localStorage("atlas-theme")`.  Every
+  surface, border, text, and icon is parameterised through a single `t` theme object; no
+  hardcoded colour strings remain outside the palette constants.
+- **Sentence-pipelined TTS**: `useTTS.js` now starts playing the first sentence chunk as
+  soon as it arrives, queuing subsequent chunks; eliminates the full-response wait that caused
+  a ~5 s silence before audio.
+- **Pause / Resume / Stop controls**: added three audio control buttons in the VoiceChat
+  component wired to the Web Audio API `AudioContext` suspend/resume and a stop flag that
+  drains the playback queue.
+
+## Post-launch — TTS drain loop fix (commit 0171e4a)
+
+- **Bug**: the drain loop in `useTTS.js` exited as soon as the playback queue was momentarily
+  empty, even when more sentence fetches were still in flight.  On multi-sentence answers the
+  second and later sentences were silently dropped.
+- **Fix**: added a `fetchDoneRef` boolean ref that is set only after the final sentence fetch
+  completes.  The drain loop now waits for both `queue empty AND fetchDone` before stopping,
+  guaranteeing every sentence is played.
+
+## Post-launch — Agent trace panel (commit daf191a)
+
+- Added a collapsible "Show agent reasoning" disclosure per assistant message.  Renders the
+  planner's intent, detected modality, retrieval query, number of chunks retrieved, total
+  latency, and token counts — pulled from the existing `trace` field in the `/api/chat`
+  response (zero extra API calls).
+- Works for both text chat and voice-triggered messages.
+
+## Post-launch — Header branding + text overflow (commit 79f3921)
+
+- **Custom "A" logo SVG**: replaced the placeholder letter with the full hand-crafted SVG path
+  (200×200 canvas).  Corrected `viewBox` to `"2 16 196 181"` (effective bounding box of the
+  path after `translate(69,16)`), so the entire letterform is visible with no cropping or gap.
+- **Monitor icon SVG**: embedded the full 17-path monitor SVG with a theme-aware colour
+  scheme — blue frame constant across themes, screen area dark in dark mode, light in light,
+  stand and foot pieces also theme-parameterised.  `viewBox="12 31 190 162"` crops out the
+  empty canvas margins.
+- **Text overflow**: added `overflowWrap: "anywhere"` to message bubbles and
+  `wordBreak: "break-all"` to `CitedText` spans so long source IDs (e.g.
+  `image/dash_priority.png`) cannot push the bubble wider than the viewport.
+  Added `overflowX: "hidden"` to the message list container as a hard outer guard.
