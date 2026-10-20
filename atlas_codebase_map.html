@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Atlas — Codebase Map</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: #0f1117;
+    color: #e6edf3;
+    min-height: 100vh;
+  }
+
+  /* ── FLOWCHART VIEW ─────────────────────────────────────────────────────── */
+  #flowchart-view { padding: 32px 24px 64px; max-width: 1100px; margin: 0 auto; }
+
+  .page-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    color: #e6edf3;
+  }
+  .page-subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #7d8590;
+    margin-bottom: 40px;
+  }
+
+  /* layer labels */
+  .layer {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+  .layer-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #7d8590;
+    margin-bottom: 10px;
+    padding-left: 4px;
+    border-left: 3px solid #30363d;
+    padding-left: 8px;
+  }
+  .layer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  /* connector arrow between layers */
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    margin: 0 0 0;
+  }
+  .connector svg { opacity: 0.35; }
+
+  /* file cards */
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    min-width: 148px;
+    max-width: 220px;
+    flex: 1 1 148px;
+    position: relative;
+    user-select: none;
+  }
+  .card:hover {
+    border-color: #3b82d4;
+    background: #1c2333;
+    transform: translateY(-2px);
+  }
+  .card-filename {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #58a6ff;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-role {
+    font-size: 11px;
+    color: #7d8590;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-bottom: 6px;
+  }
+
+  /* tag colours per layer */
+  .tag-frontend  { background: #1f3d2a; color: #56d364; border: 1px solid #238636; }
+  .tag-backend   { background: #1c2d4a; color: #58a6ff; border: 1px solid #1f6feb; }
+  .tag-agent     { background: #2d1f4a; color: #bc8cff; border: 1px solid #6e40c9; }
+  .tag-ingestion { background: #3d2a1a; color: #f0883e; border: 1px solid #9e6a03; }
+  .tag-retrieval { background: #1a2d3d; color: #39d353; border: 1px solid #238636; }
+  .tag-mcp       { background: #2d2a1a; color: #e3b341; border: 1px solid #9e6a03; }
+  .tag-voice     { background: #2a1a2d; color: #d2a8ff; border: 1px solid #6e40c9; }
+  .tag-scripts   { background: #1a1f2d; color: #79c0ff; border: 1px solid #1f6feb; }
+  .tag-eval      { background: #2d1a1a; color: #ff7b72; border: 1px solid #f85149; }
+  .tag-config    { background: #1a2d2a; color: #56d364; border: 1px solid #238636; }
+
+  /* section divider */
+  .section-divider {
+    border: none;
+    border-top: 1px solid #21262d;
+    margin: 20px 0 24px;
+  }
+
+  /* ── DETAIL VIEW ────────────────────────────────────────────────────────── */
+  #detail-view {
+    display: none;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #58a6ff;
+    cursor: pointer;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 6px 14px;
+    background: #161b22;
+    margin-bottom: 32px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .back-btn:hover { background: #1c2333; border-color: #3b82d4; }
+
+  .detail-tag { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 12px; }
+
+  .detail-filename {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #58a6ff;
+    margin-bottom: 6px;
+    word-break: break-all;
+  }
+  .detail-path {
+    font-size: 12px;
+    color: #7d8590;
+    margin-bottom: 24px;
+    font-family: monospace;
+  }
+
+  .detail-section { margin-bottom: 24px; }
+  .detail-section h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #7d8590;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #21262d;
+  }
+  .detail-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #c9d1d9;
+  }
+
+  .connects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .connect-chip {
+    font-size: 11.5px;
+    font-family: monospace;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    padding: 3px 9px;
+    color: #58a6ff;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .connect-chip:hover { border-color: #58a6ff; }
+
+  .key-list { list-style: none; padding: 0; }
+  .key-list li {
+    font-size: 13px;
+    color: #c9d1d9;
+    padding: 5px 0;
+    border-bottom: 1px solid #21262d;
+    line-height: 1.5;
+  }
+  .key-list li:last-child { border-bottom: none; }
+  .key-list li strong { color: #e6edf3; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     FLOWCHART VIEW
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="flowchart-view">
+
+  <div class="page-title">Atlas — Codebase Map</div>
+  <div class="page-subtitle">Click any file card to see what it does and how it connects to the rest of the system.</div>
+
+  <!-- ── LAYER 0: Config & Root ──────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Configuration &amp; Root</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('env_example')"><div class="card-tag tag-config">Config</div><div class="card-filename">.env.example</div><div class="card-role">All secrets &amp; model names template</div></div>
+      <div class="card" onclick="show('config_py')"><div class="card-tag tag-config">Config</div><div class="card-filename">backend/config.py</div><div class="card-role">Pydantic settings loader — reads .env</div></div>
+      <div class="card" onclick="show('rate_limiter_py')"><div class="card-tag tag-backend">Backend</div><div class="card-filename">backend/rate_limiter.py</div><div class="card-role">Central rate limiter, backoff &amp; disk cache</div></div>
+      <div class="card" onclick="show('gitignore')"><div class="card-tag tag-config">Config</div><div class="card-filename">.gitignore</div><div class="card-role">Excludes secrets, audio/video, build artifacts</div></div>
+    </div>
+  </div>
+
+  <div class="connector"><svg width="16" height="28" viewBox="0 0 16 28"><line x1="8" y1="0" x2="8" y2="20" stroke="#58a6ff" stroke-width="1.5"/><polygon points="8,28 3,18 13,18" fill="#58a6ff"/></svg></div>
+
+  <!-- ── LAYER 1: Backend Core ───────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Backend Core — FastAPI</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('main_py')"><div class="card-tag tag-backend">Backend</div><div class="card-filename">backend/main.py</div><div class="card-role">FastAPI app — /chat /stt /tts /health endpoints</div></div>
+    </div>
+  </div>
+
+  <div class="connector"><svg width="16" height="28" viewBox="0 0 16 28"><line x1="8" y1="0" x2="8" y2="20" stroke="#bc8cff" stroke-width="1.5"/><polygon points="8,28 3,18 13,18" fill="#bc8cff"/></svg></div>
+
+  <!-- ── LAYER 2: Agent ─────────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Agent Orchestrator (LangGraph-style state machine)</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('graph_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">agent/graph.py</div><div class="card-role">AtlasGraph — routes planner → sub-agents → synthesizer</div></div>
+      <div class="card" onclick="show('state_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">agent/state.py</div><div class="card-role">AgentState dict schema &amp; empty_state() factory</div></div>
+      <div class="card" onclick="show('llm_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">agent/llm.py</div><div class="card-role">Gemini REST + Groq fallback, backoff, disk cache</div></div>
+      <div class="card" onclick="show('tracer_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">agent/tracer.py</div><div class="card-role">LangSmith tracing — open/close spans via REST</div></div>
+      <div class="card" onclick="show('mcp_client_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">agent/mcp_client.py</div><div class="card-role">Stdio MCP client — spawns &amp; talks to MCP servers</div></div>
+    </div>
+  </div>
+
+  <div class="connector"><svg width="16" height="28" viewBox="0 0 16 28"><line x1="8" y1="0" x2="8" y2="20" stroke="#bc8cff" stroke-width="1.5"/><polygon points="8,28 3,18 13,18" fill="#bc8cff"/></svg></div>
+
+  <!-- ── LAYER 3: Agent Nodes ───────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Agent Nodes (Sub-agents)</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('planner_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">nodes/planner.py</div><div class="card-role">Classifies intent → routes to right sub-agent(s)</div></div>
+      <div class="card" onclick="show('retrieval_node_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">nodes/retrieval_node.py</div><div class="card-role">Calls docs-search MCP, returns ranked text chunks</div></div>
+      <div class="card" onclick="show('vision_node_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">nodes/vision_node.py</div><div class="card-role">Gemini vision on image chunks, adds [source_id] labels</div></div>
+      <div class="card" onclick="show('action_node_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">nodes/action_node.py</div><div class="card-role">Calls ticketing MCP — CRUD on tickets/events</div></div>
+      <div class="card" onclick="show('synthesizer_py')"><div class="card-tag tag-agent">Agent</div><div class="card-filename">nodes/synthesizer.py</div><div class="card-role">Merges all context → final cited answer</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 4: Retrieval ─────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Retrieval Pipeline</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('pipeline_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/pipeline.py</div><div class="card-role">Single retrieve() entry point — orchestrates all stages</div></div>
+      <div class="card" onclick="show('dense_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/dense.py</div><div class="card-role">Qdrant cosine similarity search</div></div>
+      <div class="card" onclick="show('bm25_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/bm25.py</div><div class="card-role">BM25Okapi sparse index, pickle-cached</div></div>
+      <div class="card" onclick="show('fusion_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/fusion.py</div><div class="card-role">Reciprocal Rank Fusion — merges dense + BM25</div></div>
+      <div class="card" onclick="show('reranker_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/reranker.py</div><div class="card-role">Cross-encoder re-ranking (MiniLM)</div></div>
+      <div class="card" onclick="show('query_rewriter_py')"><div class="card-tag tag-retrieval">Retrieval</div><div class="card-filename">retrieval/query_rewriter.py</div><div class="card-role">HyDE + sub-question expansion via LLM</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 5: MCP Servers ───────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">MCP Servers (JSON-RPC 2.0 over stdio)</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('protocol_py')"><div class="card-tag tag-mcp">MCP</div><div class="card-filename">shared/protocol.py</div><div class="card-role">Minimal MCP JSON-RPC 2.0 stdio transport</div></div>
+      <div class="card" onclick="show('db_py')"><div class="card-tag tag-mcp">MCP</div><div class="card-filename">shared/db.py</div><div class="card-role">SQLite helper — parameterized queries, connection pool</div></div>
+      <div class="card" onclick="show('docs_server_py')"><div class="card-tag tag-mcp">MCP</div><div class="card-filename">docs_search/server.py</div><div class="card-role">search_docs tool — wraps retrieval pipeline</div></div>
+      <div class="card" onclick="show('ticketing_server_py')"><div class="card-tag tag-mcp">MCP</div><div class="card-filename">ticketing/server.py</div><div class="card-role">5 ticket tools — list, get, create, update, assign</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 6: Ingestion ─────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Ingestion Pipelines (one-time, resumable)</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('base_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/base.py</div><div class="card-role">Chunk schema, Qdrant bootstrap, batched embeddings</div></div>
+      <div class="card" onclick="show('docs_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/docs.py</div><div class="card-role">GitLab handbook markdown → text chunks</div></div>
+      <div class="card" onclick="show('audio_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/audio.py</div><div class="card-role">ffmpeg + Groq Whisper STT + diarization</div></div>
+      <div class="card" onclick="show('video_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/video.py</div><div class="card-role">Keyframe extraction + Gemini vision descriptions</div></div>
+      <div class="card" onclick="show('images_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/images.py</div><div class="card-role">Dashboard screenshots — OCR + structured description</div></div>
+      <div class="card" onclick="show('tickets_py')"><div class="card-tag tag-ingestion">Ingestion</div><div class="card-filename">ingestion/tickets.py</div><div class="card-role">Reads tickets.db → searchable text chunks</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 7: Voice ─────────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Voice Layer</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('stt_py')"><div class="card-tag tag-voice">Voice</div><div class="card-filename">voice/stt.py</div><div class="card-role">GroqSTT — ffmpeg convert → Whisper transcription</div></div>
+      <div class="card" onclick="show('tts_py')"><div class="card-tag tag-voice">Voice</div><div class="card-filename">voice/tts.py</div><div class="card-role">Gemini TTS — text → 24kHz mono WAV</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 8: Frontend ──────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Frontend — React + Vite</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('index_html')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">frontend/index.html</div><div class="card-role">HTML shell — CSS reset, mounts React root</div></div>
+      <div class="card" onclick="show('main_jsx')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">src/main.jsx</div><div class="card-role">React entry point — mounts App into #root</div></div>
+      <div class="card" onclick="show('app_jsx')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">src/App.jsx</div><div class="card-role">Main shell — chat UI, theme, cited messages, trace panel</div></div>
+      <div class="card" onclick="show('voicechat_jsx')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">components/VoiceChat.jsx</div><div class="card-role">Hold-to-record mic, waveform, push-to-talk</div></div>
+      <div class="card" onclick="show('usestt_js')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">hooks/useSTT.js</div><div class="card-role">MediaRecorder → /api/stt; Puter.js fallback on 429</div></div>
+      <div class="card" onclick="show('usetss_js')"><div class="card-tag tag-frontend">Frontend</div><div class="card-filename">hooks/useTTS.js</div><div class="card-role">Sentence-pipelined /api/tts playback, pause/resume</div></div>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ── LAYER 9: Scripts ───────────────────────────────────────────────── -->
+  <div class="layer">
+    <div class="layer-label">Scripts — Run &amp; Eval</div>
+    <div class="layer-row">
+      <div class="card" onclick="show('health_check_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">health_check.py</div><div class="card-role">Tests every key &amp; model with one live call each</div></div>
+      <div class="card" onclick="show('check_models_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">check_models.py</div><div class="card-role">Validates .env model names against provider APIs</div></div>
+      <div class="card" onclick="show('ingest_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">ingest.py</div><div class="card-role">Master ingestion runner — all 6 pipelines, resumable</div></div>
+      <div class="card" onclick="show('demo_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">demo.py</div><div class="card-role">6-question interactive demo across all modalities</div></div>
+      <div class="card" onclick="show('test_mcp_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">test_mcp.py</div><div class="card-role">20 scripted requests → MCP tool-call success rate</div></div>
+      <div class="card" onclick="show('test_eval_py')"><div class="card-tag tag-scripts">Script</div><div class="card-filename">test_eval.py</div><div class="card-role">Master eval runner — all 4 eval stages</div></div>
+    </div>
+    <div class="layer-row" style="margin-top:6px">
+      <div class="card" onclick="show('retrieval_eval_py')"><div class="card-tag tag-eval">Eval</div><div class="card-filename">eval/retrieval_eval.py</div><div class="card-role">P@5, MRR, Recall@5 across 20 golden questions</div></div>
+      <div class="card" onclick="show('faithfulness_eval_py')"><div class="card-tag tag-eval">Eval</div><div class="card-filename">eval/faithfulness_eval.py</div><div class="card-role">RAGAS faithfulness — Groq judge scores each answer</div></div>
+      <div class="card" onclick="show('stt_eval_py')"><div class="card-tag tag-eval">Eval</div><div class="card-filename">eval/stt_eval.py</div><div class="card-role">WER (jiwer) + DER on AMI ES2008a/b/c meetings</div></div>
+      <div class="card" onclick="show('latency_cost_eval_py')"><div class="card-tag tag-eval">Eval</div><div class="card-filename">eval/latency_cost_eval.py</div><div class="card-role">p50/p95 latency, tokens, cost/query (list prices)</div></div>
+      <div class="card" onclick="show('report_py')"><div class="card-tag tag-eval">Eval</div><div class="card-filename">eval/report.py</div><div class="card-role">Consolidates all eval results → eval_report.json</div></div>
+    </div>
+    <div class="layer-row" style="margin-top:6px">
+      <div class="card" onclick="show('check_app_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_check_app.py</div><div class="card-role">Smoke-tests all running HTTP endpoints</div></div>
+      <div class="card" onclick="show('check_imports_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_check_imports.py</div><div class="card-role">Verifies all backend imports resolve cleanly</div></div>
+      <div class="card" onclick="show('db_inspect_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_db_inspect.py</div><div class="card-role">Inspects tickets.db schema &amp; row counts</div></div>
+      <div class="card" onclick="show('diag_docs_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_diag_docs.py</div><div class="card-role">Diagnoses docs retrieval quality interactively</div></div>
+      <div class="card" onclick="show('smoke_docs_py')"><div class="card-tag tag-scripts">Debug</div><div class="card-filename">_smoke_docs.py</div><div class="card-role">Smoke-tests the docs-search MCP server directly</div></div>
+    </div>
+  </div>
+
+</div><!-- end #flowchart-view -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     DETAIL VIEW
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="detail-view">
+  <button class="back-btn" onclick="goBack()">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.749.749 0 011.275.326.749.749 0 01-.215.734L6.06 8l3.72 3.72a.75.75 0 010 1.06z"/></svg>
+    Back to Codebase Map
+  </button>
+  <div id="detail-content"></div>
+</div>
+
+<script>
+// ── FILE DATA ────────────────────────────────────────────────────────────────
+const FILES = {
+
+  // CONFIG
+  env_example: {
+    tag:"Config", tagClass:"tag-config",
+    filename:".env.example", path:".env.example",
+    what:"Template for every secret and model name the project needs. Contains GEMINI_API_KEY, GROQ_API_KEY, QDRANT_URL, QDRANT_API_KEY, HF_TOKEN, LANGSMITH_API_KEY, and all six model-name variables (LLM_PRIMARY_MODEL, LLM_BULK_MODEL, LLM_FALLBACK_MODEL, EMBEDDING_MODEL, TTS_MODEL, STT_MODEL, DIARIZATION_MODEL). Never hardcoded — every file reads from here via config.py.",
+    connects:["config_py"],
+    keys:["Copy to .env and fill in real values before running anything","Model names are versioned here — change once to update the whole project","STT_PROVIDER selects Groq or Puter; VITE_ENABLE_PUTER_STT enables browser fallback"]
+  },
+  config_py: {
+    tag:"Config", tagClass:"tag-config",
+    filename:"backend/config.py", path:"backend/config.py",
+    what:"Pydantic-settings Settings class that reads every variable from .env at startup. Exported as a singleton get_settings(). Every backend module imports this instead of reading os.environ directly — gives type checking, default values, and a single validation point.",
+    connects:["main_py","llm_py","rate_limiter_py","stt_py","tts_py","base_py"],
+    keys:["Single source of truth for all runtime configuration","If a required key is missing, startup fails immediately with a clear message","Used by check_models.py and health_check.py to validate keys before running anything"]
+  },
+  rate_limiter_py: {
+    tag:"Backend", tagClass:"tag-backend",
+    filename:"backend/rate_limiter.py", path:"backend/rate_limiter.py",
+    what:"Central rate limiter with an async request queue, configurable RPM/RPD ceilings, exponential backoff with jitter, and a disk-based result cache keyed by SHA-256(file_hash + model + prompt). Any module that calls an external API goes through this. Cache hits skip the API call entirely — making all ingestion resumable at zero cost.",
+    connects:["llm_py","base_py","audio_py","video_py","images_py","query_rewriter_py"],
+    keys:["backoff formula: min(2^attempt × base + jitter, max_wait)","Cache stored under cache/ directory (gitignored)","All ingestion pipelines are resumable because of this cache"]
+  },
+  gitignore: {
+    tag:"Config", tagClass:"tag-config",
+    filename:".gitignore", path:".gitignore",
+    what:"Tells git which files must never be committed. Excludes .env (secrets), cache/ (API result cache), data/videos/*.mp4 and data/audio/**/*.wav (large binary files), node_modules/, __pycache__/, build artifacts, and data/eval/golden_draft* (work-in-progress eval files). The lock file frontend/package-lock.json IS committed.",
+    connects:[],
+    keys:["Always check this before adding new sensitive or large files","golden_draft* excluded — only the finalized golden.jsonl commits","ffmpeg.exe / ffprobe.exe excluded — place manually in project root"]
+  },
+
+  // BACKEND CORE
+  main_py: {
+    tag:"Backend", tagClass:"tag-backend",
+    filename:"backend/main.py", path:"backend/main.py",
+    what:"FastAPI application entry point. Defines four public endpoints: POST /api/chat (text question → cited answer + trace), POST /api/stt (audio upload → transcript), POST /api/tts (text → base64 WAV), and GET /api/health. Instantiates AtlasGraph once on startup and reuses it across requests. Uses a ThreadPoolExecutor to run blocking MCP subprocess I/O without blocking the async event loop.",
+    connects:["graph_py","stt_py","tts_py","config_py","app_jsx"],
+    keys:["Run with: uvicorn backend.main:app --reload --port 8000","ThreadPoolExecutor wraps all synchronous MCP calls","/api/health returns versions, Qdrant connectivity, and model names"]
+  },
+
+  // AGENT
+  graph_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/graph.py", path:"backend/agent/graph.py",
+    what:"AtlasGraph — the state machine that orchestrates one full question→answer cycle. It runs nodes in order: planner → retrieval_node (if needed) → vision_node (if needed) → action_node (if needed) → synthesizer. Each node reads from and writes to a shared AgentState dict. Wraps the whole run in a LangSmith trace span.",
+    connects:["state_py","planner_py","retrieval_node_py","vision_node_py","action_node_py","synthesizer_py","tracer_py","main_py"],
+    keys:["Native Python 3.8 implementation (LangGraph requires 3.9+)","Sub-agents run sequentially; planner decides which ones are needed","LangSmith span opened at graph entry, closed with final answer"]
+  },
+  state_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/state.py", path:"backend/agent/state.py",
+    what:"Defines AgentState — a typed dict schema that flows through every node in the graph. Includes: question, plan (planner output), retrieval_results, vision_results, action_results, final_answer, trace metadata (latency, tokens), and error. empty_state() factory resets it for each new question.",
+    connects:["graph_py","planner_py","retrieval_node_py","vision_node_py","action_node_py","synthesizer_py"],
+    keys:["Single shared state dict — nodes mutate it in place","trace field carries timing and token data back to /api/chat","All node outputs stored here before synthesizer merges them"]
+  },
+  llm_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/llm.py", path:"backend/agent/llm.py",
+    what:"Gemini REST wrapper with automatic Groq fallback. On a 429 or quota error it switches to LLM_FALLBACK_MODEL (Groq) with base-4 exponential backoff. Every call is disk-cached by SHA-256(model + prompt), so identical prompts never hit the API twice. Also exposes a vision call for image input.",
+    connects:["planner_py","synthesizer_py","vision_node_py","query_rewriter_py","rate_limiter_py"],
+    keys:["Model names read from config — never hardcoded","Groq fallback is automatic and transparent to callers","Cache key includes model name so model changes invalidate old cache entries"]
+  },
+  tracer_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/tracer.py", path:"backend/agent/tracer.py",
+    what:"LangSmith tracing shim written for Python 3.8 (the official LangSmith SDK requires 3.9+). Opens a run span via POST to the LangSmith REST API, attaches it to the graph run, then PATCHes it closed with outputs when the run finishes. Traces agent runs and eval runs only — not ingestion — to stay within the 5,000 traces/month free tier.",
+    connects:["graph_py","test_eval_py"],
+    keys:["Disabled automatically if LANGSMITH_API_KEY is not set","Only traces /api/chat calls and eval runs to conserve quota","Span payload includes question, plan, final_answer, latency, tokens"]
+  },
+  mcp_client_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/mcp_client.py", path:"backend/agent/mcp_client.py",
+    what:"Stdio transport MCP client. Spawns an MCP server as a subprocess, writes JSON-RPC 2.0 requests to its stdin, and reads responses from stdout via a background readline thread. Handles stale-message drain on timeout. Each docs-search call spawns a fresh subprocess to avoid Gemini RPM burst accumulation from multiple embedding calls in quick succession.",
+    connects:["retrieval_node_py","action_node_py","protocol_py","docs_server_py","ticketing_server_py"],
+    keys:["Agent never imports MCP server functions directly — only communicates via stdio","Fresh subprocess per docs-search call prevents rate-limit cascades","Timeout + drain prevents blocking indefinitely on a hung server"]
+  },
+
+  // AGENT NODES
+  planner_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/nodes/planner.py", path:"backend/agent/nodes/planner.py",
+    what:"First node in the graph. Sends the user's question to LLM_PRIMARY_MODEL with a structured prompt that asks it to classify intent (retrieval / vision / action / hybrid) and output a JSON plan including: modality (text/audio/video/image/ticket), the rewritten search query, and any action intent (create_ticket, update_status, etc.). use_cache=False is set here — routing must always be live.",
+    connects:["graph_py","llm_py","state_py","retrieval_node_py","vision_node_py","action_node_py"],
+    keys:["use_cache=False — planner calls are never cached, routing must be fresh","Explicit rule: 'ES2008 / AMI / meeting → modality=audio' prevents wrong routing","JSON plan is the contract between planner and all downstream nodes"]
+  },
+  retrieval_node_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/nodes/retrieval_node.py", path:"backend/agent/nodes/retrieval_node.py",
+    what:"Calls the docs-search MCP server with the rewritten query and modality from the planner's plan. Receives back a list of chunks with source_id, text, score, and location metadata. Stores them in state.retrieval_results for the synthesizer to cite.",
+    connects:["graph_py","mcp_client_py","docs_server_py","state_py","synthesizer_py"],
+    keys:["Fresh MCP subprocess per call — see mcp_client.py","Passes modality filter so audio questions don't return video chunks","source_id from each chunk becomes a citation in the final answer"]
+  },
+  vision_node_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/nodes/vision_node.py", path:"backend/agent/nodes/vision_node.py",
+    what:"Activated when the planner routes to vision (modality=image). Fetches matching image chunks from the retrieval step, then sends each image file to LLM_BULK_MODEL (Gemini Flash-Lite) as a vision call with a structured prompt asking for chart values, labels, and titles. Labels every piece of extracted information with its [source_id].",
+    connects:["graph_py","llm_py","state_py","synthesizer_py","images_py"],
+    keys:["Uses LLM_BULK_MODEL (cheaper Flash-Lite) not the primary model","Each image is processed independently — results merged by synthesizer","Connects to ingestion/images.py output stored in Qdrant"]
+  },
+  action_node_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/nodes/action_node.py", path:"backend/agent/nodes/action_node.py",
+    what:"Activated when the planner detects an action intent (create_ticket, update_status, assign_ticket, list_tickets, get_ticket). Translates the planner's action_intent and extracted parameters into the correct ticketing MCP tool call. Writes the result back to state.action_results.",
+    connects:["graph_py","mcp_client_py","ticketing_server_py","state_py","synthesizer_py"],
+    keys:["All ticket mutations go through MCP — never direct DB access from agent","Planner extracts ticket ID, status, and assignee from the question","Every mutation triggers a ticket_events audit row inside the MCP server"]
+  },
+  synthesizer_py: {
+    tag:"Agent", tagClass:"tag-agent",
+    filename:"backend/agent/nodes/synthesizer.py", path:"backend/agent/nodes/synthesizer.py",
+    what:"Final node in the graph. Receives retrieval_results, vision_results, and action_results from state, formats them as a context block with [source_id] labels, and sends it to LLM_PRIMARY_MODEL with a strict prompt: every claim must be grounded in a provided source and cited with its [source_id]. If the sources don't support the answer, the model must say so.",
+    connects:["graph_py","llm_py","state_py","retrieval_node_py","vision_node_py","action_node_py"],
+    keys:["Citation enforcement is in the prompt — model is instructed to refuse ungrounded claims","Answer with citations flows back through graph.py → main.py → App.jsx","Tokens and latency logged here for the trace panel"]
+  },
+
+  // RETRIEVAL
+  pipeline_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/pipeline.py", path:"backend/retrieval/pipeline.py",
+    what:"The single retrieve() function used by the docs-search MCP server. Orchestrates the full retrieval chain: query rewriting (HyDE + sub-questions) → dense search → BM25 sparse search → RRF fusion → cross-encoder re-ranking. Configurable via a RetrievalConfig dataclass.",
+    connects:["docs_server_py","dense_py","bm25_py","fusion_py","reranker_py","query_rewriter_py"],
+    keys:["One call, full pipeline — callers don't need to know the internals","RetrievalConfig lets you disable HyDE for latency-sensitive paths","Measured baseline: P@5=0.390, MRR=0.754, Recall@5=0.900"]
+  },
+  dense_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/dense.py", path:"backend/retrieval/dense.py",
+    what:"Qdrant vector search using cosine similarity. Embeds the query with EMBEDDING_MODEL (Gemini embeddings), queries the atlas_chunks collection with optional modality and source_id filters, and returns the top-k results with scores.",
+    connects:["pipeline_py","fusion_py","base_py"],
+    keys:["Modality filter prevents text queries returning video frame results","Embedding model read from config — was text-embedding-004, now models/gemini-embedding-2","Returns Qdrant ScoredPoint objects with full payload"]
+  },
+  bm25_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/bm25.py", path:"backend/retrieval/bm25.py",
+    what:"BM25Okapi sparse keyword index over the full Qdrant corpus. The index is pickled to disk and auto-rebuilds when Qdrant point count grows. Provides fast exact-keyword matching that dense search misses (e.g. ticket IDs, version numbers).",
+    connects:["pipeline_py","fusion_py"],
+    keys:["Pickle cache makes subsequent calls sub-millisecond","Auto-invalidates when Qdrant collection grows (point count check)","Complements dense search — RRF fuses both result lists"]
+  },
+  fusion_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/fusion.py", path:"backend/retrieval/fusion.py",
+    what:"Reciprocal Rank Fusion (k=60). Merges the ranked lists from dense.py and bm25.py into a single list using the RRF formula: score = Σ 1/(k + rank). Normalises final scores to [0,1]. Results feed into the reranker.",
+    connects:["pipeline_py","dense_py","bm25_py","reranker_py"],
+    keys:["k=60 is the standard RRF constant — balances early vs. late-rank items","Normalisation makes scores comparable across queries","Proven to outperform either search alone on this corpus"]
+  },
+  reranker_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/reranker.py", path:"backend/retrieval/reranker.py",
+    what:"Cross-encoder re-ranking using sentence-transformers cross-encoder/ms-marco-MiniLM-L-6-v2. Takes the fused candidates from fusion.py and scores each (query, chunk) pair with the cross-encoder, returning only the top_k highest-scoring chunks. Runs locally with no API calls.",
+    connects:["pipeline_py","fusion_py"],
+    keys:["FlashRank was originally planned but dropped — broken transitive deps on Python 3.8","MiniLM cross-encoder runs on CPU — no GPU needed, adds ~200ms","Final ranked list is what gets sent back to the agent"]
+  },
+  query_rewriter_py: {
+    tag:"Retrieval", tagClass:"tag-retrieval",
+    filename:"backend/retrieval/query_rewriter.py", path:"backend/retrieval/query_rewriter.py",
+    what:"Two-step query expansion: (1) HyDE — asks LLM_PRIMARY_MODEL to generate a hypothetical ideal answer passage, uses that passage as the search query for better semantic matching. (2) Sub-question expansion — splits complex questions into 2-3 simpler sub-queries. Results feed into dense.py. Disk-cached per query.",
+    connects:["pipeline_py","dense_py","llm_py","rate_limiter_py"],
+    keys:["HyDE can be disabled in RetrievalConfig for latency-sensitive calls","Cache key is hash(query) so same question never rewrites twice","Adds ~1-3s latency but significantly improves recall for complex questions"]
+  },
+
+  // MCP SERVERS
+  protocol_py: {
+    tag:"MCP", tagClass:"tag-mcp",
+    filename:"mcp_servers/shared/protocol.py", path:"mcp_servers/shared/protocol.py",
+    what:"Minimal MCP JSON-RPC 2.0 over stdio implementation, hand-written for Python 3.8 compatibility (the official MCP Python SDK requires 3.10+). Provides MCPServer base class with register_tool() and a read-loop that dispatches incoming requests to registered handlers and writes responses back to stdout.",
+    connects:["docs_server_py","ticketing_server_py","mcp_client_py"],
+    keys:["One file replaces the entire MCP SDK dependency on Python 3.8","Tools are registered as plain callables — no decorator magic needed","Both MCP servers inherit from this; it handles all JSON-RPC plumbing"]
+  },
+  db_py: {
+    tag:"MCP", tagClass:"tag-mcp",
+    filename:"mcp_servers/shared/db.py", path:"mcp_servers/shared/db.py",
+    what:"SQLite helper for the ticketing MCP server. Provides get_connection() with a connection pool keyed by thread ID (SQLite connections are not thread-safe), and execute_query() / execute_write() with parameterized query enforcement. Validates that status and priority values are within allowed enums before any write.",
+    connects:["ticketing_server_py"],
+    keys:["Parameterized queries everywhere — no SQL injection possible","Status enum: open/in_progress/blocked/resolved/closed","Priority enum: low/medium/high/critical"]
+  },
+  docs_server_py: {
+    tag:"MCP", tagClass:"tag-mcp",
+    filename:"mcp_servers/docs_search/server.py", path:"mcp_servers/docs_search/server.py",
+    what:"MCP server exposing one tool: search_docs(query, modality?, top_k). Receives a JSON-RPC call from the agent's mcp_client.py, calls the retrieval pipeline, and returns a list of chunks with source_id, text, score, and location. Runs as a subprocess — the agent communicates with it only through stdin/stdout.",
+    connects:["protocol_py","pipeline_py","mcp_client_py","retrieval_node_py"],
+    keys:["Agent never imports retrieval code directly — only through this MCP interface","modality parameter filters by text/audio/video/image/ticket","Run standalone: python mcp_servers/docs_search/server.py"]
+  },
+  ticketing_server_py: {
+    tag:"MCP", tagClass:"tag-mcp",
+    filename:"mcp_servers/ticketing/server.py", path:"mcp_servers/ticketing/server.py",
+    what:"MCP server exposing five tools: list_tickets(filters), get_ticket(id) with full event history, create_ticket, update_status, assign_ticket. Every mutation writes a row to ticket_events with actor and timestamp, creating a full audit trail. Uses db.py for all database access.",
+    connects:["protocol_py","db_py","mcp_client_py","action_node_py"],
+    keys:["Unassigned tickets use the string 'unassigned', not NULL — consistent filtering","Every status/priority change is recorded in ticket_events","Run standalone: python mcp_servers/ticketing/server.py"]
+  },
+
+  // INGESTION
+  base_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/base.py", path:"backend/ingestion/base.py",
+    what:"Shared foundation for all ingestion pipelines. Defines the Chunk dataclass with fields: source_id, modality, file, text, timestamp_start/end, page, speaker, and embedding. Bootstraps the Qdrant atlas_chunks collection with cosine similarity and payload indexes on modality and source_id. Provides embed_texts() which batches Gemini embedding calls (20 chunks per call) with base-4 backoff on 429.",
+    connects:["docs_py","audio_py","video_py","images_py","tickets_py","dense_py","rate_limiter_py"],
+    keys:["All 5 modalities upsert into the same Qdrant collection with different modality values","20 chunks per embedding batch to stay inside Gemini's 1,000 req/day free quota","Collection created once — idempotent on re-run"]
+  },
+  docs_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/docs.py", path:"backend/ingestion/docs.py",
+    what:"GitLab handbook markdown ingestion pipeline. Strips Hugo front-matter and shortcodes, splits into 500-word chunks with 50-word overlap, embeds via base.py, and upserts to Qdrant. Resume-safe — each file's processing status is cached so re-runs skip already-processed files. Ingests only the support/customer-experience/onboarding subset.",
+    connects:["base_py","ingest_py","rate_limiter_py"],
+    keys:["1,454 text chunks ingested from 622 handbook files","Hugo shortcodes stripped before chunking to avoid polluting the index","Per-file cache in cache/docs/ — delete to force re-ingest"]
+  },
+  audio_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/audio.py", path:"backend/ingestion/audio.py",
+    what:"Audio ingestion pipeline for AMI meeting WAVs and video audio tracks. Converts input to 16kHz mono MP3 with ffmpeg, splits into sub-20 MB chunks (~10 min each), transcribes each with Groq Whisper (STT_MODEL) preserving word-level timestamps, runs pyannote.audio diarization on the full file, then aligns speaker labels to word timestamps. Budget-aware — defers files that would exceed daily Groq quota.",
+    connects:["base_py","ingest_py","rate_limiter_py","stt_eval_py"],
+    keys:["329 audio chunks ingested across 9 files (3 AMI + 6 videos)","Diarization falls back gracefully if pyannote/torch not installed","ffmpeg located via _find_ffmpeg() — looks in project root if not on PATH"]
+  },
+  video_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/video.py", path:"backend/ingestion/video.py",
+    what:"Video2Text ingestion pipeline (separate from audio). Samples keyframes at a maximum of 60 frames per video: scene/slide changes first (detected via frame-diff threshold), then evenly-spaced frames to fill the remaining budget. Sends each frame to LLM_BULK_MODEL (Gemini Flash-Lite) as a vision call requesting on-screen content description with timestamps. Stores descriptions as Qdrant chunks with modality=video.",
+    connects:["base_py","ingest_py","llm_py","rate_limiter_py"],
+    keys:["60-frame cap per video regardless of length — 6h tutorial gets sparse sampling","Scene change detection via frame-diff avoids duplicate near-identical frames","360 video chunks ingested (60 × 6 videos)"]
+  },
+  images_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/images.py", path:"backend/ingestion/images.py",
+    what:"Dashboard screenshot ingestion. For each image in data/images/, sends it to LLM_BULK_MODEL with a structured prompt requesting chart values, axis labels, titles, and counts. Cross-references output against data/images/ground_truth.md (the hand-annotated answer key) for accuracy scoring. Stores as Qdrant chunks with modality=image.",
+    connects:["base_py","ingest_py","llm_py","vision_node_py"],
+    keys:["6 dashboard images ingested — status breakdown, priority, team, trend charts","ground_truth.md is the answer key used in golden.jsonl entries for vision questions","LLM_BULK_MODEL used (not primary) to save Gemini quota"]
+  },
+  tickets_py: {
+    tag:"Ingestion", tagClass:"tag-ingestion",
+    filename:"backend/ingestion/tickets.py", path:"backend/ingestion/tickets.py",
+    what:"Reads the existing tickets.db (never recreates or reseeds it) and formats each ticket plus its event history as a searchable text chunk. Upserts 20 chunks to Qdrant with modality=ticket. This allows semantic search over ticket content in addition to the structured SQL queries the ticketing MCP server handles.",
+    connects:["base_py","ingest_py","db_py"],
+    keys:["Does NOT create or modify tickets.db — read-only ingestion","Ticket + events formatted as structured text for dense/BM25 retrieval","20 tickets × 1 chunk each = 20 ticket chunks in Qdrant"]
+  },
+
+  // VOICE
+  stt_py: {
+    tag:"Voice", tagClass:"tag-voice",
+    filename:"backend/voice/stt.py", path:"backend/voice/stt.py",
+    what:"GroqSTT provider. Accepts any audio format uploaded to /api/stt, converts it to 16kHz mono MP3 with ffmpeg (to hit Groq's 25MB upload limit), and transcribes with STT_MODEL (Groq Whisper). Logs which provider handled each request. Implements the STTProvider interface — STT_PROVIDER in .env selects the implementation.",
+    connects:["main_py","usestt_js","audio_py"],
+    keys:["All audio converted to 16kHz mono MP3 before upload","STT_PROVIDER interface allows future provider swaps without changing callers","Same Groq Whisper model used for both live voice questions and batch ingestion"]
+  },
+  tts_py: {
+    tag:"Voice", tagClass:"tag-voice",
+    filename:"backend/voice/tts.py", path:"backend/voice/tts.py",
+    what:"Gemini TTS wrapper. Takes a text string, calls TTS_MODEL (Gemini TTS API), receives raw PCM audio, wraps it in a WAV header (16-bit, 24kHz, mono), and returns as base64. Implements base-4 exponential backoff on 429 errors. Called per-sentence by the frontend for low-latency pipelined playback.",
+    connects:["main_py","usetss_js","rate_limiter_py"],
+    keys:["24kHz mono WAV output — compatible with Web Audio API","Called once per sentence, not once per full answer — enables streaming playback","base64-encodes the WAV so it can be sent in a JSON response body"]
+  },
+
+  // FRONTEND
+  index_html: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"frontend/index.html", path:"frontend/index.html",
+    what:"HTML shell that Vite serves. Contains a minimal CSS reset (body margin:0, background:#0f1117) that eliminates the browser's default 8px body margin — without this a white gap appears around the app. Mounts the React app at div#root.",
+    connects:["main_jsx"],
+    keys:["CSS reset here fixes the white-border gap visible in browsers","Dark background colour set here so it shows before React hydrates","Single div#root is the React mount point"]
+  },
+  main_jsx: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"src/main.jsx", path:"frontend/src/main.jsx",
+    what:"React entry point. Imports App and renders it into document.getElementById('root'). No providers, no router — the app is a single-page shell.",
+    connects:["index_html","app_jsx"],
+    keys:["Intentionally minimal — all state lives in App.jsx","Vite 3 used (not v4/v5) due to Node.js version constraint on this machine"]
+  },
+  app_jsx: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"src/App.jsx", path:"frontend/src/App.jsx",
+    what:"Main application shell and the largest frontend file. Manages: the message list state and /api/chat fetch logic, dark/light theme toggle (Gruvbox Dark default, Gruvbox Material Light alternate, persisted in localStorage), CitedText renderer that turns [source_id] tokens into inline citation badges, ThinkingBubble animation while waiting, collapsible AgentTrace panel per message (shows planner intent, modality, retrieval query, chunks, latency, tokens), and the full header with the custom 'A' SVG logo and monitor icon.",
+    connects:["main_jsx","voicechat_jsx","usetss_js","main_py"],
+    keys:["Theme stored in localStorage('atlas-theme') — survives page refresh","Citations render inside the bubble, not below it","Agent trace data comes from the 'trace' field in /api/chat response — zero extra API calls"]
+  },
+  voicechat_jsx: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"src/components/VoiceChat.jsx", path:"frontend/src/components/VoiceChat.jsx",
+    what:"Voice interaction component. Hold-to-record mic button using MediaRecorder API, Space bar push-to-talk shortcut, animated waveform while recording, provider badge (Groq / Puter) showing which STT backend handled the request. Passes recorded audio to useSTT.js, sends the transcript to /api/chat, then feeds the answer to useTTS.js for playback.",
+    connects:["app_jsx","usestt_js","usetss_js","main_py"],
+    keys:["Hold Space or hold button to record — release to transcribe and send","Waveform animation uses Web Audio API AnalyserNode","Provider badge logs which STT handled each request (Groq vs Puter fallback)"]
+  },
+  usestt_js: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"src/hooks/useSTT.js", path:"frontend/src/hooks/useSTT.js",
+    what:"React hook for speech-to-text. Primary path: POSTs the recorded audio blob to /api/stt (Groq Whisper backend). Fallback path: if VITE_ENABLE_PUTER_STT=true and the backend returns 429, transcribes using puter.ai.speech2txt() in the browser (user's Puter account, no API key needed). Logs which provider handled each call.",
+    connects:["voicechat_jsx","stt_py"],
+    keys:["Puter.js fallback is off by default (VITE_ENABLE_PUTER_STT=false)","Puter.js runs in browser only — never used for batch ingestion","Always logs: 'STT provider: groq' or 'STT provider: puter'"]
+  },
+  usetss_js: {
+    tag:"Frontend", tagClass:"tag-frontend",
+    filename:"src/hooks/useTTS.js", path:"frontend/src/hooks/useTTS.js",
+    what:"React hook for sentence-pipelined text-to-speech. Splits the answer into sentences, fetches /api/tts for each sentence in parallel, queues the WAV chunks, and starts playing the first one as soon as it arrives — eliminating the wait for the full answer to be synthesised. A fetchDoneRef flag prevents the drain loop from exiting early when the queue temporarily empties between sentence fetches. Exposes pause(), resume(), and stop() controls.",
+    connects:["voicechat_jsx","app_jsx","tts_py"],
+    keys:["Sentence-pipelined: first word plays ~1s after answer arrives instead of ~5s","fetchDoneRef fix: drain loop waits for ALL sentences before stopping","pause/resume use AudioContext.suspend()/resume(); stop() clears the queue"]
+  },
+
+  // SCRIPTS
+  health_check_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/health_check.py", path:"scripts/health_check.py",
+    what:"End-to-end key and model validator. Runs 5 checks in sequence: LLM text call (LLM_PRIMARY_MODEL), LLM vision call on a tiny test image (LLM_BULK_MODEL), 10-second audio transcription (STT_MODEL), embeddings call (EMBEDDING_MODEL), and Qdrant connectivity. Fails fast with a clear message if any check fails.",
+    connects:["config_py","llm_py","stt_py"],
+    keys:["Run before anything else on a new machine: python scripts/health_check.py","Vision call confirms LLM_BULK_MODEL supports image input","Qdrant check confirms QDRANT_URL and QDRANT_API_KEY are correct"]
+  },
+  check_models_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/check_models.py", path:"scripts/check_models.py",
+    what:"Lists all models available to each configured API key (Gemini, Groq) and checks that every model name in .env appears in the list. Fails with a clear error if a configured model has been retired or renamed. Written after Google retired text-embedding-004 without warning.",
+    connects:["config_py"],
+    keys:["Run when 'model not found' errors appear after a Gemini model retirement","Prints available models grouped by provider so you can pick a replacement","Uses the same API keys from config.py — no separate setup needed"]
+  },
+  ingest_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/ingest.py", path:"scripts/ingest.py",
+    what:"Master ingestion runner. Reads ingestion_plan.json to determine what needs processing, then runs all 6 ingestion pipelines in priority order (tickets → docs → audio → images → video frames → video streams). Supports --only pipeline and --force flags. Fully resumable — re-running skips completed items.",
+    connects:["docs_py","audio_py","video_py","images_py","tickets_py","base_py"],
+    keys:["Single command for all ingestion: python scripts/ingest.py","--only audio runs just the audio pipeline","ingestion_plan.json tracks status per file; --force resets a file's status"]
+  },
+  demo_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/demo.py", path:"scripts/demo.py",
+    what:"Interactive 6-question demo that exercises all modalities. Questions cover: GitLab handbook (text), AMI meeting transcript (audio), Jira tutorial video (video), dashboard chart (image), and ticket status (action). Prints sub-agents activated, citations, answer excerpt, latency, token count, and estimated cost per query.",
+    connects:["graph_py","main_py"],
+    keys:["Run: python scripts/demo.py","--auto flag for non-interactive CI runs","Good first test after a fresh setup to confirm the full pipeline works"]
+  },
+  test_mcp_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/test_mcp.py", path:"scripts/test_mcp.py",
+    what:"Sends 20 scripted requests through both MCP servers and reports the tool-call success rate. Tests all 5 ticketing tools (list, get, create, update, assign) and various docs-search queries across modalities. Each docs-search test spawns a fresh subprocess to prevent Gemini RPM burst from accumulating.",
+    connects:["mcp_client_py","docs_server_py","ticketing_server_py"],
+    keys:["Expected result: 20/20 success (100%)","Run: python scripts/test_mcp.py","Fresh subprocess per docs-search call mirrors production agent behaviour"]
+  },
+  test_eval_py: {
+    tag:"Script", tagClass:"tag-scripts",
+    filename:"scripts/test_eval.py", path:"scripts/test_eval.py",
+    what:"Master evaluation runner. Calls all four eval modules in sequence: retrieval_eval → faithfulness_eval → stt_eval → latency_cost_eval, then calls report.py to consolidate results into data/eval/eval_report.json. Wrapped in a LangSmith trace span.",
+    connects:["retrieval_eval_py","faithfulness_eval_py","stt_eval_py","latency_cost_eval_py","report_py","tracer_py"],
+    keys:["Run: python scripts/test_eval.py","Requires data/eval/golden.jsonl to exist (finalized by user after Phase 1)","Results written to data/eval/eval_report.json"]
+  },
+  retrieval_eval_py: {
+    tag:"Eval", tagClass:"tag-eval",
+    filename:"scripts/eval/retrieval_eval.py", path:"scripts/eval/retrieval_eval.py",
+    what:"Evaluates retrieval quality against golden.jsonl. For each question, runs the full hybrid retrieval pipeline and checks whether expected_source_ids appear in the top-5 results. Reports P@5, MRR@5, and Recall@5 overall and broken down by modality. Results: P@5=0.390, MRR=0.754, Recall@5=0.900.",
+    connects:["test_eval_py","pipeline_py"],
+    keys:["P@5=0.390 — precision is low because retrieval returns 5 chunks but only 1-2 are expected","Recall@5=0.900 — the right chunks are in the top 5, just not always at rank 1","Ticket modality scores 1.00 — exact SQL match is reliable"]
+  },
+  faithfulness_eval_py: {
+    tag:"Eval", tagClass:"tag-eval",
+    filename:"scripts/eval/faithfulness_eval.py", path:"scripts/eval/faithfulness_eval.py",
+    what:"RAGAS-style faithfulness evaluation. For each answer from the agent, uses LLM_FALLBACK_MODEL (Groq qwen3.8-27b) as judge to score whether every claim in the answer is supported by the retrieved context. Average score: 0.205 — low because the Groq judge flags paraphrased claims even when factually correct.",
+    connects:["test_eval_py","llm_py"],
+    keys:["Uses Groq as judge to save Gemini quota","0.205 average reflects judge strictness, not factual errors — answers are cited correctly","Judge prompt is RAGAS-compatible: score 0-1 per claim, average for final score"]
+  },
+  stt_eval_py: {
+    tag:"Eval", tagClass:"tag-eval",
+    filename:"scripts/eval/stt_eval.py", path:"scripts/eval/stt_eval.py",
+    what:"STT and diarization accuracy evaluation on AMI meetings ES2008a/b/c. Runs STT_MODEL on each WAV file, compares the transcript to the precomputed reference_flat.txt using jiwer.wer(). Reports Word Error Rate per meeting and averaged. Also attempts DER measurement with pyannote.metrics if installed. Results: avg WER=0.223 (22.3%).",
+    connects:["test_eval_py","stt_py","audio_py"],
+    keys:["22.3% WER is good for multi-speaker meeting audio without speaker adaptation","DER unavailable on this machine (pyannote requires torch)","Reference files in data/audio/ami/annotations/ — do not regenerate them"]
+  },
+  latency_cost_eval_py: {
+    tag:"Eval", tagClass:"tag-eval",
+    filename:"scripts/eval/latency_cost_eval.py", path:"scripts/eval/latency_cost_eval.py",
+    what:"Latency and cost profiling. Runs all 20 golden questions through the full agent and records end-to-end latency and token counts. Computes p50/p95 latency and estimates cost at Gemini/Groq list prices (actual usage is free tier). Results: p50=16.7s, p95=23.3s, avg cost=$0.000351/query.",
+    connects:["test_eval_py","graph_py"],
+    keys:["Cost is estimated at list prices — actual charges are $0 on free tier","p50=16.7s includes HyDE query rewriting (adds ~3s) — disable for faster paths","Token logging wired in synthesizer.py and llm.py"]
+  },
+  report_py: {
+    tag:"Eval", tagClass:"tag-eval",
+    filename:"scripts/eval/report.py", path:"scripts/eval/report.py",
+    what:"Consolidates all four eval outputs into a single data/eval/eval_report.json file with a human-readable summary. Called as the final step by test_eval.py.",
+    connects:["test_eval_py","retrieval_eval_py","faithfulness_eval_py","stt_eval_py","latency_cost_eval_py"],
+    keys:["Output: data/eval/eval_report.json","Summary includes per-modality breakdown, WER table, and cost per query","Used as the source of truth in the README eval results table"]
+  },
+
+  // DEBUG SCRIPTS
+  check_app_py: {
+    tag:"Debug", tagClass:"tag-scripts",
+    filename:"scripts/_check_app.py", path:"scripts/_check_app.py",
+    what:"Smoke-tests all running HTTP endpoints (/api/health, /api/chat, /api/stt, /api/tts) against a live backend. Used during development to confirm the server is responding correctly after changes.",
+    connects:["main_py"],
+    keys:["Requires backend running on localhost:8000","Prefix _ marks it as a scratch/debug script","Safe to run anytime — read-only, no data mutations"]
+  },
+  check_imports_py: {
+    tag:"Debug", tagClass:"tag-scripts",
+    filename:"scripts/_check_imports.py", path:"scripts/_check_imports.py",
+    what:"Walks every backend Python module and attempts to import it, reporting any ImportError. Used to catch missing dependencies or broken relative imports after refactors.",
+    connects:["main_py","graph_py","pipeline_py"],
+    keys:["Run after pip install to confirm all imports resolve","Catches circular imports and missing packages early","Does not run any code — import-only check"]
+  },
+  db_inspect_py: {
+    tag:"Debug", tagClass:"tag-scripts",
+    filename:"scripts/_db_inspect.py", path:"scripts/_db_inspect.py",
+    what:"Prints the schema, row counts, and sample rows from data/tickets.db. Used to verify the database state without opening a SQLite client.",
+    connects:["db_py","ticketing_server_py"],
+    keys:["Read-only — never modifies tickets.db","Useful to confirm ticket counts and status distribution before running evals","Shows ticket_events rows to verify audit trail is working"]
+  },
+  diag_docs_py: {
+    tag:"Debug", tagClass:"tag-scripts",
+    filename:"scripts/_diag_docs.py", path:"scripts/_diag_docs.py",
+    what:"Interactive diagnostic tool for docs retrieval quality. Takes a query from the command line, runs it through the full retrieval pipeline, and prints each returned chunk with its source_id, score, and text excerpt. Used to debug why certain questions weren't returning expected results.",
+    connects:["pipeline_py","docs_server_py"],
+    keys:["Usage: python scripts/_diag_docs.py 'your query here'","Shows full retrieval chain output — useful for debugging low P@5 scores","Helped identify the audio modality routing bug fixed in planner.py"]
+  },
+  smoke_docs_py: {
+    tag:"Debug", tagClass:"tag-scripts",
+    filename:"scripts/_smoke_docs.py", path:"scripts/_smoke_docs.py",
+    what:"Directly spawns the docs-search MCP server subprocess and sends a handful of test search_docs calls, printing raw JSON-RPC responses. Used to debug the MCP protocol layer without the full agent stack.",
+    connects:["docs_server_py","mcp_client_py","protocol_py"],
+    keys:["Tests the MCP wire protocol directly, bypassing the agent","Useful when mcp_client.py changes might break the subprocess communication","Prints raw JSON-RPC request and response for each call"]
+  },
+};
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+let history = [];
+
+function show(id) {
+  const f = FILES[id];
+  if (!f) return;
+  history.push(id);
+
+  const connects = (f.connects || []).map(c => {
+    const cf = FILES[c];
+    return cf ? `<span class="connect-chip" onclick="show('${c}')">${cf.filename}</span>` : '';
+  }).join('');
+
+  const keys = (f.keys || []).map(k => `<li>${k}</li>`).join('');
+
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-tag ${f.tagClass}">${f.tag}</div>
+    <div class="detail-filename">${f.filename}</div>
+    <div class="detail-path">${f.path}</div>
+    <div class="detail-section">
+      <h3>What this file does</h3>
+      <p>${f.what}</p>
+    </div>
+    ${connects ? `<div class="detail-section"><h3>Connects to</h3><div class="connects-list">${connects}</div></div>` : ''}
+    ${keys ? `<div class="detail-section"><h3>Key details</h3><ul class="key-list">${keys}</ul></div>` : ''}
+  `;
+
+  document.getElementById('flowchart-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  history.pop();
+  if (history.length > 0) {
+    const prev = history.pop();
+    show(prev);
+  } else {
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('flowchart-view').style.display = 'block';
+    window.scrollTo(0,0);
+  }
+}
+</script>
+
+<footer style="text-align:center;padding:24px 0 32px;font-size:11px;color:#484f58;border-top:1px solid #21262d;margin-top:40px;">Made with IBM Bob</footer>
+
+</body>
+</html>
