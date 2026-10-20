@@ -564,7 +564,7 @@ export default function App() {
       <header style={S.header}>
         <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
           {/* Title row: custom A logo + "tlas" + screen icon */}
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
 
             {/* ── "A" logo SVG ──────────────────────────────────────────────
                 Original: 200×200 canvas, path starts at translate(69,16).
