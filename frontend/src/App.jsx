@@ -121,7 +121,9 @@ function makeStyles(t) {
       boxSizing: "border-box",
     },
     messageList: {
-      flex: 1, overflowY: "auto",
+      flex: 1,
+      overflowY: "auto",
+      overflowX: "hidden",   // prevent horizontal scroll from long citation badges
       display: "flex", flexDirection: "column",
       gap: 14, minHeight: 320,
       maxHeight: "calc(100vh - 340px)",
@@ -131,7 +133,11 @@ function makeStyles(t) {
       color:      role === "user" ? "#fff"       : t.assistText,
       padding:    "10px 16px",
       borderRadius: role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-      maxWidth: "100%", fontSize: 14, lineHeight: 1.6, wordBreak: "break-word",
+      maxWidth: "100%",
+      minWidth: 0,           // allow flex shrink below content size
+      fontSize: 14, lineHeight: 1.6,
+      wordBreak: "break-word",
+      overflowWrap: "anywhere",
     }),
     citationsInline: {
       display: "flex", flexWrap: "wrap", gap: 4,
@@ -143,7 +149,7 @@ function makeStyles(t) {
       background: t.citeBg, color: t.citeText,
       border: `1px solid ${t.citeBorder}`,
       fontFamily: "monospace",
-      maxWidth: 260, overflow: "hidden",
+      maxWidth: "100%", overflow: "hidden",   // never wider than parent
       textOverflow: "ellipsis", whiteSpace: "nowrap",
     },
     thinkingDot: {
@@ -192,7 +198,10 @@ function CitedText({ text, t }) {
           <span key={i} style={{
             background: t.citeBg, color: t.citeText,
             borderRadius: 4, padding: "0 3px",
-            fontSize: "0.9em", fontFamily: "monospace", whiteSpace: "nowrap",
+            fontSize: "0.9em", fontFamily: "monospace",
+            // allow wrap so long source_ids don't overflow the bubble
+            wordBreak: "break-all", overflowWrap: "anywhere",
+            display: "inline",
           }}>{p}</span>
         ) : (
           <span key={i} style={{ whiteSpace: "pre-wrap" }}>{p}</span>
@@ -553,9 +562,58 @@ export default function App() {
     <div style={S.app}>
       {/* Header */}
       <header style={S.header}>
-        <div>
-          <h1 style={S.title}>Atlas</h1>
-          <p style={S.subtitle}>Multimodal Enterprise Onboarding Assistant</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          {/* Title row: custom A logo + "tlas" + screen icon */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {/* Custom "A" letter SVG — theme-aware fill */}
+            <svg
+              version="1.1" xmlns="http://www.w3.org/2000/svg"
+              width="28" height="28" viewBox="69 16 130 165"
+              aria-hidden="true"
+              style={{ flexShrink: 0 }}
+            >
+              <path
+                d="M0 0 C20.46 0 40.92 0 62 0 C66.5 10.12 66.5 10.12 68.05 14.35 C68.4 15.31 68.75 16.27 69.12 17.25 C69.49 18.27 69.86 19.29 70.25 20.34 C70.65 21.44 71.05 22.54 71.47 23.67 C72.79 27.28 74.12 30.89 75.44 34.5 C76.37 37.05 77.31 39.6 78.25 42.15 C79.95 46.78 81.65 51.41 83.35 56.04 C87.7 67.91 92.07 79.77 96.44 91.63 C97.75 95.18 99.06 98.73 100.36 102.29 C104.55 113.66 108.75 125.02 112.96 136.38 C113.74 138.5 114.53 140.63 115.32 142.75 C116.77 146.66 118.22 150.58 119.67 154.49 C120.32 156.25 120.98 158.01 121.63 159.77 C121.91 160.53 122.2 161.3 122.49 162.08 C124.81 168.35 126.88 174.65 129 181 C105.9 181 82.8 181 59 181 C57.68 176.71 56.36 172.42 55 168 C51.17 160.85 45.63 156.63 38 154 C30.23 152.37 23.67 153.22 16.75 157.25 C8.04 163.17 5.51 170.96 3 181 C-20.1 181 -43.2 181 -67 181 C-58.95 158 -58.95 158 -55.29 148.09 C-54.67 146.41 -54.67 146.41 -54.04 144.7 C-52.71 141.11 -51.39 137.52 -50.06 133.94 C-49.36 132.04 -48.66 130.13 -47.96 128.23 C-40.77 108.76 -33.55 89.29 -26.3 69.84 C-24.01 63.71 -21.73 57.58 -19.45 51.45 C-17.41 45.98 -15.37 40.52 -13.34 35.05 C-12.08 31.67 -10.82 28.28 -9.56 24.9 C-8.16 21.13 -6.75 17.36 -5.35 13.59 C-4.92 12.45 -4.5 11.3 -4.06 10.12 C-3.67 9.08 -3.28 8.04 -2.88 6.96 C-2.54 6.05 -2.2 5.13 -1.85 4.19 C-1 2 -1 2 0 0 Z M22 82 C19.2 85.48 17.23 88.48 17 93 C18.19 98.21 20.44 102.08 24.75 105.31 C29.89 106.88 33.65 106.71 38.31 104.25 C41.72 101.39 43.52 99.51 44.88 95.25 C45.09 89.78 43.46 85.68 39.88 81.56 C33.8 78.26 27.76 77.85 22 82 Z"
+                fill={isDark ? "#e6edf3" : "#3c3836"}
+                transform="translate(69,16)"
+              />
+            </svg>
+
+            <h1 style={{ ...S.title, fontSize: 22, letterSpacing: "-0.5px" }}>tlas</h1>
+
+            {/* Screen/monitor SVG after name — theme-aware */}
+            <svg
+              version="1.1" xmlns="http://www.w3.org/2000/svg"
+              width="26" height="26" viewBox="13 31 188 165"
+              aria-hidden="true"
+              style={{ flexShrink: 0, marginLeft: 2 }}
+            >
+              {/* outer frame */}
+              <path
+                d="M0 0 C1.31 -0.01 2.62 -0.02 3.98 -0.03 C5.42 -0.03 6.86 -0.02 8.3 -0.01 C9.83 -0.02 11.36 -0.02 12.89 -0.03 C17.03 -0.05 21.17 -0.04 25.31 -0.03 C29.65 -0.02 33.98 -0.03 38.32 -0.03 C45.6 -0.04 52.89 -0.03 60.17 -0.01 C68.58 0.01 77 0 85.41 -0.02 C92.65 -0.04 99.88 -0.04 107.11 -0.03 C111.42 -0.02 115.74 -0.02 120.05 -0.04 C124.11 -0.05 128.17 -0.04 132.23 -0.02 C133.72 -0.01 135.2 -0.01 136.69 -0.02 C138.73 -0.03 140.76 -0.02 142.79 0 C143.93 0 145.07 0 146.24 0 C150.97 0.76 154.12 3.05 157.25 6.61 C158.98 10.99 158.82 15.14 158.8 19.8 C158.84 26.36 158.84 29.77 158.83 33.19 C158.85 45.31 158.85 50.29 158.84 55.27 C158.83 61.65 158.85 68.04 158.88 74.42 C158.9 84.24 158.89 89.15 158.9 96.21 C158.93 99.5 158.92 102.79 158.9 106.08 C158.87 114.66 158.32 118.14 154.4 122.51 C151.46 124.56 149.08 124.75 145.54 124.73 C132.91 124.68 129.53 124.66 126.15 124.63 C113.64 124.58 108.02 124.55 102.4 124.51 C102.19 125.94 101.98 127.39 101.37 130.64 C101 131.6 98.4 133.51 95.65 134.42 C94.04 134.62 91.21 134.57 87.4 134.51 C87.4 137.81 87.4 141.11 87.4 144.51 C90.5 144.4 94.58 144.32 96.62 144.24 C101.09 144.18 103.85 144.75 107.4 147.51 C108.83 150.38 108.78 152.33 108.4 155.51 C105.79 158.16 104.1 159.39 100.4 160.02 C93.2 160.06 89.08 160.04 84.84 160.05 C78.91 160.05 72.16 160.01 64.58 160.04 C58.74 160.05 53.02 160.04 51.62 160.05 C47.71 160.06 45.76 160.03 42.39 160.02 C38.7 159.39 37.01 158.15 34.4 155.51 C33.82 152.03 33.97 150.27 35.71 147.2 C38.32 144.58 40.32 144.51 43.97 144.41 C48.08 144.45 50.21 144.46 55.4 144.51 C55.4 141.21 55.4 137.91 55.4 134.51 C52.96 134.63 51.71 134.7 47.8 134.7 C45.52 133.99 42.4 131.51 40.4 128.51 C40.4 124.51 38.61 124.53 20.22 124.73 C15.64 124.78 10.07 124.86 3.48 124.9 C-5.42 124.96 -9.11 124.62 -13.6 120.51 C-15.39 117.58 -15.86 115.4 -15.86 112 C-15.91 99.74 -15.91 96.31 -15.9 92.89 C-15.92 80.75 -15.92 75.76 -15.92 70.77 C-15.91 64.37 -15.93 57.96 -15.95 51.56 C-15.97 41.73 -15.97 36.81 -15.97 29.73 C-15.99 23.13 -15.98 19.83 -15.98 16.88 C-15.93 8.29 -12.6 4.51 -8.27 1.14 C-5.48 0.01 0 0 0 0 Z M60.4 134.51 C60.4 137.81 60.4 141.11 60.4 144.51 C67.66 144.51 74.92 144.51 82.4 144.51 C82.4 141.21 82.4 137.91 82.4 134.51 C75.14 134.51 67.88 134.51 60.4 134.51 Z"
+                fill={isDark ? "#2283CF" : "#2283CF"}
+                transform="translate(28.603515625,31.4920654296875)"
+              />
+              {/* screen white area */}
+              <path
+                d="M0 0 C46.86 0 93.72 0 142 0 C142 3.96 142 7.92 142 12 C132.1 12 122.2 12 112 12 C112 15 112 19 112 23 C121.9 23 131.8 23 142 23 C142 27 142 35 142 39 C95.14 39 48.28 39 0 39 C0 27 0 15 0 0 Z"
+                fill={isDark ? "#1a2233" : "#FBFCFE"}
+                transform="translate(29,48)"
+              />
+              {/* screen lines */}
+              <path
+                d="M0 0 C46.86 0 93.72 0 142 0 C142 12 142 35 142 81 C95.14 81 48.28 81 0 81 C0 53 0 27 0 0 Z"
+                fill="none"
+                stroke={isDark ? "#30363d" : "#d5c4a1"}
+                strokeWidth="1"
+                transform="translate(29,48)"
+              />
+            </svg>
+          </div>
+
+          <p style={{ ...S.subtitle, fontSize: 13, marginTop: 1 }}>
+            Multimodal Enterprise Onboarding Assistant
+          </p>
         </div>
 
         <div style={S.headerRight}>
