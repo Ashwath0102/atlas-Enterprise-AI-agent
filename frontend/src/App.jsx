@@ -1,7 +1,7 @@
 // frontend/src/App.jsx
 // ─────────────────────
 // Atlas — main application shell.
-// Features: dark/light theme toggle, cited chat, voice loop.
+// Features: dark/light theme toggle, cited chat, voice loop, agent trace panel.
 
 import { useState, useEffect, useRef } from "react";
 import VoiceChat from "./components/VoiceChat";
@@ -202,6 +202,177 @@ function CitedText({ text, t }) {
   );
 }
 
+// ── Agent trace panel ─────────────────────────────────────────────────────────
+// Shows the full reasoning flow for an assistant message: which nodes ran,
+// what the planner decided, MCP queries sent, latency per step.
+// Collapsed by default; click "Show reasoning" to expand.
+function AgentTrace({ trace, tokenUsage, latencyMs, t }) {
+  const [open, setOpen] = useState(false);
+  if (!trace || trace.length === 0) return null;
+
+  const isDark = t.bg === "#0f1117";
+
+  const styles = {
+    wrapper: {
+      marginTop: 6,
+      borderRadius: 6,
+      border: `1px solid ${t.border}`,
+      overflow: "hidden",
+      fontSize: 12,
+    },
+    toggle: {
+      display: "flex", alignItems: "center", gap: 6,
+      padding: "5px 10px",
+      cursor: "pointer",
+      background: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+      color: t.textFaint,
+      userSelect: "none",
+      border: "none", width: "100%", textAlign: "left",
+      fontFamily: "inherit", fontSize: 12,
+    },
+    body: {
+      padding: "10px 12px",
+      background: isDark ? "#0d1117" : "#f7f3ec",
+      display: "flex", flexDirection: "column", gap: 8,
+    },
+    stepRow: {
+      display: "flex", gap: 8, alignItems: "flex-start",
+    },
+    dot: (color) => ({
+      width: 8, height: 8, borderRadius: "50%",
+      background: color, flexShrink: 0, marginTop: 4,
+    }),
+    stepContent: {
+      flex: 1,
+    },
+    stepLabel: (color) => ({
+      fontWeight: 700, color, fontSize: 11,
+      textTransform: "uppercase", letterSpacing: "0.5px",
+    }),
+    stepDetail: {
+      color: t.textMuted, marginTop: 2, lineHeight: 1.5,
+      fontFamily: "monospace", fontSize: 11,
+      wordBreak: "break-all",
+    },
+    latencyTag: {
+      fontSize: 10, color: t.textFaint,
+      marginLeft: 6, fontVariantNumeric: "tabular-nums",
+    },
+    divider: {
+      borderLeft: `2px dashed ${t.border}`,
+      marginLeft: 3, marginTop: 2, marginBottom: 2, height: 6,
+    },
+    footer: {
+      borderTop: `1px solid ${t.border}`, marginTop: 4,
+      paddingTop: 6, color: t.textFaint,
+      display: "flex", gap: 14, flexWrap: "wrap",
+    },
+  };
+
+  // Node colour map
+  const NODE_COLORS = {
+    planner:   isDark ? "#d2a8ff" : "#7c5cd8",
+    retrieval: isDark ? "#79c0ff" : "#1f6feb",
+    vision:    isDark ? "#ffa657" : "#b45309",
+    action:    isDark ? "#56d364" : "#2d9c44",
+    synthesizer: isDark ? "#f0883e" : "#9a4706",
+  };
+  const nodeColor = (name) => NODE_COLORS[name] || (isDark ? "#8b949e" : "#57606a");
+
+  // Build human-readable detail for each trace step
+  const stepDetail = (step) => {
+    if (step.node === "planner") {
+      const parts = [];
+      if (step.intent) parts.push(`intent: ${step.intent}`);
+      if (step.sub_agents) parts.push(`routes to: [${step.sub_agents.join(", ")}]`);
+      return parts.join("  |  ");
+    }
+    if (step.node === "retrieval") {
+      const parts = [];
+      if (step.query) parts.push(`query: "${step.query.slice(0, 80)}${step.query.length > 80 ? "…" : ""}"`);
+      if (step.chunks_returned != null) parts.push(`${step.chunks_returned} chunks`);
+      return parts.join("  |  ");
+    }
+    if (step.node === "vision") {
+      return step.images_described != null
+        ? `${step.images_described} image(s) described`
+        : step.source_id || "image analysis";
+    }
+    if (step.node === "action") {
+      const parts = [];
+      if (step.tool) parts.push(`tool: ${step.tool}`);
+      if (step.result_count != null) parts.push(`${step.result_count} result(s)`);
+      return parts.join("  |  ") || "ticket operation";
+    }
+    if (step.node === "synthesizer") {
+      return step.citations_used != null
+        ? `${step.citations_used} citation(s) in answer`
+        : "answer composed";
+    }
+    return step.error ? `error: ${step.error}` : "";
+  };
+
+  // Token summary
+  const totalIn  = (tokenUsage || []).reduce((s, u) => s + (u.input_tokens  || 0), 0);
+  const totalOut = (tokenUsage || []).reduce((s, u) => s + (u.output_tokens || 0), 0);
+
+  return (
+    <div style={styles.wrapper}>
+      {/* Toggle header */}
+      <button style={styles.toggle} onClick={() => setOpen((p) => !p)}>
+        {/* Chevron SVG */}
+        <svg width="10" height="10" viewBox="0 0 10 10" fill={t.textFaint}
+             style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.15s" }}>
+          <polygon points="2,1 8,5 2,9"/>
+        </svg>
+        {open ? "Hide" : "Show"} agent reasoning
+        <span style={{ marginLeft: "auto", color: t.textFaint }}>
+          {trace.length} step{trace.length !== 1 ? "s" : ""} · {latencyMs ? `${Math.round(latencyMs)}ms` : ""}
+        </span>
+      </button>
+
+      {open && (
+        <div style={styles.body}>
+          {trace.map((step, i) => (
+            <div key={i}>
+              {/* Connector line between steps */}
+              {i > 0 && <div style={styles.divider} />}
+              <div style={styles.stepRow}>
+                <div style={styles.dot(nodeColor(step.node))} />
+                <div style={styles.stepContent}>
+                  <div>
+                    <span style={styles.stepLabel(nodeColor(step.node))}>
+                      {step.node}
+                    </span>
+                    {step.latency_ms != null && (
+                      <span style={styles.latencyTag}>{Math.round(step.latency_ms)}ms</span>
+                    )}
+                    {step.error && (
+                      <span style={{ ...styles.latencyTag, color: isDark ? "#f85149" : "#a4262c" }}>
+                        {" "}ERROR
+                      </span>
+                    )}
+                  </div>
+                  {stepDetail(step) && (
+                    <div style={styles.stepDetail}>{stepDetail(step)}</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Footer: token + cost summary */}
+          <div style={styles.footer}>
+            <span>in: {totalIn} tok</span>
+            <span>out: {totalOut} tok</span>
+            {latencyMs && <span>total: {Math.round(latencyMs)}ms</span>}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Message bubble ────────────────────────────────────────────────────────────
 function MessageBubble({ msg, S, t }) {
   return (
@@ -218,6 +389,15 @@ function MessageBubble({ msg, S, t }) {
           </div>
         )}
       </div>
+      {/* Agent trace — shown below the bubble, outside the coloured box */}
+      {msg.role === "assistant" && msg.trace && (
+        <AgentTrace
+          trace={msg.trace}
+          tokenUsage={msg.tokenUsage}
+          latencyMs={msg.latencyMs}
+          t={t}
+        />
+      )}
     </div>
   );
 }
@@ -328,11 +508,13 @@ export default function App() {
       setMessages((prev) => [
         ...prev,
         {
-          id:        Date.now() + 1,
-          role:      "assistant",
-          text:      data.answer || "(no answer)",
-          citations: data.citations || [],
-          latencyMs: data.latency_ms,
+          id:         Date.now() + 1,
+          role:       "assistant",
+          text:       data.answer || "(no answer)",
+          citations:  data.citations || [],
+          latencyMs:  data.latency_ms,
+          trace:      data.trace       || [],
+          tokenUsage: data.token_usage || [],
         },
       ]);
     } catch (err) {
@@ -346,10 +528,17 @@ export default function App() {
   };
 
   // ── Callback for VoiceChat to inject messages ─────────────────────────────
-  const handleVoiceMessage = ({ role, text, citations }) => {
+  const handleVoiceMessage = ({ role, text, citations, trace, tokenUsage, latencyMs }) => {
     setMessages((prev) => [
       ...prev,
-      { id: Date.now() + Math.random(), role, text, citations: citations || [] },
+      {
+        id: Date.now() + Math.random(),
+        role, text,
+        citations:  citations  || [],
+        trace:      trace      || [],
+        tokenUsage: tokenUsage || [],
+        latencyMs:  latencyMs  || 0,
+      },
     ]);
   };
 

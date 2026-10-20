@@ -100,8 +100,15 @@ export default function VoiceChat({ onMessage, disabled, theme: t }) {
       if (!res.ok) throw new Error(`Chat ${res.status}`);
       const data = await res.json();
       answer = data.answer || "";
-      onMessage?.({ role: "user",      text });
-      onMessage?.({ role: "assistant", text: answer, citations: data.citations });
+      onMessage?.({ role: "user", text });
+      onMessage?.({
+        role:       "assistant",
+        text:       answer,
+        citations:  data.citations   || [],
+        trace:      data.trace       || [],
+        tokenUsage: data.token_usage || [],
+        latencyMs:  data.latency_ms  || 0,
+      });
     } catch (err) {
       setStatus(`Agent error: ${err.message}`);
       return;
